@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="text-lg font-semibold text-center mb-4">
+        <h2 class="text-lg font-medium text-center mb-4">
             <!-- @slot title -->
             <slot name="title">Section</slot>
         </h2>

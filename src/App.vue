@@ -7,6 +7,7 @@ import BaseDetailsSection from './components/BaseDetailsSection.vue'
 import BaseChip from './components/BaseChip.vue'
 import BaseSection from './components/BaseSection.vue'
 import ExperienceSection from './components/ExperienceSection.vue'
+import PortfolioItem from './components/PortfolioItem.vue'
 import { useStore } from './store'
 
 const { state } = useStore()
@@ -55,10 +56,14 @@ const { state } = useStore()
             <base-details-section class="print:hidden">
                 <template #title>Portfolio</template>
                 <template #default>
-                    <div class="flex flex-row flex-wrap justify-center">
-                        <a v-for="item in state.portfolio" :key="item.href" class="underline" :href="item.href">
-                            {{ item.text }}
-                        </a>
+                    <div class="space-y-3">
+                        <portfolio-item
+                            v-for="item in state.portfolio"
+                            :key="item.href"
+                            :href="item.href"
+                            :text="item.text"
+                            :repo="item.repo"
+                        ></portfolio-item>
                     </div>
                 </template>
             </base-details-section>
