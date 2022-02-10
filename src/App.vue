@@ -67,9 +67,7 @@ const { state } = useStore()
         <template #default>
             <base-section class="prose print:max-w-full">
                 <template #title>
-                    <div class="print:text-center">
-                        About Me
-                    </div>
+                    <div class="print:text-center">About Me</div>
                 </template>
                 <template #default>
                     <p>
@@ -81,7 +79,7 @@ const { state } = useStore()
             <hr class="my-6 print:hidden" />
 
             <base-section class="space-y-8 print:mt-12">
-                <template #title> Experience</template>
+                <template #title>Experience</template>
                 <template #default>
                     <experience-section
                         v-for="item in state.experience"
@@ -100,7 +98,7 @@ const { state } = useStore()
             <hr class="my-6" />
 
             <base-section class="space-y-8">
-                <template #title> Education</template>
+                <template #title>Education</template>
                 <template #default>
                     <experience-section
                         v-for="item in state.education"
