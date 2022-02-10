@@ -14,7 +14,7 @@ export type Link = {
 }
 
 export type DetailsItem = {
-    title: String
+    title: string
     items: TextValueItem[]
 }
 
