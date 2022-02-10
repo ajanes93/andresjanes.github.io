@@ -13,6 +13,12 @@ export type Link = {
     download?: boolean | string
 }
 
+export type PortfolioLink = {
+    text: string
+    href: string
+    repo: string
+}
+
 export type DetailsItem = {
     title: string
     items: TextValueItem[]

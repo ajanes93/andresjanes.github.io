@@ -7,6 +7,7 @@ import BaseDetailsSection from './components/BaseDetailsSection.vue'
 import BaseChip from './components/BaseChip.vue'
 import BaseSection from './components/BaseSection.vue'
 import ExperienceSection from './components/ExperienceSection.vue'
+import PortfolioItem from './components/PortfolioItem.vue'
 import { useStore } from './store'
 
 const { state } = useStore()
@@ -17,9 +18,9 @@ const { state } = useStore()
         <template #sidebar>
             <profile-header class="mb-3"></profile-header>
 
-            <hr class="my-6" />
+            <hr class="my-6 print:hidden" />
 
-            <div class="flex w-full justify-center mb-3">
+            <div class="flex w-full justify-center mb-3 print:hidden">
                 <base-tooltip-button
                     v-for="link in state.actions"
                     :key="link.href"
@@ -52,21 +53,27 @@ const { state } = useStore()
 
             <hr class="my-6" />
 
-            <base-details-section>
+            <base-details-section class="print:hidden">
                 <template #title>Portfolio</template>
                 <template #default>
-                    <div class="flex flex-row flex-wrap justify-center">
-                        <a v-for="item in state.portfolio" :key="item.href" class="underline" :href="item.href">
-                            {{ item.text }}
-                        </a>
+                    <div class="space-y-3">
+                        <portfolio-item
+                            v-for="item in state.portfolio"
+                            :key="item.href"
+                            :href="item.href"
+                            :text="item.text"
+                            :repo="item.repo"
+                        ></portfolio-item>
                     </div>
                 </template>
             </base-details-section>
         </template>
 
         <template #default>
-            <base-section class="prose">
-                <template #title> About Me</template>
+            <base-section class="prose print:max-w-full">
+                <template #title>
+                    <div class="print:text-center">About Me</div>
+                </template>
                 <template #default>
                     <p>
                         {{ state.description }}
@@ -74,10 +81,10 @@ const { state } = useStore()
                 </template>
             </base-section>
 
-            <hr class="my-6" />
+            <hr class="my-6 print:hidden" />
 
-            <base-section class="space-y-8">
-                <template #title> Experience</template>
+            <base-section class="space-y-8 print:mt-12">
+                <template #title>Experience</template>
                 <template #default>
                     <experience-section
                         v-for="item in state.experience"
@@ -96,7 +103,7 @@ const { state } = useStore()
             <hr class="my-6" />
 
             <base-section class="space-y-8">
-                <template #title> Education</template>
+                <template #title>Education</template>
                 <template #default>
                     <experience-section
                         v-for="item in state.education"
