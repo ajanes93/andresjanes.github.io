@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiAlert } from '@mdi/js'
 
 defineProps({
@@ -17,10 +16,37 @@ defineProps({
         type: String,
         required: true,
         default: mdiAlert
+    },
+    /**
+     * The icon size
+     */
+    size: {
+        type: Number,
+        default: 24
+    },
+    /**
+     * The viewbox style
+     */
+    viewbox: {
+        type: String,
+        default: '0 0 24 24'
     }
 })
 </script>
 
 <template>
-    <svg-icon :class="`text-${color}`" type="mdi" :path="path"></svg-icon>
+    <svg
+        :class="`text-${color}`"
+        :width="size"
+        :height="size"
+        :viewBox="viewbox"
+    >
+        <path :d="path" />
+    </svg>
 </template>
+
+<style scoped>
+    path {
+        fill: currentColor;
+    }
+</style>
