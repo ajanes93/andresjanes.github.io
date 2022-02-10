@@ -1,6 +1,48 @@
-# Vue 3 + Typescript + Vite
+# Personal CV Project
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+I decided as a way to update my CV and as an opportunity to learn some new tech, that I would do this project. 
+It has given me the opportunity to dive into some new frontend tech and also learn and explore some existing tech 
+that I have always wanted to try!
+
+## Built with:
+
+* Vue 3
+* Vuex 4
+* Vite
+* Typescript
+* Tailwind CSS
+* Material Design Icons
+* Eslint & Prettier
+
+## Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run start
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Lints and fixes files
+
+```
+npm run lint
+```
+
+### Formats code using Prettier
+
+```
+npm run format
+```
 
 ## Recommended IDE Setup
 
