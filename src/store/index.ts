@@ -49,9 +49,9 @@ export const store = createStore<State>({
             },
             {
                 text: 'Download CV',
-                href: '/img/profile.webp',
+                href: '/doc/cv_andres_janes.pdf',
                 icon: mdiDownload,
-                download: 'andres_cv'
+                download: 'cv_andres_janes.pdf'
             }
         ],
         details: [
