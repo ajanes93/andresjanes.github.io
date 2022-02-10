@@ -35,18 +35,13 @@ defineProps({
 </script>
 
 <template>
-    <svg
-        :class="`text-${color}`"
-        :width="size"
-        :height="size"
-        :viewBox="viewbox"
-    >
+    <svg :class="`text-${color}`" :width="size" :height="size" :viewBox="viewbox">
         <path :d="path" />
     </svg>
 </template>
 
 <style scoped>
-    path {
-        fill: currentColor;
-    }
+path {
+    fill: currentColor;
+}
 </style>

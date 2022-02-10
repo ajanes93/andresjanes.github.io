@@ -1,18 +1,18 @@
 # Personal CV Project
 
-I decided as a way to update my CV and as an opportunity to learn some new tech, that I would do this project. 
-It has given me the opportunity to dive into some new frontend tech and also learn and explore some existing tech 
+I decided as a way to update my CV and as an opportunity to learn some new tech, that I would do this project.
+It has given me the opportunity to dive into some new frontend tech and also learn and explore some existing tech
 that I have always wanted to try!
 
 ## Built with:
 
-* Vue 3
-* Vuex 4
-* Vite
-* Typescript
-* Tailwind CSS
-* Material Design Icons
-* Eslint & Prettier
+-   Vue 3
+-   Vuex 4
+-   Vite
+-   Typescript
+-   Tailwind CSS
+-   Material Design Icons
+-   Eslint & Prettier
 
 ## Project setup
 
