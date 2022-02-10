@@ -1,7 +1,7 @@
 import { InjectionKey } from 'vue'
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { DetailsItem, ExperienceItem, Link } from '../../types'
-import { mdiDownload, mdiEmail, mdiGithub, mdiLinkBox, mdiLinkedin, mdiStackOverflow } from '@mdi/js'
+import { mdiDownload, mdiEmail, mdiGithub, mdiGitlab, mdiLinkBox, mdiLinkedin, mdiStackOverflow } from '@mdi/js'
 
 export interface State {
     actions: Link[]
@@ -31,6 +31,12 @@ export const store = createStore<State>({
                 target
             },
             {
+                text: 'GitLab',
+                href: 'https://gitlab.com/andresjanes',
+                icon: mdiGitlab,
+                target
+            },
+            {
                 text: 'GitHub',
                 href: 'https://github.com/ajanes93',
                 icon: mdiGithub,
@@ -49,9 +55,9 @@ export const store = createStore<State>({
             },
             {
                 text: 'Download CV',
-                href: '/img/profile.webp',
+                href: '/doc/cv_andres_janes.pdf',
                 icon: mdiDownload,
-                download: 'andres_cv'
+                download: 'cv_andres_janes.pdf'
             }
         ],
         details: [
