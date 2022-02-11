@@ -39,13 +39,13 @@ const duration = computed(() => {
     const startDate = new Date(props.startDate)
     const endDate = props.endDate ? new Date(props.endDate) : new Date()
 
-    return `${format(startDate, 'MMM y')} - ${format(endDate, 'MMM y')}`
+    return `${format(startDate, 'MMM yy')} - ${format(endDate, 'MMM yy')}`
 })
 </script>
 
 <template>
     <div class="flex items-start">
-        <div class="flex shrink-0 rounded shadow-blue-400 shadow-sm">
+        <div class="flex shrink-0 rounded shadow-sm">
             <img width="48" :src="logoPath" />
         </div>
         <div class="ml-3 w-full space-y-5">
