@@ -6,7 +6,7 @@
         "dev": "vite",
         "preview": "vite preview",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-        "format": "prettier .  --write"
+        "format": "prettier . --ignore-path .gitignore --write"
     },
     "dependencies": {
         "@mdi/js": "^6.5.95",
