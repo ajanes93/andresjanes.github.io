@@ -1,7 +1,7 @@
 import { InjectionKey } from 'vue'
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { DetailsItem, ExperienceItem, Link, PortfolioLink } from '../../types'
-import { mdiDownload, mdiEmail, mdiGithub, mdiGitlab, mdiLinkBox, mdiLinkedin, mdiStackOverflow } from '@mdi/js'
+import { mdiDownload, mdiEmail, mdiGithub, mdiGitlab, mdiLinkedin, mdiStackOverflow } from '@mdi/js'
 
 export interface State {
     actions: Link[]
