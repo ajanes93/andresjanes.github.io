@@ -26,11 +26,11 @@ defineProps<{
             </a>
         </div>
         <div class="inline-flex">
-            <a :href="repo" class="has-tooltip" target="_blank">
+            <a data-testid="repoLink" :href="repo" class="has-tooltip" target="_blank">
                 <base-icon :path="mdiCodeNotEqualVariant" color="blue-600"></base-icon>
                 <span class="tooltip">Repo</span>
             </a>
-            <a :href="href" class="ml-2 has-tooltip" target="_blank">
+            <a data-testid="siteLink" :href="href" class="ml-2 has-tooltip" target="_blank">
                 <base-icon :path="mdiOpenInNew" color="blue-600"></base-icon>
                 <span class="tooltip">Open</span>
             </a>
