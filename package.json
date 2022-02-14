@@ -2,6 +2,7 @@
     "name": "vue3-ts",
     "version": "0.2.0",
     "scripts": {
+        "prepare": "husky install && cp -a .husky/. .git/hooks/",
         "build": "vue-tsc --noEmit && vite build",
         "dev": "vite",
         "preview": "vite preview",
@@ -38,16 +39,10 @@
         "vitest": "^0.3.2",
         "vue-tsc": "^0.29.8"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
     "lint-staged": {
-        "src/**/*.{js,ts,vue,css}": [
-            "prettier --ignore-path .gitignore --write",
-            "eslint --ignore-path .gitignore --fix src/",
-            "git add"
+        "*": "prettier . --ignore-path .gitignore --ignore-unknown --write",
+        "src/**/*.{js,ts,vue}": [
+            "eslint --ignore-path .gitignore --fix src/"
         ]
     }
 }
