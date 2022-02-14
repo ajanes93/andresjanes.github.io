@@ -1,7 +1,7 @@
-image: node:16.5.0
+image: node:16.14.0
 
 stages:
-    - lint
+    - test
     - build
     - deploy
 
@@ -16,13 +16,15 @@ cache:
 before_script:
     - npm ci
 
-lint:
-    stage: lint
+test:
+    stage: test
     script:
-        - npm run lint
-    only:
-        refs:
-            - merge_requests
+        - npm run test
+    artifacts:
+        when: always
+        reports:
+            junit: junit.xml
+            cobertura: coverage/cobertura-coverage.xml
 
 build:
     stage: build

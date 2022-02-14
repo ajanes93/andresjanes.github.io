@@ -2,17 +2,23 @@
 
 I decided as a way to update my CV and as an opportunity to learn some new tech, that I would do this project.
 It has given me the opportunity to dive into some new frontend tech and also learn and explore some existing tech
-that I have always wanted to try!
+that I have always wanted to try! This project is definitely over-engineered for such a simple app, but it allows
+perspective employers to get an idea of what my code looks like and the experience I have.
 
 ## Built with:
 
 -   Vue 3
 -   Vuex 4
 -   Vite
+-   Vitest
 -   Typescript
 -   Tailwind CSS
 -   Material Design Icons
 -   Eslint & Prettier
+
+## CI tooling
+
+-   Gitlab CI
 
 ## Project setup
 
@@ -32,6 +38,14 @@ npm run dev
 npm run build
 ```
 
+### Preview the built files (should be run after the build command)
+
+```
+npm run preview
+```
+
+## Linting and formatting
+
 ### Lints and fixes files
 
 ```
@@ -43,6 +57,24 @@ npm run lint
 ```
 npm run format
 ```
+
+## Testing
+
+### Run tests in watch mode
+
+```
+npm run test:watch
+```
+
+### Run tests and generate junit and coverage reports
+
+```
+npm run test
+```
+
+## Docker
+
+To run the project using docker please see the [Docker README](https://gitlab.com/andresjanes/andresjanes.gitlab.io/-/tree/master/docker/README.md)
 
 ## Recommended IDE Setup
 

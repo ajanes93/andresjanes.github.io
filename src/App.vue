@@ -2,10 +2,7 @@
 import ProfileHeader from './components/ProfileHeader.vue'
 import BaseSheet from './components/BaseSheet.vue'
 import BaseTooltipButton from './components/BaseTooltipButton.vue'
-import InfoSection from './components/InfoSection.vue'
-import BaseDetailsSection from './components/BaseDetailsSection.vue'
 import BaseChip from './components/BaseChip.vue'
-import BaseSection from './components/BaseSection.vue'
 import ExperienceSection from './components/ExperienceSection.vue'
 import PortfolioItem from './components/PortfolioItem.vue'
 import { useStore } from './store'
@@ -36,88 +33,94 @@ const { state } = useStore()
             <hr class="my-6" />
 
             <template v-for="section in state.details" :key="section.title">
-                <info-section class="mb-3" :title="section.title" :items="section.items"></info-section>
+                <div class="space-y-3">
+                    <h2 class="details-header">{{ section.title }}</h2>
+                    <div v-for="{ text, value } in section.items" :key="text" class="flex justify-between">
+                        <div class="text-gray-500">
+                            {{ text }}
+                        </div>
+                        <div class="font-medium text-right text-gray-600">
+                            {{ value }}
+                        </div>
+                    </div>
+                </div>
                 <hr class="my-6" />
             </template>
 
-            <base-details-section>
-                <template #title>Skills</template>
-                <template #default>
-                    <div class="flex flex-row flex-wrap justify-center">
-                        <base-chip v-for="skill in state.skills" :key="skill">
-                            {{ skill }}
-                        </base-chip>
-                    </div>
-                </template>
-            </base-details-section>
+            <div>
+                <h2 class="details-header mb-3">Skills</h2>
+                <div class="flex flex-row flex-wrap justify-center">
+                    <base-chip v-for="skill in state.skills" :key="skill">
+                        {{ skill }}
+                    </base-chip>
+                </div>
+            </div>
 
             <hr class="my-6" />
 
-            <base-details-section class="print:hidden">
-                <template #title>Portfolio</template>
-                <template #default>
-                    <div class="space-y-3">
-                        <portfolio-item
-                            v-for="item in state.portfolio"
-                            :key="item.href"
-                            :href="item.href"
-                            :text="item.text"
-                            :repo="item.repo"
-                        ></portfolio-item>
-                    </div>
-                </template>
-            </base-details-section>
+            <div class="print:hidden space-y-3">
+                <h2 class="details-header">Portfolio</h2>
+                <portfolio-item
+                    v-for="item in state.portfolio"
+                    :key="item.href"
+                    :href="item.href"
+                    :text="item.text"
+                    :repo="item.repo"
+                ></portfolio-item>
+            </div>
         </template>
 
         <template #default>
-            <base-section class="prose print:max-w-full">
-                <template #title>
-                    <div class="print:text-center">About Me</div>
-                </template>
-                <template #default>
-                    <p>
-                        {{ state.description }}
-                    </p>
-                </template>
-            </base-section>
+            <div class="space-y-6">
+                <h2 class="section-header print:text-center">About Me</h2>
+                <p class="prose print:max-w-full">
+                    {{ state.description }}
+                </p>
+            </div>
 
             <hr class="my-6 print:hidden" />
 
-            <base-section class="space-y-8 print:mt-12">
-                <template #title>Experience</template>
-                <template #default>
-                    <experience-section
-                        v-for="item in state.experience"
-                        :key="item.company"
-                        :company="item.company"
-                        :location="item.location"
-                        :start-date="item.startDate"
-                        :end-date="item.endDate"
-                        :title="item.title"
-                        :logo-path="item.logoPath"
-                        :description="item.description"
-                    ></experience-section>
-                </template>
-            </base-section>
+            <div class="space-y-6 print:mt-12">
+                <h2 class="section-header">Experience</h2>
+                <experience-section
+                    v-for="item in state.experience"
+                    :key="item.company"
+                    :company="item.company"
+                    :location="item.location"
+                    :start-date="item.startDate"
+                    :end-date="item.endDate"
+                    :title="item.title"
+                    :logo-path="item.logoPath"
+                    :description="item.description"
+                ></experience-section>
+            </div>
 
             <hr class="my-6" />
 
-            <base-section class="space-y-8">
-                <template #title>Education</template>
-                <template #default>
-                    <experience-section
-                        v-for="item in state.education"
-                        :key="item.company"
-                        :company="item.company"
-                        :location="item.location"
-                        :start-date="item.startDate"
-                        :end-date="item.endDate"
-                        :title="item.title"
-                        :logo-path="item.logoPath"
-                        :description="item.description"
-                    ></experience-section>
-                </template>
-            </base-section>
+            <div class="space-y-6 print:mt-12">
+                <h2 class="section-header">Education</h2>
+                <experience-section
+                    v-for="item in state.education"
+                    :key="item.company"
+                    :company="item.company"
+                    :location="item.location"
+                    :start-date="item.startDate"
+                    :end-date="item.endDate"
+                    :title="item.title"
+                    :logo-path="item.logoPath"
+                    :description="item.description"
+                ></experience-section>
+            </div>
         </template>
     </base-sheet>
 </template>
+
+<style>
+.details-header {
+    @apply text-lg font-medium text-center;
+}
+
+.section-header {
+    @apply text-xl font-bold text-blue-600 print:text-black;
+}
+</style>
