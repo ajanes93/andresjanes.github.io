@@ -36,7 +36,7 @@ const buttonClass = computed(() => ({
 </script>
 
 <template>
-    <a :class="buttonClass" :href="href" :target="target" :download="download">
+    <a data-testid="buttonLink" :class="buttonClass" :href="href" :target="target" :download="download">
         <base-icon v-if="hasIconPath" :path="iconPath"></base-icon>
         <!-- @slot default -->
         <slot></slot>
