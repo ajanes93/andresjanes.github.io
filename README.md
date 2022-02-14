@@ -16,8 +16,10 @@ perspective employers to get an idea of what my code looks like and the experien
 -   Material Design Icons
 -   Eslint & Prettier
 
-## CI tooling
+## CI/CD tooling
 
+-   husky
+-   lint-staged
 -   Gitlab CI
 
 ## Project setup
