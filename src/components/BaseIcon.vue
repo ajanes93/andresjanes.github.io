@@ -35,8 +35,8 @@ defineProps({
 </script>
 
 <template>
-    <svg :class="`text-${color}`" :width="size" :height="size" :viewBox="viewbox">
-        <path :d="path" />
+    <svg data-testid="svgIcon" :class="`text-${color}`" :width="size" :height="size" :viewBox="viewbox">
+        <path data-testid="svgIconPath" :d="path" />
     </svg>
 </template>
 
