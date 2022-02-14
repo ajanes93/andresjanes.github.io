@@ -7,5 +7,12 @@ export default defineConfig({
         vue({
             reactivityTransform: true
         })
-    ]
+    ],
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+        coverage: {
+            reporter: ['cobertura']
+        }
+    }
 })
