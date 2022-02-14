@@ -10,6 +10,7 @@ perspective employers to get an idea of what my code looks like and the experien
 -   Vue 3
 -   Vuex 4
 -   Vite
+-   Vitest
 -   Typescript
 -   Tailwind CSS
 -   Material Design Icons
@@ -56,6 +57,24 @@ npm run lint
 ```
 npm run format
 ```
+
+## Testing
+
+### Run tests in watch mode
+
+```
+npm run test:watch
+```
+
+### Run tests and generate junit and coverage reports
+
+```
+npm run test
+```
+
+## Docker
+
+To run the project using docker please see the [Docker README](https://gitlab.com/andresjanes/andresjanes.gitlab.io/-/tree/master/docker/README.md)
 
 ## Recommended IDE Setup
 
