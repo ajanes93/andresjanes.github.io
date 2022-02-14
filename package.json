@@ -41,8 +41,6 @@
     },
     "lint-staged": {
         "*": "prettier . --ignore-path .gitignore --ignore-unknown --write",
-        "src/**/*.{js,ts,vue}": [
-            "eslint --ignore-path .gitignore --fix src/"
-        ]
+        "src/**/*.{js,ts,vue}": "eslint --ignore-path .gitignore --fix src/"
     }
 }
