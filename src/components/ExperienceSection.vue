@@ -36,17 +36,18 @@ const props = defineProps<{
 }>()
 
 const duration = computed(() => {
-    const startDate = new Date(props.startDate)
-    const endDate = props.endDate ? new Date(props.endDate) : new Date()
+    const dateFormat = 'MMM yy'
+    const startDate = format(new Date(props.startDate), dateFormat)
+    const endDate = props.endDate ? format(new Date(props.endDate), dateFormat) : 'present'
 
-    return `${format(startDate, 'MMM yy')} - ${format(endDate, 'MMM yy')}`
+    return `${startDate} - ${endDate}`
 })
 </script>
 
 <template>
     <div class="flex items-start">
         <div class="flex shrink-0 rounded shadow-sm">
-            <img width="48" :src="logoPath" />
+            <img width="48" :src="logoPath" alt="experience logo" />
         </div>
         <div class="ml-3 w-full space-y-5">
             <div class="flex content-between">
