@@ -46,10 +46,10 @@ const duration = computed(() => {
 
 <template>
     <div class="flex items-start">
-        <div class="flex shrink-0 rounded shadow-sm">
+        <div class="flex shrink-0 rounded shadow-sm print:hidden">
             <img width="48" :src="logoPath" alt="experience logo" />
         </div>
-        <div class="ml-3 w-full space-y-5">
+        <div class="ml-3 w-full space-y-5 print:ml-0 print:space-y-1">
             <div class="flex content-between">
                 <div class="space-y-1.5">
                     <div class="font-medium">
@@ -62,7 +62,7 @@ const duration = computed(() => {
                     </div>
                 </div>
             </div>
-            <p class="text-gray-600 prose">
+            <p class="text-gray-600">
                 {{ description }}
             </p>
         </div>
