@@ -151,10 +151,10 @@ export const store = createStore<State>({
         ],
         education: [
             {
-                title: 'IT Management for Business',
+                title: 'Bsc IT Management for Business',
                 company: 'UWE Bristol',
                 location: 'Bristol',
-                description: '2:1',
+                description: 'Bachelors Degree: 2:1',
                 startDate: formatDate('2011-09-01'),
                 endDate: formatDate('2014-07-01'),
                 logoPath: '/img/uwe.svg'

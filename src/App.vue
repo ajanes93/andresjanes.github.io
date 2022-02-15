@@ -30,7 +30,7 @@ const { state } = useStore()
                 ></base-tooltip-button>
             </div>
 
-            <hr class="my-6" />
+            <hr class="my-6 print:my-3" />
 
             <template v-for="section in state.details" :key="section.title">
                 <div class="space-y-3">
@@ -44,7 +44,7 @@ const { state } = useStore()
                         </div>
                     </div>
                 </div>
-                <hr class="my-6" />
+                <hr class="my-6 print:my-3" />
             </template>
 
             <div>
@@ -56,9 +56,9 @@ const { state } = useStore()
                 </div>
             </div>
 
-            <hr class="my-6" />
+            <hr class="my-6 print:hidden" />
 
-            <div class="print:hidden space-y-3">
+            <div class="space-y-3 print:hidden">
                 <h2 class="details-header">Portfolio</h2>
                 <portfolio-item
                     v-for="item in state.portfolio"
@@ -71,16 +71,16 @@ const { state } = useStore()
         </template>
 
         <template #default>
-            <div class="space-y-6">
-                <h2 class="section-header print:text-center">About Me</h2>
-                <p class="prose print:max-w-full">
+            <div class="space-y-6 print:space-y-3 print:mb-3">
+                <h2 class="section-header">About Me</h2>
+                <p class="text-gray-600">
                     {{ state.description }}
                 </p>
             </div>
 
             <hr class="my-6 print:hidden" />
 
-            <div class="space-y-6 print:mt-12">
+            <div class="space-y-6 print:space-y-3 print:mb-3">
                 <h2 class="section-header">Experience</h2>
                 <experience-section
                     v-for="item in state.experience"
@@ -95,9 +95,9 @@ const { state } = useStore()
                 ></experience-section>
             </div>
 
-            <hr class="my-6" />
+            <hr class="my-6 print:hidden" />
 
-            <div class="space-y-6 print:mt-12">
+            <div class="space-y-6 print:space-y-3">
                 <h2 class="section-header">Education</h2>
                 <experience-section
                     v-for="item in state.education"
@@ -121,6 +121,12 @@ const { state } = useStore()
 }
 
 .section-header {
-    @apply text-xl font-bold text-blue-600 print:text-black;
+    @apply text-xl font-bold text-blue-600;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+    }
 }
 </style>

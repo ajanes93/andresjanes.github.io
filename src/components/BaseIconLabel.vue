@@ -30,7 +30,7 @@ const iconClass = computed(() => ({
         <span class="text-xs ml-1">
             {{ text }}
         </span>
-        <div data-testid="tooltip" v-if="hasTooltip" class="mt-12 tooltip">
+        <div v-if="hasTooltip" data-testid="tooltip" class="mt-12 tooltip">
             {{ tooltip }}
         </div>
     </div>
