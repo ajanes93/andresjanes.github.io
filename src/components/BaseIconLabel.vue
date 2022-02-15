@@ -26,7 +26,7 @@ const iconClass = computed(() => ({
 
 <template>
     <div :class="iconClass">
-        <base-icon color="black" :path="iconPath"></base-icon>
+        <base-icon color="text-black" :path="iconPath"></base-icon>
         <span class="text-xs ml-1">
             {{ text }}
         </span>

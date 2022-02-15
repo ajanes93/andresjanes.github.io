@@ -7,7 +7,7 @@ defineProps({
      */
     color: {
         type: String,
-        default: 'white'
+        default: 'text-white'
     },
     /**
      * The path to the icon svg
@@ -35,7 +35,7 @@ defineProps({
 </script>
 
 <template>
-    <svg data-testid="svgIcon" :class="`text-${color}`" :width="size" :height="size" :viewBox="viewbox">
+    <svg data-testid="svgIcon" :class="color" :width="size" :height="size" :viewBox="viewbox">
         <path data-testid="svgIconPath" :d="path" />
     </svg>
 </template>
