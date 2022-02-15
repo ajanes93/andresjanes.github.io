@@ -24,6 +24,6 @@ test('it renders the icon svg with the correct styles', () => {
     })
 
     expect(svgIcon.getAttribute('viewBox')).to.eq(props.viewbox)
-    expect(svgIcon.classList.contains(`text-${props.color}`)).to.be.true
+    expect(svgIcon.classList.contains(props.color)).to.be.true
     expect(svgIconPath.getAttribute('d')).to.eq(props.path)
 })
