@@ -11,6 +11,7 @@ module.exports = {
     rules: {
         // override/add rules settings here, such as:
         // 'vue/no-unused-vars': 'error'
+        '@typescript-eslint/no-var-requires': 0
     },
     parserOptions: {
         parser: '@typescript-eslint/parser'
