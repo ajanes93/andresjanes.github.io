@@ -4,6 +4,7 @@
     "scripts": {
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "check:deps": "NPM_CHECK_INSTALLER=pnpm npm-check -u",
+        "release": "node ./release.js",
         "prepare": "husky install && cp -a .husky/. .git/hooks/",
         "build": "vue-tsc --noEmit && vite build",
         "dev": "vite",
