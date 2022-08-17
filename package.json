@@ -23,6 +23,7 @@
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.1",
         "@testing-library/vue": "^6.4.2",
+        "@types/node": "^18.7.6",
         "@typescript-eslint/eslint-plugin": "^5.11.0",
         "@typescript-eslint/parser": "^5.11.0",
         "@vitejs/plugin-vue": "3.0.3",
