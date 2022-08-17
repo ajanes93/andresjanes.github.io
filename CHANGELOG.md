@@ -1,3 +1,18 @@
+# [0.6.0](https://gitlab.com/andresjanes/andresjanes.gitlab.io/compare/v0.5.1...v0.6.0) (2022-08-17)
+
+### Bug Fixes
+
+-   compatibility css fix ([257b0a5](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/257b0a55f424707b4c936766b428b0efc6a02cd5))
+-   include test dir in tsconfig ([ac5bdb0](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/ac5bdb0f215845612178f67edb875770fe41b561))
+-   reference vitest types in vite config ([b786f04](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/b786f047052f4fa3ad74d68332d2c84f1c606f7d))
+-   remove unused import ([937884a](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/937884ae39f901ea997099117b694248332c2dbc))
+-   use correct indent size in release script ([3324d89](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/3324d897619ce099508a80ba8702edefa89bf27b))
+
+### Features
+
+-   add release script and generate changelogs ([e8aae71](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/e8aae718ad1a7066aae17927a894ec859fb57c5a))
+-   add release script to package.json ([5eb9417](https://gitlab.com/andresjanes/andresjanes.gitlab.io/commit/5eb941709c8520814cb42744cdce902854e4a88d))
+
 ## [0.5.1](https://gitlab.com/andresjanes/andresjanes.gitlab.io/compare/v0.5.0...v0.5.1) (2022-02-15)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
     "name": "vue3-ts",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "scripts": {
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "check:deps": "NPM_CHECK_INSTALLER=pnpm npm-check -u",
