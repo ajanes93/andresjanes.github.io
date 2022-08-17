@@ -1,6 +1,5 @@
 import { render } from '@testing-library/vue'
 import ProfileHeader from '../src/components/ProfileHeader.vue'
-import { expect } from 'vitest'
 
 const props = {
     imgSrc: '/img/profile.webp',
