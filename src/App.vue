@@ -126,6 +126,7 @@ const { state } = useStore()
 
 @media print {
     body {
+        print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
 }
