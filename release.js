@@ -11,7 +11,7 @@ const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...op
 
 function updateVersion(version) {
     pkg.version = version
-    fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n')
+    fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 4) + '\n')
 }
 
 async function main() {
