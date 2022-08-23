@@ -116,11 +116,20 @@ export const store = createStore<State>({
         ],
         experience: [
             {
+                title: 'Senior Software Engineer',
+                company: 'Cision',
+                logoPath: '/img/cision.jpeg',
+                location: 'Remote',
+                startDate: formatDate('2022-06-06'),
+                description: `Senior software engineer working in the Buzzsumo product team with a primary focus on the frontend.`
+            },
+            {
                 title: 'Senior Frontend Developer',
                 company: 'Windsor Telecom Ltd',
                 logoPath: '/img/wt.svg',
                 location: 'Remote',
                 startDate: formatDate('2015-07-27'),
+                endDate: formatDate('2022-06-01'),
                 description: `Worked as the frontend lead within an agile team using the Kanban approach.  Led the adoption
                 of Vue within the business, and have owned and delivered a number of products, ranging from in-house CRM
                 and admin UIs, to portals that allow customers to manage their cloud telephony services.  Most recently I
@@ -138,15 +147,6 @@ export const store = createStore<State>({
                 I supported the Project Delivery Team with the integration of advanced analytics and the agile development
                 of intuitive analysis tools for data processing, reporting and decision making models, using Visual Basic in Excel.
                 I applied my technical knowledge to other business functions such as marketing, website development, social media and IT.`
-            },
-            {
-                title: 'Store Assistant',
-                company: "Sainsbury's",
-                logoPath: '/img/sains.svg',
-                location: 'Bristol',
-                startDate: formatDate('2011-09-01'),
-                endDate: formatDate('2014-07-01'),
-                description: `Part time role whilst studying at university.`
             }
         ],
         education: [

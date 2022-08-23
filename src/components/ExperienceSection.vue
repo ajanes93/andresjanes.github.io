@@ -46,7 +46,7 @@ const duration = computed(() => {
 
 <template>
     <div class="flex items-start">
-        <div class="flex shrink-0 rounded shadow-sm print:hidden">
+        <div class="flex shrink-0 shadow-blue-200 rounded shadow-md print:hidden">
             <img width="48" :src="logoPath" alt="experience logo" />
         </div>
         <div class="ml-3 w-full space-y-5 print:ml-0 print:space-y-1">

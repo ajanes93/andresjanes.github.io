@@ -33,7 +33,7 @@ defineProps({
 
 <template>
     <div>
-        <img :src="imgSrc" alt="Profile Picture" class="rounded-full w-48 mx-auto mb-1.5" />
+        <img :src="imgSrc" alt="Profile Picture" class="bg-white rounded-full w-48 mx-auto mb-1.5" />
         <h1 class="text-2xl text-center font-semibold mb-1.5">
             {{ name }}
         </h1>
