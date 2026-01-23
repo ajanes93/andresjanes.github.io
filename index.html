@@ -4,9 +4,34 @@
         <meta charset="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CV Andres Janes</title>
+        <title>Andres Janes | Senior Software Engineer</title>
+        <meta name="description" content="Andres Janes - Senior Software Engineer with 10+ years of experience in Vue.js, TypeScript, Ruby on Rails, and modern web development. Based in the UK." />
+        <meta name="author" content="Andres Janes" />
+        <meta property="og:title" content="Andres Janes | Senior Software Engineer" />
+        <meta property="og:description" content="Senior Software Engineer with 10+ years of experience in Vue.js, TypeScript, and modern web development." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://andresjanes.com" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Andres Janes | Senior Software Engineer" />
+        <meta name="twitter:description" content="Senior Software Engineer with 10+ years of experience in Vue.js, TypeScript, and modern web development." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <style>
+            body {
+                font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+        </style>
+        <script>
+            // Check for dark mode preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        </script>
     </head>
-    <body>
+    <body class="antialiased">
         <div id="app"></div>
         <script type="module" src="/src/main.ts"></script>
     </body>
