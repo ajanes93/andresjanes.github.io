@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { MapPin, Calendar, Briefcase } from 'lucide-vue-next'
-import { Card, Badge } from '@/components/ui'
+
+import { Briefcase, Calendar, MapPin } from 'lucide-vue-next'
+
+import { Badge, Card } from '@/components/ui'
 import type { ExperienceItem } from '@/stores/profile'
 
 interface Props {
@@ -11,12 +13,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const formatDate = (dateString: string) => {
+function formatDate(dateString: string): string {
     const date = new Date(dateString)
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-const calculateDuration = (start: string, end?: string) => {
+function calculateDuration(start: string, end?: string): string {
     const startDate = new Date(start)
     const endDate = end ? new Date(end) : new Date()
     const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + endDate.getMonth() - startDate.getMonth()
@@ -28,8 +30,8 @@ const calculateDuration = (start: string, end?: string) => {
     return `${years} yr${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`
 }
 
-const sortedItems = computed(() => {
-    return [...props.items].sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+const sortedItems = computed<ExperienceItem[]>((): ExperienceItem[] => {
+    return [...props.items].sort((a: ExperienceItem, b: ExperienceItem): number => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
 })
 </script>
 

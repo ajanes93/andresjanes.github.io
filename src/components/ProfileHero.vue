@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { MapPin, Building2, Clock, Languages, Github, Linkedin, Mail, ExternalLink } from 'lucide-vue-next'
-import { Avatar, AvatarImage, AvatarFallback, Button, Badge } from '@/components/ui'
+import type { Component } from 'vue'
+
+import { Building2, Clock, ExternalLink, Github, Languages, Linkedin, Mail, MapPin } from 'lucide-vue-next'
+
+import { Avatar, AvatarFallback, AvatarImage, Badge, Button } from '@/components/ui'
 import type { SocialLink } from '@/stores/profile'
 
 interface Props {
@@ -10,14 +13,15 @@ interface Props {
     location: string
     yearsExperience: string
     pronouns: string
+    avatarPath: string
     languages: { name: string; level: string }[]
     socials: SocialLink[]
 }
 
 defineProps<Props>()
 
-const getSocialIcon = (iconName: string) => {
-    const icons: Record<string, typeof Github> = {
+function getSocialIcon(iconName: string): Component {
+    const icons: Record<string, Component> = {
         github: Github,
         linkedin: Linkedin,
         gitlab: ExternalLink,
@@ -28,16 +32,16 @@ const getSocialIcon = (iconName: string) => {
 </script>
 
 <template>
-    <div class="relative overflow-hidden rounded-2xl bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 p-1">
+    <div class="relative overflow-hidden rounded-2xl bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 p-1">
         <div class="relative bg-background rounded-xl p-6 md:p-8">
             <div class="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent"></div>
 
             <div class="relative flex flex-col md:flex-row gap-6 items-center md:items-start">
                 <div class="relative">
-                    <div class="absolute inset-0 bg-linear-to-br from-indigo-500 to-purple-600 rounded-full blur-lg opacity-50"></div>
+                    <div class="absolute inset-0 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full blur-lg opacity-50"></div>
                     <Avatar class="w-28 h-28 md:w-32 md:h-32 ring-4 ring-background relative">
-                        <AvatarImage src="/img/profile.webp" :alt="name" />
-                        <AvatarFallback class="text-2xl font-bold bg-linear-to-br from-indigo-500 to-purple-600 text-white">
+                        <AvatarImage :src="avatarPath" :alt="name" />
+                        <AvatarFallback class="text-2xl font-bold bg-linear-to-br from-blue-500 to-cyan-500 text-white">
                             {{ name.split(' ').map(n => n[0]).join('') }}
                         </AvatarFallback>
                     </Avatar>

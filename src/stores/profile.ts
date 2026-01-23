@@ -11,6 +11,11 @@ export interface ExperienceItem {
     skills?: string[]
 }
 
+export interface Language {
+    name: string
+    level: string
+}
+
 export interface LLMProvider {
     id: string
     name: string
@@ -19,14 +24,39 @@ export interface LLMProvider {
     url: string
 }
 
+export interface Recommendation {
+    name: string
+    title: string
+    text: string
+}
+
 export interface SocialLink {
     name: string
     href: string
     icon: string
 }
 
+export interface ProfileState {
+    name: string
+    title: string
+    location: string
+    company: string
+    yearsExperience: string
+    availability: string
+    pronouns: string
+    avatarPath: string
+    summary: string
+    languages: Language[]
+    skills: string[]
+    experience: ExperienceItem[]
+    education: ExperienceItem[]
+    socials: SocialLink[]
+    llmProviders: LLMProvider[]
+    recommendations: Recommendation[]
+}
+
 export const useProfileStore = defineStore('profile', {
-    state: () => ({
+    state: (): ProfileState => ({
         name: 'Andres Janes',
         title: 'Senior Software Engineer',
         location: 'Lincolnshire, England, United Kingdom',
@@ -34,6 +64,7 @@ export const useProfileStore = defineStore('profile', {
         yearsExperience: '10+',
         availability: 'Open to opportunities',
         pronouns: 'He/Him',
+        avatarPath: '/img/profile.webp',
 
         summary: `Pragmatic, quick-learning, solution-driven developer with over 10 years of experience delivering complex web-based software solutions. A proactive problem solver who consistently exceeds expectations. Currently working as a Senior Software Engineer at Cision, contributing to full-stack development on Cision One, a media monitoring platform built with Rails and Vue.
 
@@ -45,25 +76,30 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
         ],
 
         skills: [
+            // Frontend
             'Vue.js / Vue 3',
-            'TypeScript',
-            'Ruby on Rails',
-            'GraphQL',
             'React',
+            'TypeScript',
+            'Tailwind CSS',
+            'PWA',
+            'webRTC',
+            'Websockets',
+            // Backend
+            'Ruby on Rails',
             'Node.js',
             'PHP',
-            'webRTC',
-            'PWA',
-            'Tailwind CSS',
-            'Docker',
-            'CI/CD',
-            'Agile / Kanban',
+            'GraphQL',
+            'REST APIs',
+            // Databases
             'PostgreSQL',
             'MySQL',
-            'REST APIs',
-            'Websockets',
+            // DevOps & Tools
+            'Docker',
+            'CI/CD',
+            'Git',
             'Testing (Vitest, Cypress)',
-            'Git'
+            // Methodology
+            'Agile / Kanban'
         ],
 
         experience: [
@@ -126,7 +162,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 description: `Worked in a dynamic team on research projects, developing analytics tools and data processing solutions using VBA and supporting various business functions.`,
                 skills: ['VBA', 'Excel', 'Data Analysis']
             }
-        ] as ExperienceItem[],
+        ],
 
         education: [
             {
@@ -138,14 +174,13 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 endDate: '2014-07-01',
                 logoPath: '/img/uwe.svg'
             }
-        ] as ExperienceItem[],
+        ],
 
         socials: [
             { name: 'LinkedIn', href: 'https://www.linkedin.com/in/andresjanes/', icon: 'linkedin' },
             { name: 'GitHub', href: 'https://github.com/ajanes93', icon: 'github' },
-            { name: 'GitLab', href: 'https://gitlab.com/andresjanes', icon: 'gitlab' },
             { name: 'Email', href: 'mailto:dev@andresjanes.com', icon: 'mail' }
-        ] as SocialLink[],
+        ],
 
         llmProviders: [
             {
@@ -176,7 +211,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 color: '#20B2AA',
                 url: 'https://www.perplexity.ai/'
             }
-        ] as LLMProvider[],
+        ],
 
         recommendations: [
             {
@@ -193,7 +228,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
     }),
 
     getters: {
-        getCandidateSummaryPrompt: (state) => {
+        getCandidateSummaryPrompt: (state): string => {
             const context = `
 # About Andres Janes
 
@@ -209,7 +244,7 @@ ${state.summary}
 ${state.skills.join(', ')}
 
 ## Work Experience
-${state.experience.map((exp) => `
+${state.experience.map((exp: ExperienceItem): string => `
 ### ${exp.title} at ${exp.company}
 ${exp.startDate} - ${exp.endDate || 'Present'} | ${exp.location}
 ${exp.description}
@@ -217,17 +252,17 @@ Skills: ${exp.skills?.join(', ') || 'N/A'}
 `).join('\n')}
 
 ## Education
-${state.education.map((edu) => `
+${state.education.map((edu: ExperienceItem): string => `
 ### ${edu.title}
 ${edu.company}, ${edu.location}
 ${edu.description}
 `).join('\n')}
 
 ## Languages
-${state.languages.map((l) => `${l.name}: ${l.level}`).join(', ')}
+${state.languages.map((l: Language): string => `${l.name}: ${l.level}`).join(', ')}
 
 ## Recommendations
-${state.recommendations.map((r) => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
+${state.recommendations.map((r: Recommendation): string => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
 `.trim()
 
             return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role.

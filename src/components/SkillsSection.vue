@@ -1,21 +1,36 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { Code2 } from 'lucide-vue-next'
+
 import { Badge } from '@/components/ui'
+
+type SkillVariant = 'default' | 'secondary' | 'outline'
 
 interface Props {
     skills: string[]
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
-const getSkillCategory = (skill: string): 'default' | 'secondary' | 'outline' => {
-    const primarySkills = ['Vue.js', 'Vue 3', 'TypeScript', 'Ruby on Rails', 'GraphQL']
-    const secondarySkills = ['React', 'Node.js', 'PHP', 'webRTC', 'PWA', 'Tailwind CSS']
+const primarySkills: string[] = ['Vue.js', 'Vue 3', 'TypeScript', 'Ruby on Rails', 'GraphQL', 'Tailwind']
+const secondarySkills: string[] = ['React', 'Node.js', 'PHP', 'webRTC', 'PWA']
 
-    if (primarySkills.some((s) => skill.includes(s))) return 'default'
-    if (secondarySkills.some((s) => skill.includes(s))) return 'secondary'
+function getSkillCategory(skill: string): SkillVariant {
+    if (primarySkills.some((s: string): boolean => skill.includes(s))) return 'default'
+    if (secondarySkills.some((s: string): boolean => skill.includes(s))) return 'secondary'
     return 'outline'
 }
+
+// Sort skills so highlighted ones appear first
+const sortedSkills = computed<string[]>((): string[] => {
+    return [...props.skills].sort((a: string, b: string): number => {
+        const aCategory = getSkillCategory(a)
+        const bCategory = getSkillCategory(b)
+        const order: Record<SkillVariant, number> = { default: 0, secondary: 1, outline: 2 }
+        return order[aCategory] - order[bCategory]
+    })
+})
 </script>
 
 <template>
@@ -28,7 +43,7 @@ const getSkillCategory = (skill: string): 'default' | 'secondary' | 'outline' =>
         </h2>
 
         <div class="flex flex-wrap gap-2">
-            <Badge v-for="skill in skills" :key="skill" :variant="getSkillCategory(skill)" class="px-3 py-1.5 text-sm transition-transform hover:scale-105 cursor-default">
+            <Badge v-for="skill in sortedSkills" :key="skill" :variant="getSkillCategory(skill)" class="px-3 py-1.5 text-sm transition-transform hover:scale-105 cursor-default">
                 {{ skill }}
             </Badge>
         </div>
