@@ -14,13 +14,10 @@ const store = useProfileStore()
 
 <template>
     <div class="min-h-screen bg-background">
-        <!-- Header -->
         <header class="sticky top-0 z-50 glass border-b">
             <div class="container max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center"
-                    >
+                    <div class="w-8 h-8 rounded-lg bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                         <span class="text-white font-bold text-sm">AJ</span>
                     </div>
                     <span class="font-semibold hidden sm:inline">andresjanes.com</span>
@@ -38,9 +35,7 @@ const store = useProfileStore()
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="container max-w-5xl mx-auto px-4 py-8 space-y-12">
-            <!-- Profile Hero -->
             <section>
                 <ProfileHero
                     :name="store.name"
@@ -54,7 +49,6 @@ const store = useProfileStore()
                 />
             </section>
 
-            <!-- AI Summary Section -->
             <section class="space-y-6">
                 <div class="text-center space-y-2">
                     <h2 class="text-2xl font-bold">
@@ -64,26 +58,21 @@ const store = useProfileStore()
                         Get an instant overview of this candidate's background, or use one of the AI assistants below for deeper analysis.
                     </p>
                 </div>
-
                 <AiChatSummary :summary="store.summary" />
             </section>
 
-            <!-- LLM Hotlinks -->
             <section>
                 <LLMHotlinks :providers="store.llmProviders" :prompt="store.getCandidateSummaryPrompt" />
             </section>
 
-            <!-- Skills Section -->
             <section>
                 <SkillsSection :skills="store.skills" />
             </section>
 
-            <!-- Experience Section -->
             <section>
                 <ExperienceTimeline :items="store.experience" title="Experience" />
             </section>
 
-            <!-- Education Section -->
             <section>
                 <div class="space-y-6">
                     <h2 class="text-2xl font-bold flex items-center gap-3">
@@ -97,15 +86,8 @@ const store = useProfileStore()
                         <Card v-for="edu in store.education" :key="edu.company" class="overflow-hidden">
                             <CardContent class="p-5">
                                 <div class="flex items-start gap-4">
-                                    <div
-                                        class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0"
-                                    >
-                                        <img
-                                            v-if="edu.logoPath"
-                                            :src="edu.logoPath"
-                                            :alt="edu.company"
-                                            class="w-full h-full object-cover"
-                                        />
+                                    <div class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0">
+                                        <img v-if="edu.logoPath" :src="edu.logoPath" :alt="edu.company" class="w-full h-full object-cover" />
                                         <GraduationCap v-else class="w-6 h-6 text-muted-foreground" />
                                     </div>
                                     <div>
@@ -120,7 +102,6 @@ const store = useProfileStore()
                 </div>
             </section>
 
-            <!-- Recommendations Section -->
             <section class="space-y-6">
                 <h2 class="text-2xl font-bold flex items-center gap-3">
                     <div class="p-2 rounded-lg bg-primary/10">
@@ -133,9 +114,7 @@ const store = useProfileStore()
                     <Card v-for="rec in store.recommendations" :key="rec.name" class="overflow-hidden">
                         <CardContent class="p-5">
                             <blockquote class="space-y-3">
-                                <p class="text-sm text-muted-foreground italic leading-relaxed">
-                                    "{{ rec.text }}"
-                                </p>
+                                <p class="text-sm text-muted-foreground italic leading-relaxed">"{{ rec.text }}"</p>
                                 <footer class="text-sm">
                                     <strong class="text-foreground">{{ rec.name }}</strong>
                                     <span class="text-muted-foreground"> - {{ rec.title }}</span>
@@ -147,21 +126,13 @@ const store = useProfileStore()
             </section>
         </main>
 
-        <!-- Footer -->
         <footer class="border-t mt-16">
             <div class="container max-w-5xl mx-auto px-4 py-8">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-                    <p>&copy; {{ new Date().getFullYear() }} Andres Janes. Built with Vue 3, TypeScript & Tailwind CSS.</p>
-                    <div class="flex items-center gap-4">
-                        <a
-                            href="https://github.com/ajanes93/andresjanes.github.io"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="hover:text-foreground transition-colors"
-                        >
-                            View Source
-                        </a>
-                    </div>
+                    <p>&copy; {{ new Date().getFullYear() }} Andres Janes. Built with Vue 3, TypeScript & Tailwind CSS 4.</p>
+                    <a href="https://github.com/ajanes93/andresjanes.github.io" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
+                        View Source
+                    </a>
                 </div>
             </div>
         </footer>

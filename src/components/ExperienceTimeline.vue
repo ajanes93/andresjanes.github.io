@@ -7,12 +7,9 @@ import type { ExperienceItem } from '@/stores/profile'
 interface Props {
     items: ExperienceItem[]
     title: string
-    icon?: 'briefcase' | 'graduation'
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    icon: 'briefcase'
-})
+const props = defineProps<Props>()
 
 const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -26,11 +23,8 @@ const calculateDuration = (start: string, end?: string) => {
     const years = Math.floor(months / 12)
     const remainingMonths = months % 12
 
-    if (years === 0) {
-        return `${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`
-    } else if (remainingMonths === 0) {
-        return `${years} yr${years !== 1 ? 's' : ''}`
-    }
+    if (years === 0) return `${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`
+    if (remainingMonths === 0) return `${years} yr${years !== 1 ? 's' : ''}`
     return `${years} yr${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`
 }
 
@@ -49,30 +43,17 @@ const sortedItems = computed(() => {
         </h2>
 
         <div class="relative">
-            <!-- Timeline line -->
             <div class="absolute left-[19px] top-0 bottom-0 w-0.5 bg-border hidden md:block"></div>
 
             <div class="space-y-6">
                 <div v-for="item in sortedItems" :key="`${item.company}-${item.startDate}`" class="relative">
-                    <!-- Timeline dot -->
-                    <div
-                        class="absolute left-3 top-6 w-3 h-3 rounded-full border-2 border-primary bg-background z-10 hidden md:block"
-                        :class="{ 'bg-primary': !item.endDate }"
-                    ></div>
+                    <div class="absolute left-3 top-6 w-3 h-3 rounded-full border-2 border-primary bg-background z-10 hidden md:block" :class="{ 'bg-primary': !item.endDate }"></div>
 
                     <Card class="md:ml-12 overflow-hidden hover:shadow-md transition-shadow duration-300">
                         <div class="p-5">
                             <div class="flex flex-col md:flex-row md:items-start gap-4">
-                                <!-- Company Logo -->
-                                <div
-                                    class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0"
-                                >
-                                    <img
-                                        v-if="item.logoPath"
-                                        :src="item.logoPath"
-                                        :alt="item.company"
-                                        class="w-full h-full object-cover"
-                                    />
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0">
+                                    <img v-if="item.logoPath" :src="item.logoPath" :alt="item.company" class="w-full h-full object-cover" />
                                     <Briefcase v-else class="w-6 h-6 text-muted-foreground" />
                                 </div>
 
@@ -82,9 +63,7 @@ const sortedItems = computed(() => {
                                             <h3 class="font-semibold text-lg">{{ item.title }}</h3>
                                             <p class="text-muted-foreground font-medium">{{ item.company }}</p>
                                         </div>
-                                        <Badge v-if="!item.endDate" variant="default" class="w-fit">
-                                            Current
-                                        </Badge>
+                                        <Badge v-if="!item.endDate" variant="default" class="w-fit">Current</Badge>
                                     </div>
 
                                     <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-muted-foreground">
@@ -99,14 +78,10 @@ const sortedItems = computed(() => {
                                         </span>
                                     </div>
 
-                                    <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
-                                        {{ item.description }}
-                                    </p>
+                                    <p class="mt-3 text-sm text-muted-foreground leading-relaxed">{{ item.description }}</p>
 
                                     <div v-if="item.skills?.length" class="mt-3 flex flex-wrap gap-2">
-                                        <Badge v-for="skill in item.skills" :key="skill" variant="secondary">
-                                            {{ skill }}
-                                        </Badge>
+                                        <Badge v-for="skill in item.skills" :key="skill" variant="secondary">{{ skill }}</Badge>
                                     </div>
                                 </div>
                             </div>

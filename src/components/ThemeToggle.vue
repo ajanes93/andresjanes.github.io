@@ -7,8 +7,6 @@ const isDark = ref(false)
 
 onMounted(() => {
     isDark.value = document.documentElement.classList.contains('dark')
-
-    // Check system preference
     if (!localStorage.getItem('theme')) {
         isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
         updateTheme()

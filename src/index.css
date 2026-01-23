@@ -1,63 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-        --primary: 239 84% 67%;
-        --primary-foreground: 210 40% 98%;
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 239 84% 67%;
-        --radius: 0.75rem;
+@theme {
+    /* Colors - Using CSS custom properties for light/dark mode */
+    --color-background: hsl(0 0% 100%);
+    --color-foreground: hsl(222.2 84% 4.9%);
+    --color-card: hsl(0 0% 100%);
+    --color-card-foreground: hsl(222.2 84% 4.9%);
+    --color-popover: hsl(0 0% 100%);
+    --color-popover-foreground: hsl(222.2 84% 4.9%);
+    --color-primary: hsl(239 84% 67%);
+    --color-primary-foreground: hsl(210 40% 98%);
+    --color-secondary: hsl(210 40% 96.1%);
+    --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+    --color-muted: hsl(210 40% 96.1%);
+    --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+    --color-accent: hsl(210 40% 96.1%);
+    --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+    --color-destructive: hsl(0 84.2% 60.2%);
+    --color-destructive-foreground: hsl(210 40% 98%);
+    --color-border: hsl(214.3 31.8% 91.4%);
+    --color-input: hsl(214.3 31.8% 91.4%);
+    --color-ring: hsl(239 84% 67%);
+
+    /* Border radius */
+    --radius-lg: 0.75rem;
+    --radius-md: calc(0.75rem - 2px);
+    --radius-sm: calc(0.75rem - 4px);
+
+    /* Custom animations */
+    --animate-blink: blink 0.75s step-end infinite;
+    --animate-fade-in: fade-in 0.5s ease-out forwards;
+    --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
     }
 
-    .dark {
-        --background: 224 71% 4%;
-        --foreground: 213 31% 91%;
-        --card: 224 71% 4%;
-        --card-foreground: 213 31% 91%;
-        --popover: 224 71% 4%;
-        --popover-foreground: 213 31% 91%;
-        --primary: 239 84% 67%;
-        --primary-foreground: 222.2 47.4% 1.2%;
-        --secondary: 222.2 47.4% 11.2%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 223 47% 11%;
-        --muted-foreground: 215.4 16.3% 56.9%;
-        --accent: 216 34% 17%;
-        --accent-foreground: 210 40% 98%;
-        --destructive: 0 63% 31%;
-        --destructive-foreground: 210 40% 98%;
-        --border: 216 34% 17%;
-        --input: 216 34% 17%;
-        --ring: 239 84% 67%;
+    @keyframes fade-in {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+            border-color: rgba(99, 102, 241, 0.8);
+        }
     }
 }
 
-@layer base {
-    * {
-        @apply border-border;
-    }
+/* Dark mode theme */
+.dark {
+    --color-background: hsl(224 71% 4%);
+    --color-foreground: hsl(213 31% 91%);
+    --color-card: hsl(224 71% 4%);
+    --color-card-foreground: hsl(213 31% 91%);
+    --color-popover: hsl(224 71% 4%);
+    --color-popover-foreground: hsl(213 31% 91%);
+    --color-primary: hsl(239 84% 67%);
+    --color-primary-foreground: hsl(222.2 47.4% 1.2%);
+    --color-secondary: hsl(222.2 47.4% 11.2%);
+    --color-secondary-foreground: hsl(210 40% 98%);
+    --color-muted: hsl(223 47% 11%);
+    --color-muted-foreground: hsl(215.4 16.3% 56.9%);
+    --color-accent: hsl(216 34% 17%);
+    --color-accent-foreground: hsl(210 40% 98%);
+    --color-destructive: hsl(0 63% 31%);
+    --color-destructive-foreground: hsl(210 40% 98%);
+    --color-border: hsl(216 34% 17%);
+    --color-input: hsl(216 34% 17%);
+    --color-ring: hsl(239 84% 67%);
+}
 
-    body {
-        @apply bg-background text-foreground;
-        font-feature-settings: "rlig" 1, "calt" 1;
-    }
+/* Base styles */
+* {
+    border-color: var(--color-border);
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
 }
 
 /* Custom scrollbar */
@@ -67,41 +95,36 @@
 }
 
 ::-webkit-scrollbar-track {
-    @apply bg-muted;
+    background: var(--color-muted);
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full;
+    background: color-mix(in srgb, var(--color-muted-foreground) 30%, transparent);
+    border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
+    background: color-mix(in srgb, var(--color-muted-foreground) 50%, transparent);
 }
 
-/* Gradient text utility */
+/* Utility classes */
 .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500;
+    background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* AI Glow effect */
-.ai-glow {
-    @apply relative;
+.glass {
+    background: color-mix(in srgb, var(--color-background) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
 }
 
-.ai-glow::before {
-    content: '';
-    @apply absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 blur-xl -z-10;
-}
-
-/* Typing cursor */
 .typing-cursor::after {
     content: '|';
-    @apply animate-blink text-primary;
-}
-
-/* Glass effect */
-.glass {
-    @apply bg-background/80 backdrop-blur-lg border border-border/50;
+    animation: var(--animate-blink);
+    color: var(--color-primary);
 }
 
 /* Print styles */
@@ -110,7 +133,6 @@
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
-
     .no-print {
         display: none !important;
     }

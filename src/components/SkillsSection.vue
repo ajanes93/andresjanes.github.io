@@ -28,12 +28,7 @@ const getSkillCategory = (skill: string): 'default' | 'secondary' | 'outline' =>
         </h2>
 
         <div class="flex flex-wrap gap-2">
-            <Badge
-                v-for="skill in skills"
-                :key="skill"
-                :variant="getSkillCategory(skill)"
-                class="px-3 py-1.5 text-sm transition-transform hover:scale-105 cursor-default"
-            >
+            <Badge v-for="skill in skills" :key="skill" :variant="getSkillCategory(skill)" class="px-3 py-1.5 text-sm transition-transform hover:scale-105 cursor-default">
                 {{ skill }}
             </Badge>
         </div>

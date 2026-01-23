@@ -17,7 +17,6 @@ export interface LLMProvider {
     icon: string
     color: string
     url: string
-    promptParam: string
 }
 
 export interface SocialLink {
@@ -94,7 +93,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 location: 'Remote, UK',
                 startDate: '2018-07-01',
                 endDate: '2022-06-01',
-                description: `Worked as the frontend lead within an agile team using the Kanban approach. Led the adoption of Vue within the business, and have owned and delivered a number of products, ranging from in-house CRM and admin UIs, to portals that allow customers to manage their cloud telephony services. Delivered a webRTC soft phone PWA which is now being used by a large part of the customer base.`,
+                description: `Led frontend development within an agile Kanban team. Championed Vue adoption across the organization and delivered multiple products including CRM systems, customer portals, and a production webRTC softphone PWA used by thousands of customers.`,
                 skills: ['Vue.js', 'webRTC', 'PWA', 'PHP']
             },
             {
@@ -104,7 +103,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 location: 'Camberley, Surrey',
                 startDate: '2017-08-01',
                 endDate: '2018-07-01',
-                description: `Promoted to Senior Web Developer, taking on more complex projects and mentoring junior team members while continuing to develop customer-facing applications.`,
+                description: `Promoted to Senior Web Developer, leading complex projects and mentoring junior developers while continuing to develop customer-facing applications.`,
                 skills: ['JavaScript', 'PHP', 'MySQL']
             },
             {
@@ -124,7 +123,7 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 location: 'Walton-on-Thames, UK',
                 startDate: '2014-09-01',
                 endDate: '2015-07-01',
-                description: `Worked as part of a small dynamic team on quantitative and qualitative research projects. Supported the Project Delivery Team with advanced analytics and agile development of intuitive analysis tools using Visual Basic in Excel.`,
+                description: `Worked in a dynamic team on research projects, developing analytics tools and data processing solutions using VBA and supporting various business functions.`,
                 skills: ['VBA', 'Excel', 'Data Analysis']
             }
         ] as ExperienceItem[],
@@ -154,32 +153,28 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
                 name: 'ChatGPT',
                 icon: 'sparkles',
                 color: '#10A37F',
-                url: 'https://chat.openai.com/',
-                promptParam: 'q'
+                url: 'https://chat.openai.com/'
             },
             {
                 id: 'claude',
                 name: 'Claude',
                 icon: 'brain',
                 color: '#D97757',
-                url: 'https://claude.ai/new',
-                promptParam: 'q'
+                url: 'https://claude.ai/new'
             },
             {
                 id: 'gemini',
                 name: 'Gemini',
                 icon: 'gem',
                 color: '#4285F4',
-                url: 'https://gemini.google.com/app',
-                promptParam: 'q'
+                url: 'https://gemini.google.com/app'
             },
             {
                 id: 'perplexity',
                 name: 'Perplexity',
                 icon: 'search',
                 color: '#20B2AA',
-                url: 'https://www.perplexity.ai/',
-                promptParam: 'q'
+                url: 'https://www.perplexity.ai/'
             }
         ] as LLMProvider[],
 
@@ -198,53 +193,6 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
     }),
 
     getters: {
-        getPromptContext: (state) => {
-            return `
-# About Andres Janes
-
-## Current Role
-${state.title} at ${state.company}
-Location: ${state.location}
-Experience: ${state.yearsExperience} years
-
-## Professional Summary
-${state.summary}
-
-## Technical Skills
-${state.skills.join(', ')}
-
-## Work Experience
-${state.experience
-    .map(
-        (exp) => `
-### ${exp.title} at ${exp.company}
-${exp.startDate} - ${exp.endDate || 'Present'}
-${exp.location}
-${exp.description}
-Skills: ${exp.skills?.join(', ') || 'N/A'}
-`
-    )
-    .join('\n')}
-
-## Education
-${state.education
-    .map(
-        (edu) => `
-### ${edu.title}
-${edu.company}, ${edu.location}
-${edu.description}
-`
-    )
-    .join('\n')}
-
-## Languages
-${state.languages.map((l) => `${l.name}: ${l.level}`).join(', ')}
-
-## Recommendations
-${state.recommendations.map((r) => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
-`.trim()
-        },
-
         getCandidateSummaryPrompt: (state) => {
             const context = `
 # About Andres Janes
@@ -261,28 +209,19 @@ ${state.summary}
 ${state.skills.join(', ')}
 
 ## Work Experience
-${state.experience
-    .map(
-        (exp) => `
+${state.experience.map((exp) => `
 ### ${exp.title} at ${exp.company}
-${exp.startDate} - ${exp.endDate || 'Present'}
-${exp.location}
+${exp.startDate} - ${exp.endDate || 'Present'} | ${exp.location}
 ${exp.description}
 Skills: ${exp.skills?.join(', ') || 'N/A'}
-`
-    )
-    .join('\n')}
+`).join('\n')}
 
 ## Education
-${state.education
-    .map(
-        (edu) => `
+${state.education.map((edu) => `
 ### ${edu.title}
 ${edu.company}, ${edu.location}
 ${edu.description}
-`
-    )
-    .join('\n')}
+`).join('\n')}
 
 ## Languages
 ${state.languages.map((l) => `${l.name}: ${l.level}`).join(', ')}
@@ -290,7 +229,8 @@ ${state.languages.map((l) => `${l.name}: ${l.level}`).join(', ')}
 ## Recommendations
 ${state.recommendations.map((r) => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
 `.trim()
-            return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role. Include strengths, potential areas of expertise, and what kind of team/company culture they might thrive in.
+
+            return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role.
 
 ${context}
 
@@ -298,64 +238,7 @@ Please provide:
 1. A brief executive summary (2-3 sentences)
 2. Key technical strengths
 3. Notable achievements and experience highlights
-4. Recommended role types and team dynamics
-5. Any potential considerations for hiring managers`
-        },
-
-        getInterviewQuestionsPrompt: (state) => {
-            const context = `
-# About Andres Janes
-
-## Current Role
-${state.title} at ${state.company}
-Location: ${state.location}
-Experience: ${state.yearsExperience} years
-
-## Professional Summary
-${state.summary}
-
-## Technical Skills
-${state.skills.join(', ')}
-
-## Work Experience
-${state.experience
-    .map(
-        (exp) => `
-### ${exp.title} at ${exp.company}
-${exp.startDate} - ${exp.endDate || 'Present'}
-${exp.location}
-${exp.description}
-Skills: ${exp.skills?.join(', ') || 'N/A'}
-`
-    )
-    .join('\n')}
-
-## Education
-${state.education
-    .map(
-        (edu) => `
-### ${edu.title}
-${edu.company}, ${edu.location}
-${edu.description}
-`
-    )
-    .join('\n')}
-
-## Languages
-${state.languages.map((l) => `${l.name}: ${l.level}`).join(', ')}
-
-## Recommendations
-${state.recommendations.map((r) => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
-`.trim()
-            return `Based on the following candidate profile, generate tailored interview questions that would help assess their fit for a senior frontend/full-stack engineering role.
-
-${context}
-
-Please provide:
-1. 3-4 technical questions based on their stated skills (Vue.js, TypeScript, Rails)
-2. 2-3 behavioral questions based on their experience leading frontend initiatives
-3. 2 questions about their webRTC/PWA experience
-4. 1-2 questions about working in remote, distributed teams`
+4. Recommended role types and team dynamics`
         }
     }
 })
