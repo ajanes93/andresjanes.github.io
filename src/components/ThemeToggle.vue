@@ -21,16 +21,21 @@
 </template>
 
 <script setup lang="ts">
-import { useDark, useToggle } from "@vueuse/core";
+import { useDark } from "@vueuse/core";
 import { Moon, Sun } from "lucide-vue-next";
 
 import { Button } from "@/components/ui";
 
 const isDark = useDark({
-  storageKey: "theme",
+  selector: "html",
+  attribute: "class",
   valueDark: "dark",
-  valueLight: "light",
+  valueLight: "",
+  storageKey: "theme",
+  storage: localStorage,
 });
 
-const toggleTheme = useToggle(isDark);
+function toggleTheme(): void {
+  isDark.value = !isDark.value;
+}
 </script>
