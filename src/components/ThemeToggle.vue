@@ -5,7 +5,7 @@
     data-testid="theme-toggle"
     size="icon"
     variant="ghost"
-    @click="toggleTheme"
+    @click="toggleTheme()"
   >
     <Sun
       v-if="isDark"
@@ -29,7 +29,7 @@ import { Button } from "@/components/ui";
 const isDark = useDark({
   storageKey: "theme",
   valueDark: "dark",
-  valueLight: "",
+  valueLight: "light",
 });
 
 const toggleTheme = useToggle(isDark);
