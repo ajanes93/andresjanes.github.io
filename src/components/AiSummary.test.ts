@@ -4,6 +4,15 @@ import type { RenderOptions } from "@/test/utils";
 
 import AiSummary from "./AiSummary.vue";
 
+const TEST_SUMMARY = vi.hoisted(() => ({
+  summary: "Test summary about Andres Janes the developer.",
+  generatedAt: "2024-01-01T00:00:00.000Z",
+}));
+
+vi.mock("@/data/ai-summary.json", () => ({
+  default: TEST_SUMMARY,
+}));
+
 const render = (options: RenderOptions<typeof AiSummary> = {}) => {
   const wrapper = mount(AiSummary, {
     global: {
@@ -36,7 +45,7 @@ describe("AiSummary", () => {
 
     it("renders summary content from the JSON data", () => {
       const { wrapper } = render();
-      expect(wrapper.text()).toContain("Andres Janes");
+      expect(wrapper.text()).toContain(TEST_SUMMARY.summary);
     });
   });
 
