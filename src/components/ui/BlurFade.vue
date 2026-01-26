@@ -38,8 +38,8 @@ let observer: IntersectionObserver | null = null;
 
 onMounted((): void => {
   observer = new IntersectionObserver(
-    (entries: IntersectionObserverEntry[]): void => {
-      entries.forEach((entry: IntersectionObserverEntry): void => {
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           isVisible.value = true;
           observer?.disconnect();

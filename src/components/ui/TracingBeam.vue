@@ -2,7 +2,8 @@
   <div
     ref="tracingBeamRef"
     class="relative h-full w-full"
-    :class="[props.class]"
+    :class="props.class"
+    data-testid="tracing-beam"
   >
     <!-- Tracing beam line - positioned to align with timeline dots -->
     <div
@@ -88,22 +89,18 @@ const gradientId = `tracing-gradient-${Math.random().toString(36).substring(2, 1
 const svgHeight = ref<number>(0);
 const scrollProgress = ref<number>(0);
 
-// Gradient length (how long the colored section is)
 const gradientLength = 200;
 
-// Y positions for the gradient - follows scroll progress
-const computedY1 = computed(() => {
-  // Start position of gradient (top of colored section)
-  return Math.max(0, scrollProgress.value * svgHeight.value - gradientLength);
-});
+const computedY1 = computed<number>(() =>
+  Math.max(0, scrollProgress.value * svgHeight.value - gradientLength)
+);
 
-const computedY2 = computed(() => {
-  // End position of gradient (bottom of colored section)
-  return Math.min(
+const computedY2 = computed<number>(() =>
+  Math.min(
     svgHeight.value,
     scrollProgress.value * svgHeight.value + gradientLength
-  );
-});
+  )
+);
 
 const spring = useSpring(
   { y1: computedY1.value, y2: computedY2.value },
@@ -118,7 +115,7 @@ watch(computedY2, (newY2) => {
   spring.y2 = newY2;
 });
 
-function updateScrollProgress() {
+function updateScrollProgress(): void {
   if (tracingBeamRef.value) {
     const rect = tracingBeamRef.value.getBoundingClientRect();
     const windowHeight = window.innerHeight;
@@ -160,7 +157,7 @@ onUnmounted(() => {
   resizeObserver?.disconnect();
 });
 
-function updateSVGHeight() {
+function updateSVGHeight(): void {
   if (!tracingBeamContentRef.value) return;
   svgHeight.value = tracingBeamContentRef.value.offsetHeight;
 }

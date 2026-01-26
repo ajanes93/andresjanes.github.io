@@ -3,6 +3,7 @@
     :class="
       cn('text-2xl leading-none font-semibold tracking-tight', props.class)
     "
+    data-testid="card-title"
   >
     <slot />
   </h3>

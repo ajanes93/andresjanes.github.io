@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   variant: "default",
 });
 
-const classes = computed(() =>
+const classes = computed<string>(() =>
   cn(badgeVariants({ variant: props.variant }), props.class)
 );
 </script>

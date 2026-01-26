@@ -1,7 +1,8 @@
 <template>
   <div
     class="leading-snug tracking-wide"
-    :class="[props.class]"
+    :class="props.class"
+    data-testid="text-generate-effect"
   >
     <div ref="scope">
       <span
@@ -44,18 +45,18 @@ const spanStyle = computed<Record<string, string>>(() => ({
 }));
 
 onMounted((): void => {
-  if (scope.value) {
-    const spans = scope.value.querySelectorAll("span");
+  if (!scope.value) return;
 
-    setTimeout((): void => {
-      spans.forEach((span: Element, index: number): void => {
-        setTimeout((): void => {
-          const el = span as HTMLElement;
-          el.style.opacity = "1";
-          el.style.filter = props.noBlur ? "none" : "blur(0px)";
-        }, index * 200);
-      });
-    }, props.delay);
-  }
+  const spans = scope.value.querySelectorAll("span");
+
+  setTimeout(() => {
+    spans.forEach((span, index) => {
+      setTimeout(() => {
+        const el = span as HTMLElement;
+        el.style.opacity = "1";
+        el.style.filter = props.noBlur ? "none" : "blur(0px)";
+      }, index * 200);
+    });
+  }, props.delay);
 });
 </script>

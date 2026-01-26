@@ -1,5 +1,8 @@
 <template>
-  <div :class="cn('p-6 pt-0', props.class)">
+  <div
+    :class="cn('p-6 pt-0', props.class)"
+    data-testid="card-content"
+  >
     <slot />
   </div>
 </template>

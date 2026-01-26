@@ -1,5 +1,8 @@
 <template>
-  <p :class="cn('text-muted-foreground text-sm', props.class)">
+  <p
+    :class="cn('text-muted-foreground text-sm', props.class)"
+    data-testid="card-description"
+  >
     <slot />
   </p>
 </template>

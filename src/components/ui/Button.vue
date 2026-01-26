@@ -2,6 +2,7 @@
   <component
     :is="asChild ? 'span' : 'button'"
     :class="classes"
+    data-testid="button"
     :type="asChild ? undefined : 'button'"
   >
     <slot />

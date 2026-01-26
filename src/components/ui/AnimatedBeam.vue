@@ -2,7 +2,7 @@
   <svg
     v-if="pathD"
     class="pointer-events-none absolute top-0 left-0 transform-gpu"
-    :class="[props.class]"
+    :class="props.class"
     data-testid="animated-beam"
     fill="none"
     :height="svgDimensions.height"
@@ -131,18 +131,17 @@ const pathD = ref<string>("");
 const svgDimensions = ref<SvgDimensions>({ height: 0, width: 0 });
 const isRightToLeft = ref<boolean>(false);
 
-// Calculate animation direction based on beam orientation
-const shouldAnimateRightToLeft = computed<boolean>(() => {
-  return props.reverse ? !isRightToLeft.value : isRightToLeft.value;
-});
+const shouldAnimateRightToLeft = computed<boolean>(() =>
+  props.reverse ? !isRightToLeft.value : isRightToLeft.value
+);
 
-const x1 = computed<string>(() => {
-  return shouldAnimateRightToLeft.value ? "90%; -10%;" : "10%; 110%;";
-});
+const x1 = computed<string>(() =>
+  shouldAnimateRightToLeft.value ? "90%; -10%;" : "10%; 110%;"
+);
 
-const x2 = computed<string>(() => {
-  return shouldAnimateRightToLeft.value ? "100%; 0%;" : "0%; 100%;";
-});
+const x2 = computed<string>(() =>
+  shouldAnimateRightToLeft.value ? "100%; 0%;" : "0%; 100%;"
+);
 
 function getCenterPoint(
   rect: DOMRect,
@@ -189,15 +188,10 @@ function updatePath(): void {
   pathD.value = `M ${start.x},${start.y} Q ${controlX},${controlY} ${end.x},${end.y}`;
 }
 
-function allRefsAvailable(): boolean {
-  return Boolean(props.containerRef && props.startRef && props.endRef);
-}
-
-// Watch for ref changes and update path
 watch(
   () => [props.containerRef, props.startRef, props.endRef],
   () => {
-    if (!allRefsAvailable()) return;
+    if (!props.containerRef || !props.startRef || !props.endRef) return;
     updatePath();
   },
   { immediate: true }
