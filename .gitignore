@@ -26,3 +26,8 @@ npm-debug.log*
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Claude Code (override global ignore)
+!CLAUDE.md
+!.claude/
+.claude/settings.local.json
