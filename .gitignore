@@ -27,6 +27,10 @@ npm-debug.log*
 # TypeScript cache
 *.tsbuildinfo
 
+# Vite config build artifacts
+vite.config.js
+vite.config.d.ts
+
 # Claude Code (override global ignore)
 !CLAUDE.md
 !.claude/
