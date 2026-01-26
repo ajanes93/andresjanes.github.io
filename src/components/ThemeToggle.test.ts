@@ -4,29 +4,50 @@ import type { RenderOptions } from "@/test/utils";
 
 import ThemeToggle from "./ThemeToggle.vue";
 
-// Helper to create matchMedia mock
-const createMatchMediaMock = (matches: boolean = false) => {
-  return (query: string) => ({
-    addEventListener: vi.fn(),
-    addListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-    matches,
-    media: query,
+// Helper to create matchMedia mock with event listener support
+const createMatchMediaMock = (initialMatches: boolean = false) => {
+  let currentMatches = initialMatches;
+  const listeners: Array<(event: MediaQueryListEvent) => void> = [];
+
+  const mediaQueryList = {
+    get matches() {
+      return currentMatches;
+    },
+    media: "(prefers-color-scheme: dark)",
     onchange: null,
-    removeEventListener: vi.fn(),
+    addEventListener: vi.fn(
+      (event: string, listener: (event: MediaQueryListEvent) => void) => {
+        if (event === "change") listeners.push(listener);
+      }
+    ),
+    removeEventListener: vi.fn(
+      (event: string, listener: (event: MediaQueryListEvent) => void) => {
+        if (event === "change") {
+          const index = listeners.indexOf(listener);
+          if (index > -1) listeners.splice(index, 1);
+        }
+      }
+    ),
+    addListener: vi.fn(),
     removeListener: vi.fn(),
-  });
+    dispatchEvent: vi.fn(),
+  };
+
+  return {
+    mock: () => mediaQueryList,
+    triggerChange: (matches: boolean) => {
+      currentMatches = matches;
+
+      listeners.forEach((listener) =>
+        listener({ matches } as MediaQueryListEvent)
+      );
+    },
+    getListenerCount: () => listeners.length,
+  };
 };
 
 const render = (options: RenderOptions<typeof ThemeToggle> = {}) => {
-  const wrapper = mount(ThemeToggle, {
-    global: {
-      ...options.global,
-    },
-    props: {
-      ...options.props,
-    },
-  });
+  const wrapper = mount(ThemeToggle, options);
 
   return {
     wrapper,
@@ -35,11 +56,14 @@ const render = (options: RenderOptions<typeof ThemeToggle> = {}) => {
 };
 
 describe("ThemeToggle", () => {
+  let matchMediaHelper: ReturnType<typeof createMatchMediaMock>;
+
   beforeEach(() => {
     document.documentElement.classList.remove("dark");
     localStorage.clear();
     // matchMedia must be mocked as it's a browser API not available in JSDOM
-    window.matchMedia = createMatchMediaMock(false);
+    matchMediaHelper = createMatchMediaMock(false);
+    window.matchMedia = matchMediaHelper.mock as typeof window.matchMedia;
   });
 
   afterEach(() => {
@@ -112,11 +136,57 @@ describe("ThemeToggle", () => {
   describe("system preference", () => {
     it("respects system dark mode preference when no localStorage value", () => {
       // Set matchMedia to return matches: true for dark mode preference
-      window.matchMedia = createMatchMediaMock(true);
+      matchMediaHelper = createMatchMediaMock(true);
+      window.matchMedia = matchMediaHelper.mock as typeof window.matchMedia;
 
       render();
       // The component checks system preference on mount if no localStorage
       expect(document.documentElement.classList.contains("dark")).toBe(true);
+    });
+
+    it("updates theme when system preference changes", async () => {
+      const { wrapper } = render();
+
+      // Initially light mode
+      expect(document.documentElement.classList.contains("dark")).toBe(false);
+
+      // Simulate system switching to dark mode
+      matchMediaHelper.triggerChange(true);
+      await wrapper.vm.$nextTick();
+
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+
+      // Simulate system switching back to light mode
+      matchMediaHelper.triggerChange(false);
+      await wrapper.vm.$nextTick();
+
+      expect(document.documentElement.classList.contains("dark")).toBe(false);
+    });
+
+    it("ignores system preference changes when user has set manual preference", async () => {
+      const { wrapper, getToggleButton } = render();
+
+      // User manually toggles to dark mode
+      await getToggleButton().trigger("click");
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+      expect(localStorage.getItem("theme")).toBe("dark");
+
+      // Simulate system switching to light mode - should be ignored
+      matchMediaHelper.triggerChange(false);
+      await wrapper.vm.$nextTick();
+
+      // Should still be dark because user preference takes precedence
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+    });
+
+    it("removes event listener on unmount", () => {
+      const { wrapper } = render();
+
+      expect(matchMediaHelper.getListenerCount()).toBe(1);
+
+      wrapper.unmount();
+
+      expect(matchMediaHelper.getListenerCount()).toBe(0);
     });
   });
 });
