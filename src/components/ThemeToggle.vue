@@ -21,38 +21,16 @@
 </template>
 
 <script setup lang="ts">
+import { useDark, useToggle } from "@vueuse/core";
 import { Moon, Sun } from "lucide-vue-next";
-import { onMounted, onUnmounted, ref } from "vue";
 
 import { Button } from "@/components/ui";
 
-const isDark = ref<boolean>(false);
-const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-function toggleTheme(): void {
-  isDark.value = !isDark.value;
-  document.documentElement.classList.toggle("dark", isDark.value);
-  localStorage.setItem("theme", isDark.value ? "dark" : "light");
-}
-
-function handleSystemThemeChange(event: MediaQueryListEvent): void {
-  if (!localStorage.getItem("theme")) {
-    isDark.value = event.matches;
-    document.documentElement.classList.toggle("dark", event.matches);
-  }
-}
-
-onMounted((): void => {
-  const savedTheme = localStorage.getItem("theme");
-  const useDark = savedTheme ? savedTheme === "dark" : mediaQuery.matches;
-
-  isDark.value = useDark;
-  document.documentElement.classList.toggle("dark", useDark);
-
-  mediaQuery.addEventListener("change", handleSystemThemeChange);
+const isDark = useDark({
+  storageKey: "theme",
+  valueDark: "dark",
+  valueLight: "light",
 });
 
-onUnmounted((): void => {
-  mediaQuery.removeEventListener("change", handleSystemThemeChange);
-});
+const toggleTheme = useToggle(isDark);
 </script>

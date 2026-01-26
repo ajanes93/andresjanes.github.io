@@ -22,14 +22,15 @@
         <div
           class="absolute left-0 flex flex-col justify-center gap-8 md:left-8"
         >
-          <button
+          <a
             ref="chatgptRef"
             aria-label="Open ChatGPT to analyze this candidate's profile"
             class="group bg-background relative z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-2 shadow-lg transition-all hover:scale-110 hover:shadow-xl"
             data-testid="llm-button"
+            :href="chatgptUrl"
+            rel="noopener noreferrer"
             :style="{ borderColor: '#10A37F' }"
-            type="button"
-            @click="openLLM(providers[0])"
+            target="_blank"
           >
             <ChatGPTIcon
               class="size-6"
@@ -40,15 +41,16 @@
             >
               ChatGPT
             </span>
-          </button>
-          <button
+          </a>
+          <a
             ref="claudeRef"
             aria-label="Open Claude to analyze this candidate's profile"
             class="group bg-background relative z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-2 shadow-lg transition-all hover:scale-110 hover:shadow-xl"
             data-testid="llm-button"
+            :href="claudeUrl"
+            rel="noopener noreferrer"
             :style="{ borderColor: '#D97757' }"
-            type="button"
-            @click="openLLM(providers[1])"
+            target="_blank"
           >
             <ClaudeIcon
               class="size-6"
@@ -59,7 +61,7 @@
             >
               Claude
             </span>
-          </button>
+          </a>
         </div>
 
         <!-- Center AJ Logo -->
@@ -74,14 +76,15 @@
         <div
           class="absolute right-0 flex flex-col justify-center gap-8 md:right-8"
         >
-          <button
+          <a
             ref="geminiRef"
             aria-label="Open Gemini to analyze this candidate's profile"
             class="group bg-background relative z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-2 shadow-lg transition-all hover:scale-110 hover:shadow-xl"
             data-testid="llm-button"
+            :href="geminiUrl"
+            rel="noopener noreferrer"
             :style="{ borderColor: '#4285F4' }"
-            type="button"
-            @click="openLLM(providers[2])"
+            target="_blank"
           >
             <GeminiIcon
               class="size-6"
@@ -92,15 +95,16 @@
             >
               Gemini
             </span>
-          </button>
-          <button
+          </a>
+          <a
             ref="perplexityRef"
             aria-label="Open Perplexity to analyze this candidate's profile"
             class="group bg-background relative z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-2 shadow-lg transition-all hover:scale-110 hover:shadow-xl"
             data-testid="llm-button"
+            :href="perplexityUrl"
+            rel="noopener noreferrer"
             :style="{ borderColor: '#20B2AA' }"
-            type="button"
-            @click="openLLM(providers[3])"
+            target="_blank"
           >
             <PerplexityIcon
               class="size-6"
@@ -111,7 +115,7 @@
             >
               Perplexity
             </span>
-          </button>
+          </a>
         </div>
 
         <!-- Animated Beams -->
@@ -176,14 +180,10 @@
           @click="copyPrompt"
         >
           <component
-            :is="copiedId === 'copied' ? Check : Copy"
+            :is="copied ? Check : Copy"
             class="size-4"
           />
-          {{
-            copiedId === "copied"
-              ? "Prompt copied!"
-              : "Copy prompt to clipboard"
-          }}
+          {{ copied ? "Prompt copied!" : "Copy prompt to clipboard" }}
         </button>
       </div>
 
@@ -196,6 +196,7 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from "@vueuse/core";
 import { Check, Copy, Sparkles } from "lucide-vue-next";
 import { computed, nextTick, onMounted, ref } from "vue";
 
@@ -221,7 +222,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const copiedId = ref<string | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const centerRef = ref<HTMLElement | null>(null);
 const chatgptRef = ref<HTMLElement | null>(null);
@@ -230,38 +230,28 @@ const geminiRef = ref<HTMLElement | null>(null);
 const perplexityRef = ref<HTMLElement | null>(null);
 const isReady = ref<boolean>(false);
 
+const { copy, copied } = useClipboard({ copiedDuring: 2000 });
+
 const encodedPrompt = computed<string>(() => encodeURIComponent(props.prompt));
 
-function getProviderUrl(provider: LLMProvider): string {
-  const prompt = encodedPrompt.value;
+const chatgptUrl = computed<string>(
+  () => `https://chat.openai.com/?q=${encodedPrompt.value}`
+);
 
-  switch (provider.id) {
-    case "chatgpt":
-      return `https://chat.openai.com/?q=${prompt}`;
-    case "claude":
-      return `https://claude.ai/new?q=${prompt}`;
-    case "gemini":
-      // Use Google Search AI Mode (udm=50) which uses Gemini
-      return `https://www.google.com/search?q=${prompt}&udm=50`;
-    case "perplexity":
-      return `https://www.perplexity.ai/?q=${prompt}`;
-    default:
-      return `${provider.url}?q=${prompt}`;
-  }
-}
+const claudeUrl = computed<string>(
+  () => `https://claude.ai/new?q=${encodedPrompt.value}`
+);
 
-function openLLM(provider: LLMProvider): void {
-  const url = getProviderUrl(provider);
-  window.open(url, "_blank");
-}
+const geminiUrl = computed<string>(
+  () => `https://www.google.com/search?q=${encodedPrompt.value}&udm=50`
+);
 
-async function copyPrompt(): Promise<void> {
-  await navigator.clipboard.writeText(props.prompt);
-  copiedId.value = "copied";
+const perplexityUrl = computed<string>(
+  () => `https://www.perplexity.ai/?q=${encodedPrompt.value}`
+);
 
-  setTimeout((): void => {
-    copiedId.value = null;
-  }, 2000);
+function copyPrompt(): void {
+  copy(props.prompt);
 }
 
 onMounted(async (): Promise<void> => {

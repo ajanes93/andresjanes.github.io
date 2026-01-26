@@ -73,7 +73,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import {
+  useEventListener,
+  useResizeObserver,
+  useWindowSize,
+} from "@vueuse/core";
+import { computed, ref, useId, watch } from "vue";
 import { useSpring } from "vue-use-spring";
 
 interface Props {
@@ -85,9 +90,10 @@ const props = defineProps<Props>();
 const tracingBeamRef = ref<HTMLDivElement>();
 const tracingBeamContentRef = ref<HTMLDivElement>();
 
-const gradientId = `tracing-gradient-${Math.random().toString(36).substring(2, 10)}`;
+const gradientId = `tracing-gradient-${useId()}`;
 const svgHeight = ref<number>(0);
 const scrollProgress = ref<number>(0);
+const { height: windowHeight } = useWindowSize();
 
 const gradientLength = 200;
 
@@ -118,12 +124,11 @@ watch(computedY2, (newY2) => {
 function updateScrollProgress(): void {
   if (tracingBeamRef.value) {
     const rect = tracingBeamRef.value.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
     const elementHeight = rect.height;
 
     // Calculate how much of the element has been scrolled through
     // Start earlier (when element is 50% down the viewport) for better visual timing
-    const startOffset = windowHeight * 0.5;
+    const startOffset = windowHeight.value * 0.5;
     const endOffset = elementHeight;
 
     const scrolled = startOffset - rect.top;
@@ -133,32 +138,16 @@ function updateScrollProgress(): void {
   }
 }
 
-let resizeObserver: ResizeObserver | null = null;
-
-onMounted(() => {
-  window.addEventListener("scroll", updateScrollProgress, { passive: true });
-  window.addEventListener("resize", updateScrollProgress);
-  updateScrollProgress();
-
-  resizeObserver = new ResizeObserver(() => {
-    updateSVGHeight();
-  });
-
-  if (tracingBeamContentRef.value) {
-    resizeObserver.observe(tracingBeamContentRef.value);
-  }
-
-  updateSVGHeight();
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", updateScrollProgress);
-  window.removeEventListener("resize", updateScrollProgress);
-  resizeObserver?.disconnect();
-});
-
 function updateSVGHeight(): void {
   if (!tracingBeamContentRef.value) return;
   svgHeight.value = tracingBeamContentRef.value.offsetHeight;
 }
+
+useEventListener("scroll", updateScrollProgress, { passive: true });
+useEventListener("resize", updateScrollProgress);
+useResizeObserver(tracingBeamContentRef, updateSVGHeight);
+
+// Initial calculations
+updateScrollProgress();
+updateSVGHeight();
 </script>
