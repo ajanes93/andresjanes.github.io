@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="cn('flex flex-col space-y-1.5 p-6', props.class)"
+    :class="cn('flex flex-col space-y-1.5 p-4', props.class)"
     data-testid="card-header"
   >
     <slot />
