@@ -22,7 +22,7 @@
           <Card
             class="overflow-hidden transition-shadow duration-300 hover:shadow-md md:ml-12"
           >
-            <div class="p-5">
+            <div class="p-4">
               <div class="flex flex-col gap-4 md:flex-row md:items-start">
                 <div
                   class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
