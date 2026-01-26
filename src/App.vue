@@ -69,16 +69,7 @@
 
       <BlurFade>
         <section>
-          <AiSummary />
-        </section>
-      </BlurFade>
-
-      <BlurFade>
-        <section>
-          <LLMHotlinks
-            :prompt="store.getCandidateSummaryPrompt"
-            :providers="store.llmProviders"
-          />
+          <AiInsights :prompt="store.getCandidateSummaryPrompt" />
         </section>
       </BlurFade>
 
@@ -223,9 +214,8 @@
 <script setup lang="ts">
 import { Download, GraduationCap, Heart } from "lucide-vue-next";
 
-import AiSummary from "@/components/AiSummary.vue";
+import AiInsights from "@/components/AiInsights.vue";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
-import LLMHotlinks from "@/components/LLMHotlinks.vue";
 import ProfileHero from "@/components/ProfileHero.vue";
 import SkillsSection from "@/components/SkillsSection.vue";
 import ThemeToggle from "@/components/ThemeToggle.vue";
