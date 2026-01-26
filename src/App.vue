@@ -27,24 +27,9 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <!-- Mobile: icon-only button -->
           <Button
             aria-label="Download CV as PDF"
-            class="sm:hidden"
-            data-testid="download-cv-button-mobile"
-            size="icon"
-            variant="outline"
-            @click="downloadCv"
-          >
-            <Download
-              aria-hidden="true"
-              class="size-4"
-            />
-          </Button>
-          <!-- Desktop: full button with text -->
-          <Button
-            aria-label="Download CV as PDF"
-            class="hidden items-center gap-2 sm:inline-flex"
+            class="inline-flex items-center gap-2"
             data-testid="download-cv-button"
             size="sm"
             variant="outline"
@@ -54,7 +39,7 @@
               aria-hidden="true"
               class="size-4"
             />
-            <span>Download CV</span>
+            <span class="hidden sm:inline">Download CV</span>
           </Button>
           <ThemeToggle />
         </div>
