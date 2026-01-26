@@ -13,6 +13,7 @@
     <!-- Background path -->
     <path
       :d="pathD"
+      data-testid="beam-background-path"
       fill="none"
       :stroke="pathColor"
       stroke-linecap="round"
@@ -22,6 +23,7 @@
     <!-- Animated gradient path -->
     <path
       :d="pathD"
+      data-testid="beam-animated-path"
       fill="none"
       :stroke="`url(#${id})`"
       stroke-linecap="round"
@@ -30,16 +32,27 @@
     <defs>
       <linearGradient
         :id="id"
+        data-testid="beam-gradient"
         gradientUnits="userSpaceOnUse"
         x1="0%"
         x2="0%"
         y1="0%"
         y2="0%"
       >
-        <stop :stop-color="gradientStartColor" stop-opacity="0" />
+        <stop
+          :stop-color="gradientStartColor"
+          stop-opacity="0"
+        />
         <stop :stop-color="gradientStartColor" />
-        <stop offset="32.5%" :stop-color="gradientStopColor" />
-        <stop offset="100%" :stop-color="gradientStopColor" stop-opacity="0" />
+        <stop
+          offset="32.5%"
+          :stop-color="gradientStopColor"
+        />
+        <stop
+          offset="100%"
+          :stop-color="gradientStopColor"
+          stop-opacity="0"
+        />
         <animate
           attributeName="x1"
           calcMode="spline"
@@ -64,7 +77,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { useResizeObserver } from "@vueuse/core";
+import { computed, ref, toRef, useId, watch } from "vue";
 
 interface AnimatedBeamProps {
   class?: string;
@@ -72,18 +86,18 @@ interface AnimatedBeamProps {
   curvature?: number;
   delay?: number;
   duration?: number;
+  endRef: HTMLElement | null;
   endXOffset?: number;
   endYOffset?: number;
-  fromRef: HTMLElement | null;
   gradientStartColor?: string;
   gradientStopColor?: string;
   pathColor?: string;
   pathOpacity?: number;
   pathWidth?: number;
   reverse?: boolean;
+  startRef: HTMLElement | null;
   startXOffset?: number;
   startYOffset?: number;
-  toRef: HTMLElement | null;
 }
 
 const props = withDefaults(defineProps<AnimatedBeamProps>(), {
@@ -102,86 +116,98 @@ const props = withDefaults(defineProps<AnimatedBeamProps>(), {
   startYOffset: 0,
 });
 
-const id = `beam-${Math.random().toString(36).substring(2, 10)}`;
+interface SvgDimensions {
+  height: number;
+  width: number;
+}
+
+interface Point {
+  x: number;
+  y: number;
+}
+
+const id = useId();
 const pathD = ref<string>("");
-
-const svgDimensions = ref<{ height: number; width: number }>({
-  height: 0,
-  width: 0,
-});
-
+const svgDimensions = ref<SvgDimensions>({ height: 0, width: 0 });
 const isRightToLeft = ref<boolean>(false);
 
-const x1 = computed<string>(() => {
-  const direction = props.reverse ? !isRightToLeft.value : isRightToLeft.value;
+// Calculate animation direction based on beam orientation
+const shouldAnimateRightToLeft = computed<boolean>(() => {
+  return props.reverse ? !isRightToLeft.value : isRightToLeft.value;
+});
 
-  return direction ? "90%; -10%;" : "10%; 110%;";
+const x1 = computed<string>(() => {
+  return shouldAnimateRightToLeft.value ? "90%; -10%;" : "10%; 110%;";
 });
 
 const x2 = computed<string>(() => {
-  const direction = props.reverse ? !isRightToLeft.value : isRightToLeft.value;
-
-  return direction ? "100%; 0%;" : "0%; 100%;";
+  return shouldAnimateRightToLeft.value ? "100%; 0%;" : "0%; 100%;";
 });
 
-let resizeObserver: ResizeObserver | undefined;
-
-function updatePath(): void {
-  if (!props.containerRef || !props.fromRef || !props.toRef) return;
-
-  const containerRect = props.containerRef.getBoundingClientRect();
-  const rectA = props.fromRef.getBoundingClientRect();
-  const rectB = props.toRef.getBoundingClientRect();
-
-  const svgWidth = containerRect.width;
-  const svgHeight = containerRect.height;
-  svgDimensions.value = { height: svgHeight, width: svgWidth };
-
-  const startX =
-    rectA.left - containerRect.left + rectA.width / 2 + props.startXOffset;
-
-  const startY =
-    rectA.top - containerRect.top + rectA.height / 2 + props.startYOffset;
-
-  const endX =
-    rectB.left - containerRect.left + rectB.width / 2 + props.endXOffset;
-
-  const endY =
-    rectB.top - containerRect.top + rectB.height / 2 + props.endYOffset;
-
-  isRightToLeft.value = endX < startX;
-
-  const controlY = startY - props.curvature;
-  pathD.value = `M ${startX},${startY} Q ${(startX + endX) / 2},${controlY} ${endX},${endY}`;
+function getCenterPoint(
+  rect: DOMRect,
+  containerRect: DOMRect,
+  xOffset: number,
+  yOffset: number
+): Point {
+  return {
+    x: rect.left - containerRect.left + rect.width / 2 + xOffset,
+    y: rect.top - containerRect.top + rect.height / 2 + yOffset,
+  };
 }
 
-// Watch for ref changes
+function updatePath(): void {
+  if (!props.containerRef || !props.startRef || !props.endRef) return;
+
+  const containerRect = props.containerRef.getBoundingClientRect();
+  const fromRect = props.startRef.getBoundingClientRect();
+  const toRect = props.endRef.getBoundingClientRect();
+
+  svgDimensions.value = {
+    width: containerRect.width,
+    height: containerRect.height,
+  };
+
+  const start = getCenterPoint(
+    fromRect,
+    containerRect,
+    props.startXOffset,
+    props.startYOffset
+  );
+
+  const end = getCenterPoint(
+    toRect,
+    containerRect,
+    props.endXOffset,
+    props.endYOffset
+  );
+
+  isRightToLeft.value = end.x < start.x;
+
+  const controlX = (start.x + end.x) / 2;
+  const controlY = start.y - props.curvature;
+  pathD.value = `M ${start.x},${start.y} Q ${controlX},${controlY} ${end.x},${end.y}`;
+}
+
+function allRefsAvailable(): boolean {
+  return Boolean(props.containerRef && props.startRef && props.endRef);
+}
+
+// Watch for ref changes and update path
 watch(
-  () => [props.containerRef, props.fromRef, props.toRef],
-  ([container, from, to]) => {
-    if (container && from && to) {
-      // Clean up old observer
-      resizeObserver?.disconnect();
-
-      // Update path immediately
-      updatePath();
-
-      // Set up resize observer
-      resizeObserver = new ResizeObserver(() => updatePath());
-      resizeObserver.observe(container);
-    }
+  () => [props.containerRef, props.startRef, props.endRef],
+  () => {
+    if (!allRefsAvailable()) return;
+    updatePath();
   },
   { immediate: true }
 );
 
-onMounted(() => {
-  // Trigger initial update after mount
-  if (props.containerRef && props.fromRef && props.toRef) {
+// Set up resize observer on container
+useResizeObserver(
+  toRef(() => props.containerRef),
+  () => {
     updatePath();
   }
-});
-
-onBeforeUnmount(() => {
-  resizeObserver?.disconnect();
-});
+);
 </script>

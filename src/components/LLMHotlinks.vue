@@ -105,50 +105,50 @@
           :container-ref="containerRef"
           :curvature="75"
           :duration="4"
-          :from-ref="centerRef"
+          :end-ref="chatgptRef"
           gradient-start-color="#10A37F"
           gradient-stop-color="#1A7F64"
           path-color="gray"
           :path-opacity="0.15"
-          :to-ref="chatgptRef"
+          :start-ref="centerRef"
         />
         <AnimatedBeam
           v-if="isReady && containerRef && centerRef && claudeRef"
           :container-ref="containerRef"
           :curvature="-75"
           :duration="4.5"
-          :from-ref="centerRef"
+          :end-ref="claudeRef"
           gradient-start-color="#D97757"
           gradient-stop-color="#C4694B"
           path-color="gray"
           :path-opacity="0.15"
-          :to-ref="claudeRef"
+          :start-ref="centerRef"
         />
         <AnimatedBeam
           v-if="isReady && containerRef && centerRef && geminiRef"
           :container-ref="containerRef"
           :curvature="-75"
           :duration="5"
-          :from-ref="centerRef"
           gradient-start-color="#4285F4"
+          :end-ref="geminiRef"
           gradient-stop-color="#1967D2"
           path-color="gray"
           :path-opacity="0.15"
           reverse
-          :to-ref="geminiRef"
+          :start-ref="centerRef"
         />
         <AnimatedBeam
           v-if="isReady && containerRef && centerRef && perplexityRef"
           :container-ref="containerRef"
           :curvature="75"
           :duration="4.2"
-          :from-ref="centerRef"
           gradient-start-color="#20B2AA"
+          :end-ref="perplexityRef"
           gradient-stop-color="#008B8B"
           path-color="gray"
           :path-opacity="0.15"
           reverse
-          :to-ref="perplexityRef"
+          :start-ref="centerRef"
         />
       </div>
 
