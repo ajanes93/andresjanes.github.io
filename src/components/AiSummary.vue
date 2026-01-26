@@ -2,7 +2,7 @@
   <Card
     class="from-background via-background to-muted/30 overflow-hidden bg-linear-to-br"
   >
-    <div class="space-y-4 p-6">
+    <div class="space-y-4 p-4">
       <div class="flex items-center gap-3">
         <div
           class="flex size-10 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-500"
