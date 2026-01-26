@@ -1,16 +1,16 @@
-export { default as AnimatedBeam } from './AnimatedBeam.vue'
-export { default as Avatar } from './Avatar.vue'
-export { default as AvatarFallback } from './AvatarFallback.vue'
-export { default as AvatarImage } from './AvatarImage.vue'
-export { default as Badge } from './Badge.vue'
-export { default as BlurFade } from './BlurFade.vue'
-export { default as BorderBeam } from './BorderBeam.vue'
-export { default as Button } from './Button.vue'
-export { buttonVariants } from './button'
-export { default as Card } from './Card.vue'
-export { default as CardContent } from './CardContent.vue'
-export { default as CardDescription } from './CardDescription.vue'
-export { default as CardHeader } from './CardHeader.vue'
-export { default as CardTitle } from './CardTitle.vue'
-export { default as TextGenerateEffect } from './TextGenerateEffect.vue'
-export { default as TracingBeam } from './TracingBeam.vue'
+export { default as AnimatedBeam } from "./AnimatedBeam.vue";
+export { default as Avatar } from "./Avatar.vue";
+export { default as AvatarFallback } from "./AvatarFallback.vue";
+export { default as AvatarImage } from "./AvatarImage.vue";
+export { default as Badge } from "./Badge.vue";
+export { default as BlurFade } from "./BlurFade.vue";
+export { default as BorderBeam } from "./BorderBeam.vue";
+export { default as Button } from "./Button.vue";
+export { buttonVariants } from "./button";
+export { default as Card } from "./Card.vue";
+export { default as CardContent } from "./CardContent.vue";
+export { default as CardDescription } from "./CardDescription.vue";
+export { default as CardHeader } from "./CardHeader.vue";
+export { default as CardTitle } from "./CardTitle.vue";
+export { default as TextGenerateEffect } from "./TextGenerateEffect.vue";
+export { default as TracingBeam } from "./TracingBeam.vue";
