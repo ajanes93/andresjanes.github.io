@@ -59,6 +59,27 @@ export interface ProfileState {
 export const useProfileStore = defineStore("profile", {
   getters: {
     getCandidateSummaryPrompt: (state): string => {
+      const formatExperience = (exp: ExperienceItem): string => {
+        const dateRange = `${exp.startDate} - ${exp.endDate || "Present"}`;
+        const skills = exp.skills?.join(", ") || "N/A";
+
+        return `### ${exp.title} at ${exp.company}\n${dateRange} | ${exp.location}\n${exp.description}\nSkills: ${skills}`;
+      };
+
+      const formatEducation = (edu: ExperienceItem): string =>
+        `### ${edu.title}\n${edu.company}, ${edu.location}\n${edu.description}`;
+
+      const formatLanguage = (lang: Language): string =>
+        `${lang.name}: ${lang.level}`;
+
+      const formatRecommendation = (rec: Recommendation): string =>
+        `"${rec.text}" - ${rec.name}, ${rec.title}`;
+
+      const formatSocialLink = (social: SocialLink): string =>
+        `- ${social.name}: ${social.href}`;
+
+      const nonEmailSocials = state.socials.filter((s) => s.icon !== "mail");
+
       const context = `
 # About Andres Janes
 
@@ -74,39 +95,19 @@ ${state.summary}
 ${state.skills.join(", ")}
 
 ## Work Experience
-${state.experience
-  .map(
-    (exp: ExperienceItem): string => `
-### ${exp.title} at ${exp.company}
-${exp.startDate} - ${exp.endDate || "Present"} | ${exp.location}
-${exp.description}
-Skills: ${exp.skills?.join(", ") || "N/A"}
-`
-  )
-  .join("\n")}
+${state.experience.map(formatExperience).join("\n\n")}
 
 ## Education
-${state.education
-  .map(
-    (edu: ExperienceItem): string => `
-### ${edu.title}
-${edu.company}, ${edu.location}
-${edu.description}
-`
-  )
-  .join("\n")}
+${state.education.map(formatEducation).join("\n\n")}
 
 ## Languages
-${state.languages.map((l: Language): string => `${l.name}: ${l.level}`).join(", ")}
+${state.languages.map(formatLanguage).join(", ")}
 
 ## Recommendations
-${state.recommendations.map((r: Recommendation): string => `"${r.text}" - ${r.name}, ${r.title}`).join("\n\n")}
+${state.recommendations.map(formatRecommendation).join("\n\n")}
 
 ## Online Presence
-${state.socials
-  .filter((s: SocialLink): boolean => s.icon !== "mail")
-  .map((s: SocialLink): string => `- ${s.name}: ${s.href}`)
-  .join("\n")}
+${nonEmailSocials.map(formatSocialLink).join("\n")}
 - Portfolio: https://andresjanes.com
 `.trim();
 

@@ -21,10 +21,7 @@ describe("cn utility", () => {
   });
 
   it("handles object notation", () => {
-    const result = cn({ bar: false, baz: true, foo: true });
-    expect(result).toContain("baz");
-    expect(result).toContain("foo");
-    expect(result).not.toContain("bar");
+    expect(cn({ foo: true, bar: false, baz: true })).toBe("foo baz");
   });
 
   it("merges Tailwind classes correctly", () => {

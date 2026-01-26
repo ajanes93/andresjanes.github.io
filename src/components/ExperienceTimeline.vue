@@ -16,7 +16,7 @@
         >
           <!-- Timeline dot indicator - filled for current role, centered on the beam line (beam at 19px + 2px center = 21px, circle 12px wide, so 21-6=15px) -->
           <div
-            class="border-primary bg-background absolute top-6 left-3.75 z-10 hidden size-3  rounded-full border-2 md:block"
+            class="border-primary bg-background absolute top-6 left-3.75 z-10 hidden size-3 rounded-full border-2 md:block"
             :class="{ 'bg-primary': !item.endDate }"
           />
           <Card
@@ -30,7 +30,7 @@
                   <img
                     v-if="item.logoPath"
                     :alt="item.company"
-                    class="h-full w-full object-cover"
+                    class="size-full object-cover"
                     data-testid="company-logo"
                     :src="item.logoPath"
                   />

@@ -1,12 +1,19 @@
 <template>
-  <div class="bg-background min-h-screen">
+  <div
+    class="bg-background min-h-screen"
+    data-testid="app-root"
+  >
     <a
       class="focus:bg-primary focus:text-primary-foreground focus:ring-ring sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
+      data-testid="skip-link"
       href="#main-content"
     >
       Skip to main content
     </a>
-    <header class="glass sticky top-0 z-50 border-b">
+    <header
+      class="glass sticky top-0 z-50 border-b"
+      data-testid="app-header"
+    >
       <div
         class="container mx-auto flex max-w-5xl items-center justify-between px-4 py-3"
       >
@@ -23,6 +30,7 @@
           <Button
             aria-label="Download CV as PDF"
             class="hidden items-center gap-2 sm:inline-flex"
+            data-testid="download-cv-button"
             size="sm"
             variant="outline"
             @click="downloadCv"
@@ -41,6 +49,7 @@
     <main
       id="main-content"
       class="container mx-auto max-w-5xl space-y-12 px-4 py-8"
+      data-testid="main-content"
     >
       <BlurFade>
         <section>
@@ -89,7 +98,7 @@
       </BlurFade>
 
       <BlurFade>
-        <section>
+        <section data-testid="education-section">
           <div class="space-y-6">
             <h2 class="flex items-center gap-3 text-2xl font-bold">
               <div class="bg-primary/10 rounded-lg p-2">
@@ -103,6 +112,7 @@
                 v-for="edu in store.education"
                 :key="edu.company"
                 class="overflow-hidden"
+                data-testid="education-card"
               >
                 <CardContent class="p-5">
                   <div class="flex items-start gap-4">
@@ -140,7 +150,10 @@
       </BlurFade>
 
       <BlurFade>
-        <section class="space-y-6">
+        <section
+          class="space-y-6"
+          data-testid="recommendations-section"
+        >
           <h2 class="flex items-center gap-3 text-2xl font-bold">
             <div class="bg-primary/10 rounded-lg p-2">
               <Heart class="text-primary size-5" />
@@ -153,6 +166,7 @@
               v-for="rec in store.recommendations"
               :key="rec.name"
               class="block cursor-pointer"
+              data-testid="recommendation-card"
               :href="rec.linkedInUrl"
               rel="noopener noreferrer"
               target="_blank"
@@ -180,7 +194,10 @@
       </BlurFade>
     </main>
 
-    <footer class="mt-16 border-t">
+    <footer
+      class="mt-16 border-t"
+      data-testid="app-footer"
+    >
       <div class="container mx-auto max-w-5xl px-4 py-8">
         <div
           class="text-muted-foreground flex flex-col items-center justify-between gap-4 text-sm md:flex-row"
@@ -217,9 +234,9 @@ import { useCvGenerator } from "@/composables/useCvGenerator";
 import { useProfileStore } from "@/stores/profile";
 
 const store = useProfileStore();
-const { generateCv } = useCvGenerator();
+const { downloadCv: downloadCvComposable } = useCvGenerator();
 
 function downloadCv(): void {
-  generateCv({ profile: store.$state });
+  downloadCvComposable({ profile: store.$state });
 }
 </script>
