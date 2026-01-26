@@ -29,7 +29,7 @@
         <div class="flex items-center gap-2">
           <Button
             aria-label="Download CV as PDF"
-            class="hidden items-center gap-2 sm:inline-flex"
+            class="inline-flex items-center gap-2"
             data-testid="download-cv-button"
             size="sm"
             variant="outline"
@@ -39,7 +39,7 @@
               aria-hidden="true"
               class="size-4"
             />
-            <span>Download CV</span>
+            <span class="hidden sm:inline">Download CV</span>
           </Button>
           <ThemeToggle />
         </div>

@@ -29,7 +29,7 @@ import { Button } from "@/components/ui";
 const isDark = useDark({
   storageKey: "theme",
   valueDark: "dark",
-  valueLight: "light",
+  valueLight: "",
 });
 
 const toggleTheme = useToggle(isDark);
