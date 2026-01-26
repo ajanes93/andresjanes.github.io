@@ -29,7 +29,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   blur: "6px",
   delay: 0,
-  duration: 0.4,
+  duration: 0.3,
   yOffset: 6,
 });
 
@@ -44,7 +44,7 @@ const { stop } = useIntersectionObserver(
       stop();
     }
   },
-  { rootMargin: "50px", threshold: 0.1 }
+  { rootMargin: "100px", threshold: 0 }
 );
 </script>
 
