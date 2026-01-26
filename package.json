@@ -27,7 +27,6 @@
     "vue-use-spring": "^0.3.3"
   },
   "devDependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
     "@eslint/js": "^9.18.0",
     "@pinia/testing": "^0.1.7",
     "@tailwindcss/vite": "^4.0.6",
