@@ -6,16 +6,16 @@ config.global.stubs = {
 };
 
 // Extend VueWrapper with helper methods
-VueWrapper.prototype.findByTestId = function <T extends Node = Node>(
+VueWrapper.prototype.findByTestId = function <T extends Element = Element>(
   selector: string
 ): DOMWrapper<T> {
-  return this.find(`[data-testid="${selector}"]`);
+  return this.find<T>(`[data-testid="${selector}"]`);
 };
 
-VueWrapper.prototype.findAllByTestId = function <T extends Node = Node>(
+VueWrapper.prototype.findAllByTestId = function <T extends Element = Element>(
   selector: string
 ): DOMWrapper<T>[] {
-  return this.findAll(`[data-testid="${selector}"]`);
+  return this.findAll<T>(`[data-testid="${selector}"]`);
 };
 
 VueWrapper.prototype.findByAria = function <
