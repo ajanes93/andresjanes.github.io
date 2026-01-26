@@ -1,6 +1,6 @@
 <template>
   <Card class="overflow-hidden">
-    <CardHeader class="pb-4">
+    <CardHeader class="p-4">
       <CardTitle class="flex items-center gap-2 text-lg">
         <Sparkles
           aria-hidden="true"

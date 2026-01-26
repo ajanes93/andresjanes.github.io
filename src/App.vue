@@ -114,7 +114,7 @@
                 class="overflow-hidden"
                 data-testid="education-card"
               >
-                <CardContent class="p-5">
+                <CardContent class="p-4">
                   <div class="flex items-start gap-4">
                     <div
                       class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
@@ -174,7 +174,7 @@
               <Card
                 class="h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <CardContent class="p-5">
+                <CardContent class="p-4">
                   <blockquote class="space-y-3">
                     <p class="text-muted-foreground text-sm/relaxed italic">
                       "{{ rec.text }}"
