@@ -6,7 +6,7 @@ config.global.stubs = {
 };
 
 // Extend VueWrapper with helper methods
-VueWrapper.prototype.findByTestId = function <T extends Element = Element>(
+VueWrapper.prototype.findByTestId = function <T extends Node = Node>(
   selector: string
 ): DOMWrapper<T> {
   return this.find<T>(`[data-testid="${selector}"]`);
@@ -28,6 +28,20 @@ VueWrapper.prototype.findAllByAria = function <
   T extends HTMLElement = HTMLElement,
 >(selector: string): DOMWrapper<T>[] {
   return this.findAll(`[aria-label*="${selector}"]`);
+};
+
+VueWrapper.prototype.findComponentByTestId = function <T>(
+  selector: string
+): VueWrapper<T> {
+  return this.findComponent(`[data-testid="${selector}"]`) as VueWrapper<T>;
+};
+
+VueWrapper.prototype.findAllComponentsByTestId = function <T>(
+  selector: string
+): VueWrapper<T>[] {
+  return this.findAllComponents(
+    `[data-testid="${selector}"]`
+  ) as VueWrapper<T>[];
 };
 
 // Mock IntersectionObserver
