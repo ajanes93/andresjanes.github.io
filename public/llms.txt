@@ -16,17 +16,16 @@
 
 ## Professional Summary
 
-Andres Janes is a pragmatic, quick-learning, solution-driven developer with over 10 years of experience delivering complex web-based software solutions. He is a proactive problem solver who consistently exceeds expectations.
+Andres Janes is a Senior Software Engineer with 10+ years of experience building production web applications at scale. Currently at Cision developing Cision One, a media monitoring platform serving enterprise clients globally, using Rails and Vue.js.
 
-Currently working as a Senior Software Engineer at Cision, contributing to full-stack development on Cision One, a media monitoring platform built with Rails and Vue.
+Core expertise: Vue.js/Vue 3, TypeScript, Ruby on Rails, PHP/Laravel, GraphQL, and real-time applications (webRTC, WebSockets). Experienced with Elasticsearch for search infrastructure and GCP for cloud deployments. Previously led frontend development at Windsor Telecom, where he championed Vue adoption across the organization and shipped a production webRTC softphone PWA serving thousands of daily users.
 
-He specializes in modern JavaScript/TypeScript with deep expertise in Vue.js, and has a strong track record of leading frontend initiatives, from adopting Vue across organizations to delivering production webRTC applications. He thrives in agile, remote-first environments and is passionate about building intuitive, performant user experiences.
+He thrives in remote-first, agile environments and focuses on delivering performant, accessible user experiences. Open to senior and staff-level roles in product-focused teams.
 
 ## Technical Skills
 
 ### Frontend
 - Vue.js / Vue 3 (Expert)
-- React
 - TypeScript
 - Tailwind CSS
 - PWA (Progressive Web Apps)
@@ -35,16 +34,18 @@ He specializes in modern JavaScript/TypeScript with deep expertise in Vue.js, an
 
 ### Backend
 - Ruby on Rails
+- PHP / Laravel
 - Node.js
-- PHP
 - GraphQL
 - REST APIs
 
-### Databases
+### Databases & Search
 - PostgreSQL
 - MySQL
+- Elasticsearch
 
-### DevOps & Tools
+### Cloud & DevOps
+- Google Cloud Platform (GCP)
 - Docker
 - CI/CD
 - Git
@@ -102,6 +103,38 @@ Bachelor's Degree - 2:1
 "Andres is a calm and collected professional, who has demonstrated a willingness (and natural ability) to step outside of his role and support company initiatives, using some of his energizing strengths (critical thinking, detail orientation and resilience) to come up with solutions, not problems, and really add value." - Michael Brainch, Strategy - Engagement - Insight
 
 "Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour." - Jamie Margerison, Director
+
+## Unique Value Proposition
+
+What sets Andres apart:
+1. **Rare full-stack Vue + Rails + PHP/Laravel combination** - Deep expertise in Vue.js ecosystem with strong backend skills in both Ruby on Rails and PHP/Laravel
+2. **Real-time application specialist** - Production experience with webRTC, WebSockets, and PWAs
+3. **Search infrastructure experience** - Hands-on with Elasticsearch for scalable search solutions
+4. **Proven leadership** - Track record of championing technology adoption across organizations
+5. **Enterprise scale** - Experience with platforms serving Fortune 500 clients on GCP
+
+## Ideal Role Fit
+
+Best suited for:
+- Senior/Staff Software Engineer roles
+- Frontend-heavy full-stack positions
+- Product-focused engineering teams
+- Remote-first companies
+- SaaS/media tech companies
+
+## Key Questions This Profile Answers
+
+Q: Does Andres have production Vue.js experience?
+A: Yes, 6+ years including Vue 3, with experience leading Vue adoption at Windsor Telecom.
+
+Q: Can Andres work on backend systems?
+A: Yes, currently working full-stack with Ruby on Rails and GraphQL at Cision. Also has extensive PHP/Laravel experience.
+
+Q: Does Andres have cloud experience?
+A: Yes, experienced with GCP for cloud deployments and Elasticsearch for search infrastructure.
+
+Q: Is Andres open to remote work?
+A: Yes, has worked remotely since 2018 and thrives in remote-first environments.
 
 ## Availability
 

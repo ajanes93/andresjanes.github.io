@@ -4,7 +4,13 @@ import type { RenderOptions } from "@/test/utils";
 
 import SkillsSection from "./SkillsSection.vue";
 
-const TEST_SKILLS = ["Vue.js", "React", "TypeScript", "PHP", "Docker"];
+const TEST_SKILLS = [
+  "Vue.js",
+  "Node.js",
+  "TypeScript",
+  "PHP / Laravel",
+  "Docker",
+];
 
 const render = (options: RenderOptions<typeof SkillsSection> = {}) => {
   const wrapper = mount(SkillsSection, {
@@ -49,8 +55,8 @@ describe("SkillsSection", () => {
     it("sorts skills by category", () => {
       const { getBadges } = render();
       const badges = getBadges();
-      // Vue.js and TypeScript are primary, React and PHP are secondary, Docker is outline
-      // After sorting: Vue.js, TypeScript (primary), React, PHP (secondary), Docker (outline)
+      // Vue.js, TypeScript, PHP / Laravel are primary, Node.js is secondary, Docker is outline
+      // After sorting: Vue.js, TypeScript, PHP / Laravel (primary), Node.js (secondary), Docker (outline)
       expect(badges[0].text()).toBe("Vue.js");
       expect(badges[1].text()).toBe("TypeScript");
     });
@@ -61,7 +67,7 @@ describe("SkillsSection", () => {
     });
 
     it("assigns correct variant to secondary skills", () => {
-      const { getBadge } = render({ props: { skills: ["React"] } });
+      const { getBadge } = render({ props: { skills: ["Node.js"] } });
       expect(getBadge().attributes("data-variant")).toBe("secondary");
     });
 

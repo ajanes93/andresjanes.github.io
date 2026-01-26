@@ -259,7 +259,6 @@ Please provide:
     skills: [
       // Frontend
       "Vue.js / Vue 3",
-      "React",
       "TypeScript",
       "Tailwind CSS",
       "PWA",
@@ -267,14 +266,16 @@ Please provide:
       "Websockets",
       // Backend
       "Ruby on Rails",
+      "PHP / Laravel",
       "Node.js",
-      "PHP",
       "GraphQL",
       "REST APIs",
-      // Databases
+      // Databases & Search
       "PostgreSQL",
       "MySQL",
-      // DevOps & Tools
+      "Elasticsearch",
+      // Cloud & DevOps
+      "GCP",
       "Docker",
       "CI/CD",
       "Git",
@@ -293,9 +294,11 @@ Please provide:
       { href: "mailto:dev@andresjanes.com", icon: "mail", name: "Email" },
     ],
 
-    summary: `Pragmatic, quick-learning, solution-driven developer with over 10 years of experience delivering complex web-based software solutions. A proactive problem solver who consistently exceeds expectations. Currently working as a Senior Software Engineer at Cision, contributing to full-stack development on Cision One, a media monitoring platform built with Rails and Vue.
+    summary: `Senior Software Engineer with 10+ years of experience building production web applications at scale. Currently at Cision developing Cision One, a media monitoring platform serving enterprise clients globally, using Rails and Vue.js.
 
-I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and have a strong track record of leading frontend initiatives, from adopting Vue across organizations to delivering production webRTC applications. I thrive in agile, remote-first environments and am passionate about building intuitive, performant user experiences.`,
+Core expertise: Vue.js/Vue 3, TypeScript, Ruby on Rails, PHP/Laravel, GraphQL, and real-time applications (webRTC, WebSockets). Experienced with Elasticsearch for search infrastructure and GCP for cloud deployments. Previously led frontend development at Windsor Telecom, where I championed Vue adoption across the organization and shipped a production webRTC softphone PWA serving thousands of daily users.
+
+I thrive in remote-first, agile environments and focus on delivering performant, accessible user experiences. Open to senior and staff-level roles in product-focused teams.`,
 
     title: "Senior Software Engineer",
 
