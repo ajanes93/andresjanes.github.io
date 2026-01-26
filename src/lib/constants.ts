@@ -9,10 +9,11 @@ export const SKILL_CATEGORIES = {
     "Vue 3",
     "TypeScript",
     "Ruby on Rails",
+    "PHP / Laravel",
     "GraphQL",
     "Tailwind",
   ] as const,
-  SECONDARY: ["React", "Node.js", "PHP", "webRTC", "PWA"] as const,
+  SECONDARY: ["Node.js", "Elasticsearch", "GCP", "webRTC", "PWA"] as const,
 } as const;
 
 export type SkillVariant = "default" | "secondary" | "outline";
