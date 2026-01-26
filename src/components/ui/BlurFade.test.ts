@@ -67,7 +67,7 @@ describe("BlurFade", () => {
       const { getBlurFade } = render();
 
       expect(getBlurFade().attributes("style")).toContain(
-        "--blur-fade-duration: 0.4s"
+        "--blur-fade-duration: 0.3s"
       );
     });
 

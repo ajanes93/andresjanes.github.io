@@ -16,7 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useIntersectionObserver } from "@vueuse/core";
+import { ref } from "vue";
 
 interface Props {
   blur?: string;
@@ -28,35 +29,23 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   blur: "6px",
   delay: 0,
-  duration: 0.4,
+  duration: 0.3,
   yOffset: 6,
 });
 
 const target = ref<HTMLElement | null>(null);
 const isVisible = ref<boolean>(false);
-let observer: IntersectionObserver | null = null;
 
-onMounted((): void => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-          observer?.disconnect();
-        }
-      });
-    },
-    { rootMargin: "50px", threshold: 0.1 }
-  );
-
-  if (target.value) {
-    observer.observe(target.value);
-  }
-});
-
-onBeforeUnmount((): void => {
-  observer?.disconnect();
-});
+const { stop } = useIntersectionObserver(
+  target,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      isVisible.value = true;
+      stop();
+    }
+  },
+  { rootMargin: "100px", threshold: 0 }
+);
 </script>
 
 <style scoped>
