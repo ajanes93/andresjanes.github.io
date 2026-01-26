@@ -120,6 +120,7 @@ describe("ProfileHero", () => {
       const { getSocialLink } = render();
       const linkedInLink = getSocialLink("linkedin");
       expect(linkedInLink.exists()).toBe(true);
+
       expect(linkedInLink.attributes("href")).toBe(
         "https://linkedin.com/in/johndoe"
       );

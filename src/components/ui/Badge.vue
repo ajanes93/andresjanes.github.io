@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes" :data-variant="props.variant" data-testid="badge">
+  <div :class="classes" data-testid="badge" :data-variant="props.variant">
     <slot />
   </div>
 </template>

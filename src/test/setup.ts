@@ -1,4 +1,4 @@
-import { config, DOMWrapper, VueWrapper } from "@vue/test-utils";
+import { config, type DOMWrapper, VueWrapper } from "@vue/test-utils";
 
 // Stub common components that are hard to test
 config.global.stubs = {
@@ -18,9 +18,9 @@ VueWrapper.prototype.findAllByTestId = function <T extends Node = Node>(
   return this.findAll(`[data-testid="${selector}"]`);
 };
 
-VueWrapper.prototype.findByAria = function <T extends HTMLElement = HTMLElement>(
-  selector: string
-): DOMWrapper<T> {
+VueWrapper.prototype.findByAria = function <
+  T extends HTMLElement = HTMLElement,
+>(selector: string): DOMWrapper<T> {
   return this.find(`[aria-label*="${selector}"]`);
 };
 

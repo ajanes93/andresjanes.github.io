@@ -5,10 +5,10 @@ declare module "@vue/test-utils" {
     findAllByAria<T extends HTMLElement = HTMLElement>(
       selector: string
     ): DOMWrapper<T>[];
+    findAllByTestId<T extends Node = Node>(selector: string): DOMWrapper<T>[];
     findByAria<T extends HTMLElement = HTMLElement>(
       selector: string
     ): DOMWrapper<T>;
     findByTestId<T extends Node = Node>(selector: string): DOMWrapper<T>;
-    findAllByTestId<T extends Node = Node>(selector: string): DOMWrapper<T>[];
   }
 }

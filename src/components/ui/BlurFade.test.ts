@@ -49,6 +49,7 @@ describe("BlurFade", () => {
   describe("props", () => {
     it("applies default delay", () => {
       const { getBlurFade } = render();
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-delay: 0s"
       );
@@ -56,6 +57,7 @@ describe("BlurFade", () => {
 
     it("applies custom delay", () => {
       const { getBlurFade } = render({ props: { delay: 0.5 } });
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-delay: 0.5s"
       );
@@ -63,6 +65,7 @@ describe("BlurFade", () => {
 
     it("applies default duration", () => {
       const { getBlurFade } = render();
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-duration: 0.4s"
       );
@@ -70,6 +73,7 @@ describe("BlurFade", () => {
 
     it("applies custom duration", () => {
       const { getBlurFade } = render({ props: { duration: 1 } });
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-duration: 1s"
       );
@@ -77,6 +81,7 @@ describe("BlurFade", () => {
 
     it("applies default blur", () => {
       const { getBlurFade } = render();
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-blur: 6px"
       );
@@ -84,6 +89,7 @@ describe("BlurFade", () => {
 
     it("applies custom blur", () => {
       const { getBlurFade } = render({ props: { blur: "10px" } });
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-blur: 10px"
       );
@@ -96,6 +102,7 @@ describe("BlurFade", () => {
 
     it("applies custom yOffset", () => {
       const { getBlurFade } = render({ props: { yOffset: 12 } });
+
       expect(getBlurFade().attributes("style")).toContain(
         "--blur-fade-y: 12px"
       );
