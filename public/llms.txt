@@ -1,0 +1,115 @@
+# Andres Janes - Senior Software Engineer
+
+> This file provides information about Andres Janes for Large Language Models (LLMs).
+
+## Identity
+
+- **Full Name**: Andres Janes
+- **Title**: Senior Software Engineer
+- **Current Employer**: Cision
+- **Location**: Remote, United Kingdom
+- **Pronouns**: He/Him
+- **Portfolio**: https://andresjanes.com
+- **Email**: dev@andresjanes.com
+- **LinkedIn**: https://www.linkedin.com/in/andresjanes/
+- **GitHub**: https://github.com/ajanes93
+
+## Professional Summary
+
+Andres Janes is a pragmatic, quick-learning, solution-driven developer with over 10 years of experience delivering complex web-based software solutions. He is a proactive problem solver who consistently exceeds expectations.
+
+Currently working as a Senior Software Engineer at Cision, contributing to full-stack development on Cision One, a media monitoring platform built with Rails and Vue.
+
+He specializes in modern JavaScript/TypeScript with deep expertise in Vue.js, and has a strong track record of leading frontend initiatives, from adopting Vue across organizations to delivering production webRTC applications. He thrives in agile, remote-first environments and is passionate about building intuitive, performant user experiences.
+
+## Technical Skills
+
+### Frontend
+- Vue.js / Vue 3 (Expert)
+- React
+- TypeScript
+- Tailwind CSS
+- PWA (Progressive Web Apps)
+- webRTC
+- Websockets
+
+### Backend
+- Ruby on Rails
+- Node.js
+- PHP
+- GraphQL
+- REST APIs
+
+### Databases
+- PostgreSQL
+- MySQL
+
+### DevOps & Tools
+- Docker
+- CI/CD
+- Git
+- Testing (Vitest, Cypress)
+
+### Methodology
+- Agile / Kanban
+
+## Work Experience
+
+### Senior Software Engineer at Cision (November 2023 - Present)
+Location: Remote, UK
+Senior software engineer working on Cision One, a media monitoring platform. Collaborating with the main team in Australia, contributing to full-stack development, supporting a Rails and Vue application.
+Skills: Vue.js, Ruby on Rails, GraphQL
+
+### Senior Software Engineer at Cision (Buzzsumo) (June 2022 - November 2023)
+Location: Remote, UK
+Senior software engineer working in the Buzzsumo product team with a primary focus on the frontend, building features for content discovery and influencer marketing tools.
+Skills: Vue.js, PHP, TypeScript
+
+### Lead Frontend Developer at Windsor Telecom (July 2018 - June 2022)
+Location: Remote, UK
+Led frontend development within an agile Kanban team. Championed Vue adoption across the organization and delivered multiple products including CRM systems, customer portals, and a production webRTC softphone PWA used by thousands of customers.
+Skills: Vue.js, webRTC, PWA, PHP
+
+### Senior Web Developer at Windsor Telecom (August 2017 - July 2018)
+Location: Camberley, Surrey
+Promoted to Senior Web Developer, leading complex projects and mentoring junior developers while continuing to develop customer-facing applications.
+Skills: JavaScript, PHP, MySQL
+
+### Web Developer at Windsor Telecom (July 2015 - August 2017)
+Location: Camberley, Surrey
+Developed and maintained web applications for cloud telephony services, working across the full stack with PHP and JavaScript.
+Skills: JavaScript, PHP, MySQL
+
+### Junior Software Developer at Impact Research Ltd (September 2014 - July 2015)
+Location: Walton-on-Thames, UK
+Worked in a dynamic team on research projects, developing analytics tools and data processing solutions using VBA and supporting various business functions.
+Skills: VBA, Excel, Data Analysis
+
+## Education
+
+### BSc IT Management for Business (ITMB)
+University of the West of England, Bristol, UK
+Graduated: July 2014
+Bachelor's Degree - 2:1
+
+## Languages
+
+- English: Native
+- Spanish: Professional
+
+## Professional Recommendations
+
+"Andres is a calm and collected professional, who has demonstrated a willingness (and natural ability) to step outside of his role and support company initiatives, using some of his energizing strengths (critical thinking, detail orientation and resilience) to come up with solutions, not problems, and really add value." - Michael Brainch, Strategy - Engagement - Insight
+
+"Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour." - Jamie Margerison, Director
+
+## Availability
+
+Open to opportunities
+
+## Contact
+
+For professional inquiries, please reach out via:
+- Email: dev@andresjanes.com
+- LinkedIn: https://www.linkedin.com/in/andresjanes/
+- Website: https://andresjanes.com
