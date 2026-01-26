@@ -129,24 +129,25 @@ body {
   );
 }
 
-/* Utility classes */
-.gradient-text {
-  background: linear-gradient(to right, #0066ff, #0099ff, #00ccff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+@layer components {
+  .gradient-text {
+    background: linear-gradient(to right, #0066ff, #0099ff, #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.glass {
-  background: color-mix(in srgb, var(--color-background) 80%, transparent);
-  backdrop-filter: blur(12px);
-  border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
-}
+  .glass {
+    background: color-mix(in srgb, var(--color-background) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  }
 
-.typing-cursor::after {
-  content: "|";
-  animation: var(--animate-blink);
-  color: var(--color-primary);
+  .typing-cursor::after {
+    content: "|";
+    animation: var(--animate-blink);
+    color: var(--color-primary);
+  }
 }
 
 /* Print styles */

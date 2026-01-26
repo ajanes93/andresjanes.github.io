@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <h2 class="flex items-center gap-3 text-2xl font-bold">
       <div class="bg-primary/10 rounded-lg p-2">
-        <Code2 class="text-primary h-5 w-5" />
+        <Code2 class="text-primary size-5" />
       </div>
       Technical Skills
     </h2>
@@ -38,17 +38,18 @@ interface Props {
 const props = defineProps<Props>();
 
 function getSkillCategory(skill: string): SkillVariant {
-  if (SKILL_CATEGORIES.PRIMARY.some((s): boolean => skill.includes(s)))
-    return "default";
-  if (SKILL_CATEGORIES.SECONDARY.some((s): boolean => skill.includes(s)))
-    return "secondary";
+  const isPrimary = SKILL_CATEGORIES.PRIMARY.some((s) => skill.includes(s));
+  if (isPrimary) return "default";
+
+  const isSecondary = SKILL_CATEGORIES.SECONDARY.some((s) => skill.includes(s));
+  if (isSecondary) return "secondary";
 
   return "outline";
 }
 
 // Sort skills so highlighted ones appear first
 const sortedSkills = computed<string[]>(() => {
-  return [...props.skills].sort((a: string, b: string): number => {
+  return [...props.skills].sort((a, b) => {
     const aCategory = getSkillCategory(a);
     const bCategory = getSkillCategory(b);
 

@@ -4,7 +4,7 @@
       <CardTitle class="flex items-center gap-2 text-lg">
         <Sparkles
           aria-hidden="true"
-          class="text-primary h-5 w-5"
+          class="text-primary size-5"
         />
         Ask AI About This Candidate
       </CardTitle>
@@ -16,7 +16,7 @@
     <CardContent>
       <div
         ref="containerRef"
-        class="relative flex h-[200px] w-full items-center justify-center"
+        class="relative flex h-50 w-full items-center justify-center"
       >
         <!-- Left side LLMs (ChatGPT and Claude) -->
         <div
@@ -32,7 +32,7 @@
             @click="openLLM(providers[0])"
           >
             <ChatGPTIcon
-              class="h-6 w-6"
+              class="size-6"
               style="color: #10a37f"
             />
             <span
@@ -51,7 +51,7 @@
             @click="openLLM(providers[1])"
           >
             <ClaudeIcon
-              class="h-6 w-6"
+              class="size-6"
               style="color: #d97757"
             />
             <span
@@ -84,7 +84,7 @@
             @click="openLLM(providers[2])"
           >
             <GeminiIcon
-              class="h-6 w-6"
+              class="size-6"
               style="color: #4285f4"
             />
             <span
@@ -103,7 +103,7 @@
             @click="openLLM(providers[3])"
           >
             <PerplexityIcon
-              class="h-6 w-6"
+              class="size-6"
               style="color: #20b2aa"
             />
             <span
@@ -177,7 +177,7 @@
         >
           <component
             :is="copiedId === 'copied' ? Check : Copy"
-            class="h-4 w-4"
+            class="size-4"
           />
           {{
             copiedId === "copied"

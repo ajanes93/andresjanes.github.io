@@ -14,9 +14,7 @@
           <div
             class="absolute inset-0 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 opacity-50 blur-lg"
           />
-          <Avatar
-            class="ring-background relative h-28 w-28 ring-4 md:h-32 md:w-32"
-          >
+          <Avatar class="ring-background relative h-28 w-28 ring-4 md:size-32">
             <AvatarImage
               :alt="name"
               :src="avatarPath"
@@ -24,12 +22,7 @@
             <AvatarFallback
               class="bg-linear-to-br from-blue-500 to-cyan-500 text-2xl font-bold text-white"
             >
-              {{
-                name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")
-              }}
+              {{ initials }}
             </AvatarFallback>
           </Avatar>
         </div>
@@ -56,20 +49,20 @@
             class="text-muted-foreground flex flex-wrap justify-center gap-4 text-sm md:justify-start"
           >
             <span class="flex items-center gap-1.5">
-              <Building2 class="h-4 w-4" />
+              <Building2 class="size-4" />
               {{ company }}
             </span>
             <span class="flex items-center gap-1.5">
-              <MapPin class="h-4 w-4" />
+              <MapPin class="size-4" />
               {{ location }}
             </span>
             <span class="flex items-center gap-1.5">
-              <Clock class="h-4 w-4" />
+              <Clock class="size-4" />
               {{ yearsExperience }} years experience
             </span>
             <span class="flex items-center gap-1.5">
-              <Languages class="h-4 w-4" />
-              {{ languages.map((l) => l.name).join(", ") }}
+              <Languages class="size-4" />
+              {{ languageNames }}
             </span>
           </div>
 
@@ -86,17 +79,13 @@
                 :data-testid="`social-link-${social.icon}`"
                 :href="social.href"
                 :rel="
-                  social.href.startsWith('mailto')
-                    ? undefined
-                    : 'noopener noreferrer'
+                  isMailtoLink(social.href) ? undefined : 'noopener noreferrer'
                 "
-                :target="
-                  social.href.startsWith('mailto') ? undefined : '_blank'
-                "
+                :target="isMailtoLink(social.href) ? undefined : '_blank'"
               >
                 <component
                   :is="getSocialIcon(social.icon)"
-                  class="h-4 w-4"
+                  class="size-4"
                 />
               </a>
             </Button>
@@ -118,7 +107,7 @@ import {
   Mail,
   MapPin,
 } from "lucide-vue-next";
-import type { Component } from "vue";
+import { computed, type Component } from "vue";
 
 import {
   Avatar,
@@ -141,7 +130,22 @@ interface Props {
   yearsExperience: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const initials = computed<string>(() =>
+  props.name
+    .split(" ")
+    .map((namePart) => namePart[0])
+    .join("")
+);
+
+const languageNames = computed<string>(() =>
+  props.languages.map((l) => l.name).join(", ")
+);
+
+function isMailtoLink(href: string): boolean {
+  return href.startsWith("mailto");
+}
 
 function getSocialIcon(iconName: string): Component {
   const icons: Record<string, Component> = {

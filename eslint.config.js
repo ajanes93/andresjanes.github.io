@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
+import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 import pluginImport from "eslint-plugin-import";
 import perfectionist from "eslint-plugin-perfectionist";
 import pluginVue from "eslint-plugin-vue";
@@ -16,6 +17,35 @@ export default tseslint.config(
       parserOptions: {
         parser: tseslint.parser,
       },
+    },
+  },
+  {
+    files: ["**/*.vue", "**/*.ts", "**/*.tsx"],
+    ignores: ["**/*.test.ts", "**/*.spec.ts"],
+    plugins: {
+      "better-tailwindcss": betterTailwindcss,
+    },
+    settings: {
+      "better-tailwindcss": {
+        entryPoint: "./src/index.css",
+      },
+    },
+    rules: {
+      "better-tailwindcss/enforce-canonical-classes": [
+        "warn",
+        {
+          rootFontSize: 16,
+        },
+      ],
+      "better-tailwindcss/no-conflicting-classes": "error",
+      "better-tailwindcss/no-duplicate-classes": "error",
+      "better-tailwindcss/no-unknown-classes": [
+        "warn",
+        {
+          detectComponentClasses: true,
+          ignore: ["^blur-fade", "^border-beam", "^animate-border-beam"],
+        },
+      ],
     },
   },
   {
@@ -61,7 +91,12 @@ export default tseslint.config(
       "no-debugger": "error",
       "no-implicit-coercion": [
         "error",
-        { boolean: true, disallowTemplateShorthand: true, number: true, string: true },
+        {
+          boolean: true,
+          disallowTemplateShorthand: true,
+          number: true,
+          string: true,
+        },
       ],
       "no-param-reassign": [
         "error",
@@ -149,7 +184,10 @@ export default tseslint.config(
       "vue/component-name-in-template-casing": [
         "error",
         "PascalCase",
-        { ignores: ["i18n", "i18n-d", "i18n-n", "i18n-t"], registeredComponentsOnly: false },
+        {
+          ignores: ["i18n", "i18n-d", "i18n-n", "i18n-t"],
+          registeredComponentsOnly: false,
+        },
       ],
       "vue/eqeqeq": "error",
       "vue/first-attribute-linebreak": "error",

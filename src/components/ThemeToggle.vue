@@ -10,12 +10,12 @@
     <Sun
       v-if="isDark"
       aria-hidden="true"
-      class="h-5 w-5"
+      class="size-5"
     />
     <Moon
       v-else
       aria-hidden="true"
-      class="h-5 w-5"
+      class="size-5"
     />
   </Button>
 </template>
@@ -28,17 +28,9 @@ import { Button } from "@/components/ui";
 
 const isDark = ref<boolean>(false);
 
-function updateTheme(): void {
-  if (isDark.value) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-}
-
 function toggleTheme(): void {
   isDark.value = !isDark.value;
-  updateTheme();
+  document.documentElement.classList.toggle("dark", isDark.value);
   localStorage.setItem("theme", isDark.value ? "dark" : "light");
 }
 
@@ -47,7 +39,7 @@ onMounted((): void => {
 
   if (!localStorage.getItem("theme")) {
     isDark.value = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    updateTheme();
+    document.documentElement.classList.toggle("dark", isDark.value);
   }
 });
 </script>

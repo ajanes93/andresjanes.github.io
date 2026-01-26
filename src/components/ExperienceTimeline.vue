@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <h2 class="flex items-center gap-3 text-2xl font-bold">
       <div class="bg-primary/10 rounded-lg p-2">
-        <Briefcase class="text-primary h-5 w-5" />
+        <Briefcase class="text-primary size-5" />
       </div>
       {{ title }}
     </h2>
@@ -16,7 +16,7 @@
         >
           <!-- Timeline dot indicator - filled for current role, centered on the beam line (beam at 19px + 2px center = 21px, circle 12px wide, so 21-6=15px) -->
           <div
-            class="border-primary bg-background absolute top-6 left-[15px] z-10 hidden h-3 w-3 rounded-full border-2 md:block"
+            class="border-primary bg-background absolute top-6 left-3.75 z-10 hidden size-3  rounded-full border-2 md:block"
             :class="{ 'bg-primary': !item.endDate }"
           />
           <Card
@@ -36,7 +36,7 @@
                   />
                   <Briefcase
                     v-else
-                    class="text-muted-foreground h-6 w-6"
+                    class="text-muted-foreground size-6"
                   />
                 </div>
 
@@ -65,7 +65,7 @@
                     class="text-muted-foreground mt-2 flex flex-wrap items-center gap-4 text-sm"
                   >
                     <span class="flex items-center gap-1">
-                      <Calendar class="h-4 w-4" />
+                      <Calendar class="size-4" />
                       {{ formatDate(item.startDate) }} -
                       {{ item.endDate ? formatDate(item.endDate) : "Present" }}
                       <span class="text-xs"
@@ -75,12 +75,12 @@
                       >
                     </span>
                     <span class="flex items-center gap-1">
-                      <MapPin class="h-4 w-4" />
+                      <MapPin class="size-4" />
                       {{ item.location }}
                     </span>
                   </div>
 
-                  <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+                  <p class="text-muted-foreground mt-3 text-sm/relaxed">
                     {{ item.description }}
                   </p>
 
@@ -136,28 +136,31 @@ function formatDate(dateString: string): string {
   return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
+function pluralize(count: number, singular: string): string {
+  return count === 1 ? singular : `${singular}s`;
+}
+
 function calculateDuration(start: string, end?: string): string {
   const startDate = parseISODate(start);
   const endDate = end ? parseISODate(end) : new Date();
 
-  const months =
+  const totalMonths =
     (endDate.getFullYear() - startDate.getFullYear()) * 12 +
     endDate.getMonth() -
     startDate.getMonth();
 
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
 
-  if (years === 0)
-    return `${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`;
-  if (remainingMonths === 0) return `${years} yr${years !== 1 ? "s" : ""}`;
+  if (years === 0) return `${months} ${pluralize(months, "mo")}`;
+  if (months === 0) return `${years} ${pluralize(years, "yr")}`;
 
-  return `${years} yr${years !== 1 ? "s" : ""} ${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`;
+  return `${years} ${pluralize(years, "yr")} ${months} ${pluralize(months, "mo")}`;
 }
 
 const sortedItems = computed<ExperienceItem[]>(() => {
   return [...props.items].sort(
-    (a: ExperienceItem, b: ExperienceItem): number =>
+    (a, b) =>
       parseISODate(b.startDate).getTime() - parseISODate(a.startDate).getTime()
   );
 });

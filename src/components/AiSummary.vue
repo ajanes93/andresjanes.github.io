@@ -5,10 +5,10 @@
     <div class="space-y-4 p-6">
       <div class="flex items-center gap-3">
         <div
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-500"
+          class="flex size-10 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-500"
           data-testid="ai-summary-icon"
         >
-          <Sparkles class="h-5 w-5 text-white" />
+          <Sparkles class="size-5 text-white" />
         </div>
         <div>
           <h3 class="text-foreground font-semibold">AI Summary</h3>
@@ -17,7 +17,7 @@
       </div>
 
       <div
-        class="text-sm leading-relaxed"
+        class="text-sm/relaxed"
         :class="
           hasValidSummary
             ? 'text-foreground/90'
@@ -32,29 +32,12 @@
 
 <script setup lang="ts">
 import { Sparkles } from "lucide-vue-next";
-import { computed } from "vue";
 
 import { Card } from "@/components/ui";
 import aiSummaryData from "@/data/ai-summary.json";
 
-interface AiSummaryData {
-  generatedAt?: string;
-  summary?: string;
-}
-
 const FALLBACK_SUMMARY = "Summary unavailable. Please try again later.";
 
-const summary = computed<string>(() => {
-  const data = aiSummaryData as AiSummaryData;
-
-  if (!data || typeof data.summary !== "string" || data.summary.trim() === "") {
-    return FALLBACK_SUMMARY;
-  }
-
-  return data.summary;
-});
-
-const hasValidSummary = computed<boolean>(
-  () => summary.value !== FALLBACK_SUMMARY
-);
+const summary: string = aiSummaryData.summary || FALLBACK_SUMMARY;
+const hasValidSummary: boolean = summary !== FALLBACK_SUMMARY;
 </script>

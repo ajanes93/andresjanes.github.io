@@ -12,7 +12,7 @@
       >
         <div class="flex items-center gap-2">
           <div
-            class="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-cyan-500"
+            class="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-cyan-500"
           >
             <span class="text-sm font-bold text-white">AJ</span>
           </div>
@@ -29,7 +29,7 @@
           >
             <Download
               aria-hidden="true"
-              class="h-4 w-4"
+              class="size-4"
             />
             <span>Download CV</span>
           </Button>
@@ -93,7 +93,7 @@
           <div class="space-y-6">
             <h2 class="flex items-center gap-3 text-2xl font-bold">
               <div class="bg-primary/10 rounded-lg p-2">
-                <GraduationCap class="text-primary h-5 w-5" />
+                <GraduationCap class="text-primary size-5" />
               </div>
               Education
             </h2>
@@ -112,12 +112,12 @@
                       <img
                         v-if="edu.logoPath"
                         :alt="edu.company"
-                        class="h-full w-full object-cover"
+                        class="size-full object-cover"
                         :src="edu.logoPath"
                       />
                       <GraduationCap
                         v-else
-                        class="text-muted-foreground h-6 w-6"
+                        class="text-muted-foreground size-6"
                       />
                     </div>
                     <div>
@@ -143,7 +143,7 @@
         <section class="space-y-6">
           <h2 class="flex items-center gap-3 text-2xl font-bold">
             <div class="bg-primary/10 rounded-lg p-2">
-              <Heart class="text-primary h-5 w-5" />
+              <Heart class="text-primary size-5" />
             </div>
             Recommendations
           </h2>
@@ -162,9 +162,7 @@
               >
                 <CardContent class="p-5">
                   <blockquote class="space-y-3">
-                    <p
-                      class="text-muted-foreground text-sm leading-relaxed italic"
-                    >
+                    <p class="text-muted-foreground text-sm/relaxed italic">
                       "{{ rec.text }}"
                     </p>
                     <footer class="text-sm">

@@ -7,7 +7,7 @@
   >
     <!-- Tracing beam line - positioned to align with timeline dots -->
     <div
-      class="absolute top-0 left-[19px] hidden md:block"
+      class="absolute top-0 left-4.75 hidden md:block"
       style="z-index: 5"
     >
       <svg
