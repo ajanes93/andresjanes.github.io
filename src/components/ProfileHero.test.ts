@@ -42,7 +42,8 @@ const render = (options: RenderOptions<typeof ProfileHero> = {}) => {
   return {
     wrapper,
     getAvatarImage: () => wrapper.findByTestId("avatar-image"),
-    getSocialLink: (icon: string) => wrapper.findByTestId(`social-link-${icon}`),
+    getSocialLink: (icon: string) =>
+      wrapper.findByTestId(`social-link-${icon}`),
     getAllSocialLinks: () => [
       ...wrapper.findAllByTestId("social-link-linkedin"),
       ...wrapper.findAllByTestId("social-link-github"),

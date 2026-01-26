@@ -2,24 +2,27 @@
   <div
     class="relative overflow-hidden rounded-2xl bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 p-1"
   >
-    <div class="relative bg-background rounded-xl p-6 md:p-8">
+    <div class="bg-background relative rounded-xl p-6 md:p-8">
       <div
-        class="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent"
+        class="from-primary/5 absolute inset-0 bg-linear-to-br via-transparent to-transparent"
       />
 
       <div
-        class="relative flex flex-col md:flex-row gap-6 items-center md:items-start"
+        class="relative flex flex-col items-center gap-6 md:flex-row md:items-start"
       >
         <div class="relative">
           <div
-            class="absolute inset-0 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full blur-lg opacity-50"
+            class="absolute inset-0 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 opacity-50 blur-lg"
           />
           <Avatar
-            class="w-28 h-28 md:w-32 md:h-32 ring-4 ring-background relative"
+            class="ring-background relative h-28 w-28 ring-4 md:h-32 md:w-32"
           >
-            <AvatarImage :alt="name" :src="avatarPath" />
+            <AvatarImage
+              :alt="name"
+              :src="avatarPath"
+            />
             <AvatarFallback
-              class="text-2xl font-bold bg-linear-to-br from-blue-500 to-cyan-500 text-white"
+              class="bg-linear-to-br from-blue-500 to-cyan-500 text-2xl font-bold text-white"
             >
               {{
                 name
@@ -31,43 +34,46 @@
           </Avatar>
         </div>
 
-        <div class="flex-1 text-center md:text-left space-y-4">
+        <div class="flex-1 space-y-4 text-center md:text-left">
           <div>
-            <div class="flex flex-col md:flex-row md:items-center gap-2">
-              <h1 class="text-3xl md:text-4xl font-bold gradient-text">
+            <div class="flex flex-col gap-2 md:flex-row md:items-center">
+              <h1 class="gradient-text text-3xl font-bold md:text-4xl">
                 {{ name }}
               </h1>
-              <Badge class="w-fit mx-auto md:mx-0" variant="secondary">
+              <Badge
+                class="mx-auto w-fit md:mx-0"
+                variant="secondary"
+              >
                 {{ pronouns }}
               </Badge>
             </div>
-            <p class="text-xl text-muted-foreground mt-1">
+            <p class="text-muted-foreground mt-1 text-xl">
               {{ title }}
             </p>
           </div>
 
           <div
-            class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-muted-foreground"
+            class="text-muted-foreground flex flex-wrap justify-center gap-4 text-sm md:justify-start"
           >
             <span class="flex items-center gap-1.5">
-              <Building2 class="w-4 h-4" />
+              <Building2 class="h-4 w-4" />
               {{ company }}
             </span>
             <span class="flex items-center gap-1.5">
-              <MapPin class="w-4 h-4" />
+              <MapPin class="h-4 w-4" />
               {{ location }}
             </span>
             <span class="flex items-center gap-1.5">
-              <Clock class="w-4 h-4" />
+              <Clock class="h-4 w-4" />
               {{ yearsExperience }} years experience
             </span>
             <span class="flex items-center gap-1.5">
-              <Languages class="w-4 h-4" />
+              <Languages class="h-4 w-4" />
               {{ languages.map((l) => l.name).join(", ") }}
             </span>
           </div>
 
-          <div class="flex justify-center md:justify-start gap-2">
+          <div class="flex justify-center gap-2 md:justify-start">
             <Button
               v-for="social in socials"
               :key="social.name"
@@ -88,7 +94,10 @@
                   social.href.startsWith('mailto') ? undefined : '_blank'
                 "
               >
-                <component :is="getSocialIcon(social.icon)" class="w-4 h-4" />
+                <component
+                  :is="getSocialIcon(social.icon)"
+                  class="h-4 w-4"
+                />
               </a>
             </Button>
           </div>

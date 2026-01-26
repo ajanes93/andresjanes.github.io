@@ -6,6 +6,7 @@
         props.class
       )
     "
+    data-testid="avatar"
   >
     <slot />
   </span>

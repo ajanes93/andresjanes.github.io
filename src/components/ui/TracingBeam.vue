@@ -5,7 +5,10 @@
     :class="[props.class]"
   >
     <!-- Tracing beam line - positioned to align with timeline dots -->
-    <div class="absolute top-0 left-[19px] hidden md:block" style="z-index: 5">
+    <div
+      class="absolute top-0 left-[19px] hidden md:block"
+      style="z-index: 5"
+    >
       <svg
         aria-hidden="true"
         class="block"
@@ -37,11 +40,27 @@
             :y1="spring.y1"
             :y2="spring.y2"
           >
-            <stop stop-color="hsl(var(--primary))" stop-opacity="0" />
-            <stop offset="0.1" stop-color="hsl(var(--primary))" />
-            <stop offset="0.5" stop-color="hsl(217 91% 60%)" />
-            <stop offset="0.9" stop-color="hsl(187 85% 53%)" />
-            <stop offset="1" stop-color="hsl(187 85% 53%)" stop-opacity="0" />
+            <stop
+              stop-color="hsl(var(--primary))"
+              stop-opacity="0"
+            />
+            <stop
+              offset="0.1"
+              stop-color="hsl(var(--primary))"
+            />
+            <stop
+              offset="0.5"
+              stop-color="hsl(217 91% 60%)"
+            />
+            <stop
+              offset="0.9"
+              stop-color="hsl(187 85% 53%)"
+            />
+            <stop
+              offset="1"
+              stop-color="hsl(187 85% 53%)"
+              stop-opacity="0"
+            />
           </linearGradient>
         </defs>
       </svg>

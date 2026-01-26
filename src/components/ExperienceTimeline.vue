@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6">
-    <h2 class="text-2xl font-bold flex items-center gap-3">
-      <div class="p-2 rounded-lg bg-primary/10">
-        <Briefcase class="w-5 h-5 text-primary" />
+    <h2 class="flex items-center gap-3 text-2xl font-bold">
+      <div class="bg-primary/10 rounded-lg p-2">
+        <Briefcase class="text-primary h-5 w-5" />
       </div>
       {{ title }}
     </h2>
@@ -16,49 +16,56 @@
         >
           <!-- Timeline dot indicator - filled for current role, centered on the beam line (beam at 19px + 2px center = 21px, circle 12px wide, so 21-6=15px) -->
           <div
-            class="absolute left-[15px] top-6 w-3 h-3 rounded-full border-2 border-primary bg-background z-10 hidden md:block"
+            class="border-primary bg-background absolute top-6 left-[15px] z-10 hidden h-3 w-3 rounded-full border-2 md:block"
             :class="{ 'bg-primary': !item.endDate }"
           />
           <Card
-            class="md:ml-12 overflow-hidden hover:shadow-md transition-shadow duration-300"
+            class="overflow-hidden transition-shadow duration-300 hover:shadow-md md:ml-12"
           >
             <div class="p-5">
-              <div class="flex flex-col md:flex-row md:items-start gap-4">
+              <div class="flex flex-col gap-4 md:flex-row md:items-start">
                 <div
-                  class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0"
+                  class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                 >
                   <img
                     v-if="item.logoPath"
                     :alt="item.company"
-                    class="w-full h-full object-cover"
+                    class="h-full w-full object-cover"
                     data-testid="company-logo"
                     :src="item.logoPath"
                   />
-                  <Briefcase v-else class="w-6 h-6 text-muted-foreground" />
+                  <Briefcase
+                    v-else
+                    class="text-muted-foreground h-6 w-6"
+                  />
                 </div>
 
-                <div class="flex-1 min-w-0">
+                <div class="min-w-0 flex-1">
                   <div
-                    class="flex flex-col md:flex-row md:items-center md:justify-between gap-2"
+                    class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between"
                   >
                     <div>
-                      <h3 class="font-semibold text-lg">
+                      <h3 class="text-lg font-semibold">
                         {{ item.title }}
                       </h3>
                       <p class="text-muted-foreground font-medium">
                         {{ item.company }}
                       </p>
                     </div>
-                    <Badge v-if="!item.endDate" class="w-fit" variant="default">
+                    <Badge
+                      v-if="!item.endDate"
+                      class="w-fit"
+                      variant="default"
+                    >
                       Current
                     </Badge>
                   </div>
 
                   <div
-                    class="flex flex-wrap items-center gap-4 mt-2 text-sm text-muted-foreground"
+                    class="text-muted-foreground mt-2 flex flex-wrap items-center gap-4 text-sm"
                   >
                     <span class="flex items-center gap-1">
-                      <Calendar class="w-4 h-4" />
+                      <Calendar class="h-4 w-4" />
                       {{ formatDate(item.startDate) }} -
                       {{ item.endDate ? formatDate(item.endDate) : "Present" }}
                       <span class="text-xs"
@@ -68,12 +75,12 @@
                       >
                     </span>
                     <span class="flex items-center gap-1">
-                      <MapPin class="w-4 h-4" />
+                      <MapPin class="h-4 w-4" />
                       {{ item.location }}
                     </span>
                   </div>
 
-                  <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
+                  <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
                     {{ item.description }}
                   </p>
 

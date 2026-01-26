@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-4">
-    <h2 class="text-2xl font-bold flex items-center gap-3">
-      <div class="p-2 rounded-lg bg-primary/10">
-        <Code2 class="w-5 h-5 text-primary" />
+    <h2 class="flex items-center gap-3 text-2xl font-bold">
+      <div class="bg-primary/10 rounded-lg p-2">
+        <Code2 class="text-primary h-5 w-5" />
       </div>
       Technical Skills
     </h2>
@@ -11,7 +11,7 @@
       <Badge
         v-for="skill in sortedSkills"
         :key="skill"
-        class="px-3 py-1.5 text-sm transition-transform hover:scale-105 cursor-default"
+        class="cursor-default px-3 py-1.5 text-sm transition-transform hover:scale-105"
         :variant="getSkillCategory(skill)"
       >
         {{ skill }}

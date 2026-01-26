@@ -1,5 +1,9 @@
 <template>
-  <div :class="classes" data-testid="badge" :data-variant="props.variant">
+  <div
+    :class="classes"
+    data-testid="badge"
+    :data-variant="props.variant"
+  >
     <slot />
   </div>
 </template>

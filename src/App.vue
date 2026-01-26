@@ -1,33 +1,36 @@
 <template>
-  <div class="min-h-screen bg-background">
+  <div class="bg-background min-h-screen">
     <a
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+      class="focus:bg-primary focus:text-primary-foreground focus:ring-ring sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-md focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
       href="#main-content"
     >
       Skip to main content
     </a>
-    <header class="sticky top-0 z-50 glass border-b">
+    <header class="glass sticky top-0 z-50 border-b">
       <div
-        class="container max-w-5xl mx-auto px-4 py-3 flex items-center justify-between"
+        class="container mx-auto flex max-w-5xl items-center justify-between px-4 py-3"
       >
         <div class="flex items-center gap-2">
           <div
-            class="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center"
+            class="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-cyan-500"
           >
-            <span class="text-white font-bold text-sm">AJ</span>
+            <span class="text-sm font-bold text-white">AJ</span>
           </div>
-          <span class="font-semibold hidden sm:inline">andresjanes.com</span>
+          <span class="hidden font-semibold sm:inline">andresjanes.com</span>
         </div>
 
         <div class="flex items-center gap-2">
           <Button
             aria-label="Download CV as PDF"
-            class="hidden sm:inline-flex items-center gap-2"
+            class="hidden items-center gap-2 sm:inline-flex"
             size="sm"
             variant="outline"
             @click="downloadCv"
           >
-            <Download aria-hidden="true" class="w-4 h-4" />
+            <Download
+              aria-hidden="true"
+              class="h-4 w-4"
+            />
             <span>Download CV</span>
           </Button>
           <ThemeToggle />
@@ -37,7 +40,7 @@
 
     <main
       id="main-content"
-      class="container max-w-5xl mx-auto px-4 py-8 space-y-12"
+      class="container mx-auto max-w-5xl space-y-12 px-4 py-8"
     >
       <BlurFade>
         <section>
@@ -78,16 +81,19 @@
 
       <BlurFade>
         <section>
-          <ExperienceTimeline :items="store.experience" title="Experience" />
+          <ExperienceTimeline
+            :items="store.experience"
+            title="Experience"
+          />
         </section>
       </BlurFade>
 
       <BlurFade>
         <section>
           <div class="space-y-6">
-            <h2 class="text-2xl font-bold flex items-center gap-3">
-              <div class="p-2 rounded-lg bg-primary/10">
-                <GraduationCap class="w-5 h-5 text-primary" />
+            <h2 class="flex items-center gap-3 text-2xl font-bold">
+              <div class="bg-primary/10 rounded-lg p-2">
+                <GraduationCap class="text-primary h-5 w-5" />
               </div>
               Education
             </h2>
@@ -101,17 +107,17 @@
                 <CardContent class="p-5">
                   <div class="flex items-start gap-4">
                     <div
-                      class="w-12 h-12 rounded-lg overflow-hidden bg-muted flex items-center justify-center shrink-0"
+                      class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                     >
                       <img
                         v-if="edu.logoPath"
                         :alt="edu.company"
-                        class="w-full h-full object-cover"
+                        class="h-full w-full object-cover"
                         :src="edu.logoPath"
                       />
                       <GraduationCap
                         v-else
-                        class="w-6 h-6 text-muted-foreground"
+                        class="text-muted-foreground h-6 w-6"
                       />
                     </div>
                     <div>
@@ -121,7 +127,7 @@
                       <p class="text-muted-foreground">
                         {{ edu.company }}
                       </p>
-                      <p class="text-sm text-muted-foreground mt-1">
+                      <p class="text-muted-foreground mt-1 text-sm">
                         {{ edu.description }}
                       </p>
                     </div>
@@ -135,14 +141,14 @@
 
       <BlurFade>
         <section class="space-y-6">
-          <h2 class="text-2xl font-bold flex items-center gap-3">
-            <div class="p-2 rounded-lg bg-primary/10">
-              <Heart class="w-5 h-5 text-primary" />
+          <h2 class="flex items-center gap-3 text-2xl font-bold">
+            <div class="bg-primary/10 rounded-lg p-2">
+              <Heart class="text-primary h-5 w-5" />
             </div>
             Recommendations
           </h2>
 
-          <div class="grid md:grid-cols-2 gap-4">
+          <div class="grid gap-4 md:grid-cols-2">
             <a
               v-for="rec in store.recommendations"
               :key="rec.name"
@@ -152,12 +158,12 @@
               target="_blank"
             >
               <Card
-                class="overflow-hidden h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                class="h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
                 <CardContent class="p-5">
                   <blockquote class="space-y-3">
                     <p
-                      class="text-sm text-muted-foreground italic leading-relaxed"
+                      class="text-muted-foreground text-sm leading-relaxed italic"
                     >
                       "{{ rec.text }}"
                     </p>
@@ -176,10 +182,10 @@
       </BlurFade>
     </main>
 
-    <footer class="border-t mt-16">
-      <div class="container max-w-5xl mx-auto px-4 py-8">
+    <footer class="mt-16 border-t">
+      <div class="container mx-auto max-w-5xl px-4 py-8">
         <div
-          class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground"
+          class="text-muted-foreground flex flex-col items-center justify-between gap-4 text-sm md:flex-row"
         >
           <p>
             &copy; {{ new Date().getFullYear() }} Andres Janes. Built with Vue

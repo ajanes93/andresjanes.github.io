@@ -147,7 +147,10 @@ describe("ExperienceTimeline", () => {
     });
 
     it("renders no cards when items is empty", () => {
-      const { getCards } = render({ props: { items: [], title: "Experience" } });
+      const { getCards } = render({
+        props: { items: [], title: "Experience" },
+      });
+
       expect(getCards().length).toBe(0);
     });
   });

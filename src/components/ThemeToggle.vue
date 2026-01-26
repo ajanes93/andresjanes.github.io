@@ -7,8 +7,16 @@
     variant="ghost"
     @click="toggleTheme"
   >
-    <Sun v-if="isDark" aria-hidden="true" class="w-5 h-5" />
-    <Moon v-else aria-hidden="true" class="w-5 h-5" />
+    <Sun
+      v-if="isDark"
+      aria-hidden="true"
+      class="h-5 w-5"
+    />
+    <Moon
+      v-else
+      aria-hidden="true"
+      class="h-5 w-5"
+    />
   </Button>
 </template>
 

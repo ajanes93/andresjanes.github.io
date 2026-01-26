@@ -1,5 +1,8 @@
 <template>
-  <div class="leading-snug tracking-wide" :class="[props.class]">
+  <div
+    class="leading-snug tracking-wide"
+    :class="[props.class]"
+  >
     <div ref="scope">
       <span
         v-for="(word, idx) in wordsArray"

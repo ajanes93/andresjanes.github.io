@@ -2,10 +2,11 @@
   <span
     :class="
       cn(
-        'flex h-full w-full items-center justify-center rounded-full bg-muted',
+        'bg-muted flex h-full w-full items-center justify-center rounded-full',
         props.class
       )
     "
+    data-testid="avatar-fallback"
   >
     <slot />
   </span>
