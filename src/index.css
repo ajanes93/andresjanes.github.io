@@ -1,23 +1,162 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
 
-.tooltip {
-    @apply absolute
-    bg-gray-500
-    text-xs
-    text-white
-    shadow-2xl
-    rounded-full
-    px-2
-    py-1
-    opacity-0
-    transition-opacity
-    ease-linear
-    duration-200;
+@theme {
+  /* Colors - Blue theme using CSS custom properties for light/dark mode */
+  --color-background: hsl(210 40% 99%);
+  --color-foreground: hsl(212 45% 10%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(212 45% 10%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(212 45% 10%);
+  --color-primary: hsl(211 100% 50%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(210 50% 95%);
+  --color-secondary-foreground: hsl(212 45% 20%);
+  --color-muted: hsl(210 40% 96%);
+  --color-muted-foreground: hsl(215 20% 45%);
+  --color-accent: hsl(210 50% 93%);
+  --color-accent-foreground: hsl(212 45% 15%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(214 32% 91%);
+  --color-input: hsl(214 32% 91%);
+  --color-ring: hsl(211 100% 50%);
+
+  /* Border radius */
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+
+  /* Custom animations */
+  --animate-blink: blink 0.75s step-end infinite;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+      border-color: rgba(0, 122, 255, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(0, 122, 255, 0.6);
+      border-color: rgba(0, 122, 255, 0.8);
+    }
+  }
 }
 
-.has-tooltip:hover .tooltip {
-    @apply z-50 opacity-100 transition-opacity ease-linear duration-200;
+/* Dark mode theme - Blue */
+.dark {
+  --color-background: hsl(215 50% 6%);
+  --color-foreground: hsl(210 40% 96%);
+  --color-card: hsl(215 50% 8%);
+  --color-card-foreground: hsl(210 40% 96%);
+  --color-popover: hsl(215 50% 8%);
+  --color-popover-foreground: hsl(210 40% 96%);
+  --color-primary: hsl(211 100% 55%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(215 40% 15%);
+  --color-secondary-foreground: hsl(210 40% 96%);
+  --color-muted: hsl(215 40% 12%);
+  --color-muted-foreground: hsl(215 20% 60%);
+  --color-accent: hsl(215 50% 18%);
+  --color-accent-foreground: hsl(210 40% 96%);
+  --color-destructive: hsl(0 63% 40%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(215 40% 18%);
+  --color-input: hsl(215 40% 18%);
+  --color-ring: hsl(211 100% 55%);
 }
 
-@tailwind utilities;
+/* Base styles */
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(
+    in srgb,
+    var(--color-muted-foreground) 30%,
+    transparent
+  );
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-muted-foreground) 50%,
+    transparent
+  );
+}
+
+@layer components {
+  .gradient-text {
+    background: linear-gradient(to right, #0066ff, #0099ff, #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: color-mix(in srgb, var(--color-background) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  }
+
+  .typing-cursor::after {
+    content: "|";
+    animation: var(--animate-blink);
+    color: var(--color-primary);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

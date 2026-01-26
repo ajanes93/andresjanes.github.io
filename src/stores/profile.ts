@@ -1,0 +1,304 @@
+import { defineStore } from "pinia";
+
+export interface ExperienceItem {
+  company: string;
+  description: string;
+  endDate?: string;
+  location: string;
+  logoPath: string;
+  skills?: string[];
+  startDate: string;
+  title: string;
+}
+
+export interface Language {
+  level: string;
+  name: string;
+}
+
+export interface LLMProvider {
+  color: string;
+  icon: string;
+  id: string;
+  name: string;
+  url: string;
+}
+
+export interface Recommendation {
+  linkedInUrl: string;
+  name: string;
+  text: string;
+  title: string;
+}
+
+export interface SocialLink {
+  href: string;
+  icon: string;
+  name: string;
+}
+
+export interface ProfileState {
+  availability: string;
+  avatarPath: string;
+  company: string;
+  education: ExperienceItem[];
+  experience: ExperienceItem[];
+  languages: Language[];
+  llmProviders: LLMProvider[];
+  location: string;
+  name: string;
+  pronouns: string;
+  recommendations: Recommendation[];
+  skills: string[];
+  socials: SocialLink[];
+  summary: string;
+  title: string;
+  yearsExperience: string;
+}
+
+export const useProfileStore = defineStore("profile", {
+  getters: {
+    getCandidateSummaryPrompt: (state): string => {
+      const formatExperience = (exp: ExperienceItem): string => {
+        const dateRange = `${exp.startDate} - ${exp.endDate || "Present"}`;
+        const skills = exp.skills?.join(", ") || "N/A";
+
+        return `### ${exp.title} at ${exp.company}\n${dateRange} | ${exp.location}\n${exp.description}\nSkills: ${skills}`;
+      };
+
+      const formatEducation = (edu: ExperienceItem): string =>
+        `### ${edu.title}\n${edu.company}, ${edu.location}\n${edu.description}`;
+
+      const formatLanguage = (lang: Language): string =>
+        `${lang.name}: ${lang.level}`;
+
+      const formatRecommendation = (rec: Recommendation): string =>
+        `"${rec.text}" - ${rec.name}, ${rec.title}`;
+
+      const formatSocialLink = (social: SocialLink): string =>
+        `- ${social.name}: ${social.href}`;
+
+      const nonEmailSocials = state.socials.filter((s) => s.icon !== "mail");
+
+      const context = `
+# About Andres Janes
+
+## Current Role
+${state.title} at ${state.company}
+Location: ${state.location}
+Experience: ${state.yearsExperience} years
+
+## Professional Summary
+${state.summary}
+
+## Technical Skills
+${state.skills.join(", ")}
+
+## Work Experience
+${state.experience.map(formatExperience).join("\n\n")}
+
+## Education
+${state.education.map(formatEducation).join("\n\n")}
+
+## Languages
+${state.languages.map(formatLanguage).join(", ")}
+
+## Recommendations
+${state.recommendations.map(formatRecommendation).join("\n\n")}
+
+## Online Presence
+${nonEmailSocials.map(formatSocialLink).join("\n")}
+- Portfolio: https://andresjanes.com
+`.trim();
+
+      return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role.
+
+${context}
+
+Please provide:
+1. A brief executive summary (2-3 sentences)
+2. Key technical strengths
+3. Notable achievements and experience highlights
+4. Recommended role types and team dynamics`;
+    },
+  },
+
+  state: (): ProfileState => ({
+    availability: "Open to opportunities",
+    avatarPath: "/img/profile.webp",
+    company: "Cision",
+    education: [
+      {
+        company: "University of the West of England",
+        description: "Bachelor's Degree - 2:1",
+        endDate: "2014-07-01",
+        location: "Bristol, UK",
+        logoPath: "/img/uwe.svg",
+        startDate: "2011-09-01",
+        title: "BSc IT Management for Business (ITMB)",
+      },
+    ],
+    experience: [
+      {
+        company: "Cision",
+        description: `Senior software engineer working on Cision One, a media monitoring platform. Collaborating with the main team in Australia, I contribute to the full-stack development, supporting a Rails and Vue application.`,
+        location: "Remote, UK",
+        logoPath: "/img/cision.jpeg",
+        skills: ["Vue.js", "Ruby on Rails", "GraphQL"],
+        startDate: "2023-11-01",
+        title: "Senior Software Engineer",
+      },
+      {
+        company: "Cision (Buzzsumo)",
+        description: `Senior software engineer working in the Buzzsumo product team with a primary focus on the frontend, building features for content discovery and influencer marketing tools.`,
+        endDate: "2023-11-01",
+        location: "Remote, UK",
+        logoPath: "/img/cision.jpeg",
+        skills: ["Vue.js", "PHP", "TypeScript"],
+        startDate: "2022-06-01",
+        title: "Senior Software Engineer",
+      },
+      {
+        company: "Windsor Telecom",
+        description: `Led frontend development within an agile Kanban team. Championed Vue adoption across the organization and delivered multiple products including CRM systems, customer portals, and a production webRTC softphone PWA used by thousands of customers.`,
+        endDate: "2022-06-01",
+        location: "Remote, UK",
+        logoPath: "/img/wt.svg",
+        skills: ["Vue.js", "webRTC", "PWA", "PHP"],
+        startDate: "2018-07-01",
+        title: "Lead Frontend Developer",
+      },
+      {
+        company: "Windsor Telecom",
+        description: `Promoted to Senior Web Developer, leading complex projects and mentoring junior developers while continuing to develop customer-facing applications.`,
+        endDate: "2018-07-01",
+        location: "Camberley, Surrey",
+        logoPath: "/img/wt.svg",
+        skills: ["JavaScript", "PHP", "MySQL"],
+        startDate: "2017-08-01",
+        title: "Senior Web Developer",
+      },
+      {
+        company: "Windsor Telecom",
+        description: `Developed and maintained web applications for cloud telephony services, working across the full stack with PHP and JavaScript.`,
+        endDate: "2017-08-01",
+        location: "Camberley, Surrey",
+        logoPath: "/img/wt.svg",
+        skills: ["JavaScript", "PHP", "MySQL"],
+        startDate: "2015-07-01",
+        title: "Web Developer",
+      },
+      {
+        company: "Impact Research Ltd",
+        description: `Worked in a dynamic team on research projects, developing analytics tools and data processing solutions using VBA and supporting various business functions.`,
+        endDate: "2015-07-01",
+        location: "Walton-on-Thames, UK",
+        logoPath: "/img/imp.svg",
+        skills: ["VBA", "Excel", "Data Analysis"],
+        startDate: "2014-09-01",
+        title: "Junior Software Developer",
+      },
+    ],
+    languages: [
+      { level: "Native", name: "English" },
+      { level: "Professional", name: "Spanish" },
+    ],
+    llmProviders: [
+      {
+        color: "#10A37F",
+        icon: "sparkles",
+        id: "chatgpt",
+        name: "ChatGPT",
+        url: "https://chat.openai.com/",
+      },
+      {
+        color: "#D97757",
+        icon: "brain",
+        id: "claude",
+        name: "Claude",
+        url: "https://claude.ai/new",
+      },
+      {
+        color: "#4285F4",
+        icon: "gem",
+        id: "gemini",
+        name: "Gemini",
+        url: "https://gemini.google.com/app",
+      },
+      {
+        color: "#20B2AA",
+        icon: "search",
+        id: "perplexity",
+        name: "Perplexity",
+        url: "https://www.perplexity.ai/",
+      },
+    ],
+    location: "Remote, United Kingdom",
+
+    name: "Andres Janes",
+
+    pronouns: "He/Him",
+
+    recommendations: [
+      {
+        linkedInUrl:
+          "https://www.linkedin.com/in/andresjanes/details/recommendations/",
+        name: "Michael Brainch",
+        text: "Andres is a calm and collected professional, who has demonstrated a willingness (and natural ability) to step outside of his role and support company initiatives, using some of his energizing strengths (critical thinking, detail orientation and resilience) to come up with solutions, not problems, and really add value.",
+        title: "Strategy - Engagement - Insight",
+      },
+      {
+        linkedInUrl:
+          "https://www.linkedin.com/in/andresjanes/details/recommendations/",
+        name: "Jamie Margerison",
+        text: "Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour.",
+        title: "Director",
+      },
+    ],
+
+    skills: [
+      // Frontend
+      "Vue.js / Vue 3",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "PWA",
+      "webRTC",
+      "Websockets",
+      // Backend
+      "Ruby on Rails",
+      "Node.js",
+      "PHP",
+      "GraphQL",
+      "REST APIs",
+      // Databases
+      "PostgreSQL",
+      "MySQL",
+      // DevOps & Tools
+      "Docker",
+      "CI/CD",
+      "Git",
+      "Testing (Vitest, Cypress)",
+      // Methodology
+      "Agile / Kanban",
+    ],
+
+    socials: [
+      {
+        href: "https://www.linkedin.com/in/andresjanes/",
+        icon: "linkedin",
+        name: "LinkedIn",
+      },
+      { href: "https://github.com/ajanes93", icon: "github", name: "GitHub" },
+      { href: "mailto:dev@andresjanes.com", icon: "mail", name: "Email" },
+    ],
+
+    summary: `Pragmatic, quick-learning, solution-driven developer with over 10 years of experience delivering complex web-based software solutions. A proactive problem solver who consistently exceeds expectations. Currently working as a Senior Software Engineer at Cision, contributing to full-stack development on Cision One, a media monitoring platform built with Rails and Vue.
+
+I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and have a strong track record of leading frontend initiatives, from adopting Vue across organizations to delivering production webRTC applications. I thrive in agile, remote-first environments and am passionate about building intuitive, performant user experiences.`,
+
+    title: "Senior Software Engineer",
+
+    yearsExperience: "10+",
+  }),
+});

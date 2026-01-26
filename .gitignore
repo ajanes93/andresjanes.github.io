@@ -1,26 +1,33 @@
-.DS_Store
+# Dependencies
 node_modules
-/dist
 
-# local env files
-.env
-.env.local
-.env.*.local
+# Build output
+dist
+dist-ssr
 
-# Log files
+# Logs
+logs
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-.vscode
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw*
+*.sw?
 
-# Test output
-coverage
-junit.xml
+# Local env files
+*.local
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Claude Code (override global ignore)
+!CLAUDE.md
+!.claude/
+.claude/settings.local.json
