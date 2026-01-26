@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Download, GraduationCap, Heart } from 'lucide-vue-next'
 
+import AiSummary from '@/components/AiSummary.vue'
 import ExperienceTimeline from '@/components/ExperienceTimeline.vue'
 import LLMHotlinks from '@/components/LLMHotlinks.vue'
 import ProfileHero from '@/components/ProfileHero.vue'
@@ -64,6 +65,12 @@ function downloadCv(): void {
 
             <BlurFade>
                 <section>
+                    <AiSummary />
+                </section>
+            </BlurFade>
+
+            <BlurFade>
+                <section>
                     <LLMHotlinks :providers="store.llmProviders" :prompt="store.getCandidateSummaryPrompt" />
                 </section>
             </BlurFade>
@@ -121,17 +128,26 @@ function downloadCv(): void {
                     </h2>
 
                     <div class="grid md:grid-cols-2 gap-4">
-                        <Card v-for="rec in store.recommendations" :key="rec.name" class="overflow-hidden">
-                            <CardContent class="p-5">
-                                <blockquote class="space-y-3">
-                                    <p class="text-sm text-muted-foreground italic leading-relaxed">"{{ rec.text }}"</p>
-                                    <footer class="text-sm">
-                                        <strong class="text-foreground">{{ rec.name }}</strong>
-                                        <span class="text-muted-foreground"> - {{ rec.title }}</span>
-                                    </footer>
-                                </blockquote>
-                            </CardContent>
-                        </Card>
+                        <a
+                            v-for="rec in store.recommendations"
+                            :key="rec.name"
+                            :href="rec.linkedInUrl"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="block cursor-pointer"
+                        >
+                            <Card class="overflow-hidden h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                                <CardContent class="p-5">
+                                    <blockquote class="space-y-3">
+                                        <p class="text-sm text-muted-foreground italic leading-relaxed">"{{ rec.text }}"</p>
+                                        <footer class="text-sm">
+                                            <strong class="text-foreground">{{ rec.name }}</strong>
+                                            <span class="text-muted-foreground"> - {{ rec.title }}</span>
+                                        </footer>
+                                    </blockquote>
+                                </CardContent>
+                            </Card>
+                        </a>
                     </div>
                 </section>
             </BlurFade>

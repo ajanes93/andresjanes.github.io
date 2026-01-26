@@ -34,8 +34,8 @@ function getProviderUrl(provider: LLMProvider): string {
         case 'claude':
             return `https://claude.ai/new?q=${prompt}`
         case 'gemini':
-            // Gemini doesn't support URL prefill, just open the app
-            return 'https://gemini.google.com/app'
+            // Use Google Search AI Mode (udm=50) which uses Gemini
+            return `https://www.google.com/search?q=${prompt}&udm=50`
         case 'perplexity':
             return `https://www.perplexity.ai/?q=${prompt}`
         default:
@@ -43,11 +43,7 @@ function getProviderUrl(provider: LLMProvider): string {
     }
 }
 
-async function openLLM(provider: LLMProvider): Promise<void> {
-    // For Gemini, copy the prompt to clipboard first since it doesn't support URL prefill
-    if (provider.id === 'gemini') {
-        await navigator.clipboard.writeText(props.prompt)
-    }
+function openLLM(provider: LLMProvider): void {
     const url = getProviderUrl(provider)
     window.open(url, '_blank')
 }

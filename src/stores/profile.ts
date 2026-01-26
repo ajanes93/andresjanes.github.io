@@ -28,6 +28,7 @@ export interface Recommendation {
     name: string
     title: string
     text: string
+    linkedInUrl: string
 }
 
 export interface SocialLink {
@@ -59,7 +60,7 @@ export const useProfileStore = defineStore('profile', {
     state: (): ProfileState => ({
         name: 'Andres Janes',
         title: 'Senior Software Engineer',
-        location: 'Lincolnshire, England, United Kingdom',
+        location: 'Remote, United Kingdom',
         company: 'Cision',
         yearsExperience: '10+',
         availability: 'Open to opportunities',
@@ -217,12 +218,14 @@ I specialize in modern JavaScript/TypeScript with deep expertise in Vue.js, and 
             {
                 name: 'Michael Brainch',
                 title: 'Strategy - Engagement - Insight',
-                text: 'Andres is a calm and collected professional, who has demonstrated a willingness (and natural ability) to step outside of his role and support company initiatives, using some of his energizing strengths (critical thinking, detail orientation and resilience) to come up with solutions, not problems, and really add value.'
+                text: 'Andres is a calm and collected professional, who has demonstrated a willingness (and natural ability) to step outside of his role and support company initiatives, using some of his energizing strengths (critical thinking, detail orientation and resilience) to come up with solutions, not problems, and really add value.',
+                linkedInUrl: 'https://www.linkedin.com/in/andresjanes/details/recommendations/'
             },
             {
                 name: 'Jamie Margerison',
                 title: 'Director',
-                text: 'Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour.'
+                text: 'Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour.',
+                linkedInUrl: 'https://www.linkedin.com/in/andresjanes/details/recommendations/'
             }
         ]
     }),
@@ -263,6 +266,10 @@ ${state.languages.map((l: Language): string => `${l.name}: ${l.level}`).join(', 
 
 ## Recommendations
 ${state.recommendations.map((r: Recommendation): string => `"${r.text}" - ${r.name}, ${r.title}`).join('\n\n')}
+
+## Online Presence
+${state.socials.filter((s: SocialLink): boolean => s.icon !== 'mail').map((s: SocialLink): string => `- ${s.name}: ${s.href}`).join('\n')}
+- Portfolio: https://andresjanes.com
 `.trim()
 
             return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role.

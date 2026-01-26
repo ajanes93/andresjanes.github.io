@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 import { Briefcase, Calendar, MapPin } from 'lucide-vue-next'
 
-import { Badge, Card } from '@/components/ui'
+import { Badge, Card, TracingBeam } from '@/components/ui'
 import type { ExperienceItem } from '@/stores/profile'
 
 interface Props {
@@ -44,13 +44,14 @@ const sortedItems = computed<ExperienceItem[]>((): ExperienceItem[] => {
             {{ title }}
         </h2>
 
-        <div class="relative">
-            <div class="absolute left-[19px] top-0 bottom-0 w-0.5 bg-border hidden md:block"></div>
-
+        <TracingBeam>
             <div class="space-y-6">
                 <div v-for="item in sortedItems" :key="`${item.company}-${item.startDate}`" class="relative">
-                    <div class="absolute left-3 top-6 w-3 h-3 rounded-full border-2 border-primary bg-background z-10 hidden md:block" :class="{ 'bg-primary': !item.endDate }"></div>
-
+                    <!-- Timeline dot indicator - filled for current role, centered on the beam line (beam at 19px + 2px center = 21px, circle 12px wide, so 21-6=15px) -->
+                    <div
+                        class="absolute left-[15px] top-6 w-3 h-3 rounded-full border-2 border-primary bg-background z-10 hidden md:block"
+                        :class="{ 'bg-primary': !item.endDate }"
+                    ></div>
                     <Card class="md:ml-12 overflow-hidden hover:shadow-md transition-shadow duration-300">
                         <div class="p-5">
                             <div class="flex flex-col md:flex-row md:items-start gap-4">
@@ -91,6 +92,6 @@ const sortedItems = computed<ExperienceItem[]>((): ExperienceItem[] => {
                     </Card>
                 </div>
             </div>
-        </div>
+        </TracingBeam>
     </div>
 </template>

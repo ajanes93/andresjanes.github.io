@@ -1,0 +1,126 @@
+<script lang="ts" setup>
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useSpring } from 'vue-use-spring'
+
+defineProps({
+    class: String
+})
+
+const tracingBeamRef = ref<HTMLDivElement>()
+const tracingBeamContentRef = ref<HTMLDivElement>()
+
+const gradientId = `tracing-gradient-${Math.random().toString(36).substring(2, 10)}`
+const svgHeight = ref(0)
+const scrollProgress = ref(0)
+
+// Gradient length (how long the colored section is)
+const gradientLength = 200
+
+// Y positions for the gradient - follows scroll progress
+const computedY1 = computed(() => {
+    // Start position of gradient (top of colored section)
+    return Math.max(0, scrollProgress.value * svgHeight.value - gradientLength)
+})
+
+const computedY2 = computed(() => {
+    // End position of gradient (bottom of colored section)
+    return Math.min(svgHeight.value, scrollProgress.value * svgHeight.value + gradientLength)
+})
+
+const spring = useSpring(
+    { y1: computedY1.value, y2: computedY2.value },
+    { tension: 120, friction: 20, precision: 0.01 }
+)
+
+watch(computedY1, (newY1) => {
+    spring.y1 = newY1
+})
+
+watch(computedY2, (newY2) => {
+    spring.y2 = newY2
+})
+
+function updateScrollProgress() {
+    if (tracingBeamRef.value) {
+        const rect = tracingBeamRef.value.getBoundingClientRect()
+        const windowHeight = window.innerHeight
+        const elementHeight = rect.height
+
+        // Calculate how much of the element has been scrolled through
+        // Start earlier (when element is 50% down the viewport) for better visual timing
+        const startOffset = windowHeight * 0.5
+        const endOffset = elementHeight
+
+        const scrolled = startOffset - rect.top
+        const total = startOffset + endOffset
+
+        scrollProgress.value = Math.max(0, Math.min(1, scrolled / total))
+    }
+}
+
+let resizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
+    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    window.addEventListener('resize', updateScrollProgress)
+    updateScrollProgress()
+
+    resizeObserver = new ResizeObserver(() => {
+        updateSVGHeight()
+    })
+
+    if (tracingBeamContentRef.value) {
+        resizeObserver.observe(tracingBeamContentRef.value)
+    }
+
+    updateSVGHeight()
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', updateScrollProgress)
+    window.removeEventListener('resize', updateScrollProgress)
+    resizeObserver?.disconnect()
+})
+
+function updateSVGHeight() {
+    if (!tracingBeamContentRef.value) return
+    svgHeight.value = tracingBeamContentRef.value.offsetHeight
+}
+</script>
+
+<template>
+    <div ref="tracingBeamRef" class="relative h-full w-full" :class="[$props.class]">
+        <!-- Tracing beam line - positioned to align with timeline dots -->
+        <div class="absolute top-0 left-[19px] hidden md:block" style="z-index: 5;">
+            <svg :viewBox="`0 0 4 ${svgHeight}`" width="4" :height="svgHeight" class="block" aria-hidden="true">
+                <!-- Background line -->
+                <path
+                    :d="`M 2 0 V ${svgHeight}`"
+                    fill="none"
+                    stroke="hsl(var(--border))"
+                    stroke-width="2"
+                />
+                <!-- Animated gradient line -->
+                <path
+                    :d="`M 2 0 V ${svgHeight}`"
+                    fill="none"
+                    :stroke="`url(#${gradientId})`"
+                    stroke-width="2"
+                    class="motion-reduce:hidden"
+                />
+                <defs>
+                    <linearGradient :id="gradientId" gradientUnits="userSpaceOnUse" x1="0" x2="0" :y1="spring.y1" :y2="spring.y2">
+                        <stop stop-color="hsl(var(--primary))" stop-opacity="0" />
+                        <stop offset="0.1" stop-color="hsl(var(--primary))" />
+                        <stop offset="0.5" stop-color="hsl(217 91% 60%)" />
+                        <stop offset="0.9" stop-color="hsl(187 85% 53%)" />
+                        <stop offset="1" stop-color="hsl(187 85% 53%)" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div ref="tracingBeamContentRef">
+            <slot />
+        </div>
+    </div>
+</template>

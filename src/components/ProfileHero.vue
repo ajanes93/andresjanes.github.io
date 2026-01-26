@@ -45,7 +45,6 @@ function getSocialIcon(iconName: string): Component {
                             {{ name.split(' ').map(n => n[0]).join('') }}
                         </AvatarFallback>
                     </Avatar>
-                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-background"></div>
                 </div>
 
                 <div class="flex-1 text-center md:text-left space-y-4">
