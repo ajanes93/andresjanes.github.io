@@ -49,6 +49,13 @@ const createMockProfile = (
   llmProviders: [],
   location: "Test Location",
   name: "Test Person",
+  personal: {
+    aiTools: ["Claude Code", "Cursor"],
+    currentChapter: "Testing things",
+    interests: ["Testing", "Coding"],
+    origin: "Test Land",
+    sideProjectStatus: "Always testing",
+  },
   pronouns: "They/Them",
   recommendations: [],
   skills: ["TypeScript", "Vue.js", "React", "Node.js", "GraphQL"],
@@ -153,15 +160,15 @@ describe("useCvGenerator", () => {
       const { generateCv } = useCvGenerator();
 
       const profile = createMockProfile({
-        experience: Array.from({ length: 15 }, (_, i) => ({
-          company: `Company ${i}`,
+        experience: Array.from({ length: 15 }, (_, idx) => ({
+          company: `Company ${idx}`,
           description: "A description that takes up space ".repeat(10),
-          endDate: i < 14 ? "2023-01-01" : undefined,
+          endDate: idx < 14 ? "2023-01-01" : undefined,
           location: "Location",
           logoPath: "/img/logo.svg",
           skills: ["Skill1", "Skill2", "Skill3", "Skill4", "Skill5"],
           startDate: "2020-01-01",
-          title: `Position ${i}`,
+          title: `Position ${idx}`,
         })),
       });
 

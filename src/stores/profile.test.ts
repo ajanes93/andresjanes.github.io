@@ -69,6 +69,41 @@ describe("useProfileStore", () => {
       expect(Array.isArray(store.recommendations)).toBe(true);
       expect(store.recommendations.length).toBeGreaterThan(0);
     });
+
+    it("has personal info object", () => {
+      const store = useProfileStore();
+      expect(store.personal).toBeDefined();
+      expect(typeof store.personal).toBe("object");
+    });
+  });
+
+  describe("personal info", () => {
+    it("has origin", () => {
+      const store = useProfileStore();
+      expect(store.personal.origin).toBe("Colombia");
+    });
+
+    it("has currentChapter", () => {
+      const store = useProfileStore();
+      expect(store.personal.currentChapter).toContain("Arianna");
+    });
+
+    it("has interests array", () => {
+      const store = useProfileStore();
+      expect(Array.isArray(store.personal.interests)).toBe(true);
+      expect(store.personal.interests.length).toBeGreaterThan(0);
+    });
+
+    it("has aiTools array", () => {
+      const store = useProfileStore();
+      expect(Array.isArray(store.personal.aiTools)).toBe(true);
+      expect(store.personal.aiTools.length).toBeGreaterThan(0);
+    });
+
+    it("has sideProjectStatus", () => {
+      const store = useProfileStore();
+      expect(store.personal.sideProjectStatus).toBeDefined();
+    });
   });
 
   describe("experience items", () => {
@@ -146,6 +181,12 @@ describe("useProfileStore", () => {
       it("includes education", () => {
         const store = useProfileStore();
         expect(store.getCandidateSummaryPrompt).toContain("Education");
+      });
+
+      it("includes personal info", () => {
+        const store = useProfileStore();
+        expect(store.getCandidateSummaryPrompt).toContain("Personal");
+        expect(store.getCandidateSummaryPrompt).toContain("Colombia");
       });
     });
   });

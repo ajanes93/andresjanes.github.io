@@ -31,6 +31,14 @@ export interface Recommendation {
   title: string;
 }
 
+export interface PersonalInfo {
+  aiTools: string[];
+  currentChapter: string;
+  interests: string[];
+  origin: string;
+  sideProjectStatus: string;
+}
+
 export interface SocialLink {
   href: string;
   icon: string;
@@ -47,6 +55,7 @@ export interface ProfileState {
   llmProviders: LLMProvider[];
   location: string;
   name: string;
+  personal: PersonalInfo;
   pronouns: string;
   recommendations: Recommendation[];
   skills: string[];
@@ -78,7 +87,9 @@ export const useProfileStore = defineStore("profile", {
       const formatSocialLink = (social: SocialLink): string =>
         `- ${social.name}: ${social.href}`;
 
-      const nonEmailSocials = state.socials.filter((s) => s.icon !== "mail");
+      const nonEmailSocials = state.socials.filter(
+        (social) => social.icon !== "mail"
+      );
 
       const context = `
 # About Andres Janes
@@ -109,17 +120,26 @@ ${state.recommendations.map(formatRecommendation).join("\n\n")}
 ## Online Presence
 ${nonEmailSocials.map(formatSocialLink).join("\n")}
 - Portfolio: https://andresjanes.com
+
+## Personal
+- Originally from: ${state.personal.origin}
+- Current life chapter: ${state.personal.currentChapter}
+- Interests outside work: ${state.personal.interests.join(", ")}
+- AI tools I use: ${state.personal.aiTools.join(", ")}
+- Side project status: ${state.personal.sideProjectStatus}
 `.trim();
 
-      return `Based on the following candidate profile, provide a comprehensive summary that would help a hiring manager understand if this candidate would be a good fit for a senior software engineering role.
+      return `Here's the profile for Andres Janes, a senior software engineer. He's a real person, not a corporate template—so please keep your response warm and human.
 
 ${context}
 
 Please provide:
-1. A brief executive summary (2-3 sentences)
-2. Key technical strengths
-3. Notable achievements and experience highlights
-4. Recommended role types and team dynamics`;
+1. A brief, personable summary (2-3 sentences) — write like you're introducing him to a friend, not a hiring committee
+2. Key technical strengths (what he's genuinely good at)
+3. Notable achievements — the stuff that actually matters, not just bullet points
+4. What kind of team and role would be a great fit (based on his personality and work style)
+
+Avoid corporate buzzwords. Be specific and genuine.`;
     },
   },
 
@@ -294,11 +314,24 @@ Please provide:
       { href: "mailto:dev@andresjanes.com", icon: "mail", name: "Email" },
     ],
 
-    summary: `Senior Software Engineer with 10+ years of experience building production web applications at scale. Currently at Cision developing Cision One, a media monitoring platform serving enterprise clients globally, using Rails and Vue.js.
+    personal: {
+      aiTools: ["Claude Code", "Cursor", "GitHub Copilot", "ChatGPT", "Gemini"],
+      currentChapter: "New dad to Arianna (2025)",
+      interests: [
+        "Football (Lincoln City)",
+        "Coffee",
+        "Craft beer",
+        "Family adventures",
+      ],
+      origin: "Colombia",
+      sideProjectStatus: "Hacking together ideas with Claude",
+    },
 
-Core expertise: Vue.js/Vue 3, TypeScript, Ruby on Rails, PHP/Laravel, GraphQL, and real-time applications (webRTC, WebSockets). Experienced with Elasticsearch for search infrastructure and GCP for cloud deployments. Previously led frontend development at Windsor Telecom, where I championed Vue adoption across the organization and shipped a production webRTC softphone PWA serving thousands of daily users.
+    summary: `Senior Software Engineer with 10+ years building web apps that people actually enjoy using. Currently at Cision, helping enterprise clients make sense of media at scale with Rails and Vue.js.
 
-I thrive in remote-first, agile environments and focus on delivering performant, accessible user experiences. Open to senior and staff-level roles in product-focused teams.`,
+I get excited about clean component APIs, accessible UIs, and shipping features that solve real problems. Previously led frontend development at Windsor Telecom, where I championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
+
+Originally from Colombia, now based in the UK. Recently became a dad—so side projects are on pause, but I'm still tinkering with AI coding tools whenever I get a spare moment.`,
 
     title: "Senior Software Engineer",
 
