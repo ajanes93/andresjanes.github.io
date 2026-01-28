@@ -1,15 +1,10 @@
-# robots.txt for andresjanes.com
-# Allow all crawlers to index the site
+<!-- Profile hash: 890492cf98a4 -->
+# robots.txt for https://andresjanes.com
+# Generated automatically from profile data
 
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://andresjanes.com/sitemap.xml
-
-# LLMs.txt - Information for Large Language Models
-# See: https://llmstxt.org/
-# Location: https://andresjanes.com/llms.txt
-
-# Crawl-delay (optional, be polite to servers)
+Llms-txt: https://andresjanes.com/llms.txt
 Crawl-delay: 1
