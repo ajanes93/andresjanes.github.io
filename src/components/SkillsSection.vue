@@ -38,10 +38,16 @@ interface Props {
 const props = defineProps<Props>();
 
 function getSkillCategory(skill: string): SkillVariant {
-  const isPrimary = SKILL_CATEGORIES.PRIMARY.some((s) => skill.includes(s));
+  const isPrimary = SKILL_CATEGORIES.PRIMARY.some((pattern) =>
+    skill.includes(pattern)
+  );
+
   if (isPrimary) return "default";
 
-  const isSecondary = SKILL_CATEGORIES.SECONDARY.some((s) => skill.includes(s));
+  const isSecondary = SKILL_CATEGORIES.SECONDARY.some((pattern) =>
+    skill.includes(pattern)
+  );
+
   if (isSecondary) return "secondary";
 
   return "outline";
@@ -49,9 +55,9 @@ function getSkillCategory(skill: string): SkillVariant {
 
 // Sort skills so highlighted ones appear first
 const sortedSkills = computed<string[]>(() => {
-  return [...props.skills].sort((a, b) => {
-    const aCategory = getSkillCategory(a);
-    const bCategory = getSkillCategory(b);
+  return [...props.skills].sort((skillA, skillB) => {
+    const aCategory = getSkillCategory(skillA);
+    const bCategory = getSkillCategory(skillB);
 
     return SKILL_VARIANT_ORDER[aCategory] - SKILL_VARIANT_ORDER[bCategory];
   });

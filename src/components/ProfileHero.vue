@@ -14,7 +14,7 @@
           <div
             class="absolute inset-0 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 opacity-50 blur-lg"
           />
-          <Avatar class="ring-background relative h-28 w-28 ring-4 md:size-32">
+          <Avatar class="ring-background relative size-28 ring-4 md:size-32">
             <AvatarImage
               :alt="name"
               :src="avatarPath"
@@ -140,7 +140,7 @@ const initials = computed<string>(() =>
 );
 
 const languageNames = computed<string>(() =>
-  props.languages.map((l) => l.name).join(", ")
+  props.languages.map((lang) => lang.name).join(", ")
 );
 
 function isMailtoLink(href: string): boolean {

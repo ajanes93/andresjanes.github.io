@@ -130,12 +130,12 @@
             data-testid="llm-button"
             :href="perplexityUrl"
             rel="noopener noreferrer"
-            :style="{ borderColor: '#20B2AA' }"
+            :style="{ borderColor: '#00C9FF' }"
             target="_blank"
           >
             <PerplexityIcon
               class="size-5"
-              style="color: #20b2aa"
+              style="color: #00c9ff"
             />
             <span
               class="text-muted-foreground absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs font-medium whitespace-nowrap opacity-0 transition-opacity group-hover:opacity-100"
@@ -189,8 +189,8 @@
           :curvature="60"
           :duration="4.2"
           :end-ref="perplexityRef"
-          gradient-start-color="#20B2AA"
-          gradient-stop-color="#008B8B"
+          gradient-start-color="#00C9FF"
+          gradient-stop-color="#0099CC"
           path-color="gray"
           :path-opacity="0.15"
           reverse

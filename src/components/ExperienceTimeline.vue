@@ -25,7 +25,7 @@
             <div class="p-4">
               <div class="flex flex-col gap-4 md:flex-row md:items-start">
                 <div
-                  class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
+                  class="bg-muted flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                 >
                   <img
                     v-if="item.logoPath"
@@ -160,8 +160,9 @@ function calculateDuration(start: string, end?: string): string {
 
 const sortedItems = computed<ExperienceItem[]>(() => {
   return [...props.items].sort(
-    (a, b) =>
-      parseISODate(b.startDate).getTime() - parseISODate(a.startDate).getTime()
+    (itemA, itemB) =>
+      parseISODate(itemB.startDate).getTime() -
+      parseISODate(itemA.startDate).getTime()
   );
 });
 </script>
