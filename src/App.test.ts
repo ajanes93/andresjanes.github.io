@@ -36,6 +36,8 @@ const render = (options: RenderOptions<typeof App> = {}) => {
   return {
     wrapper,
     getAppRoot: () => wrapper.findByTestId("app-root"),
+    getBeyondTheCodeSection: () =>
+      wrapper.findByTestId("beyond-the-code-section"),
     getDownloadButton: () => wrapper.findByTestId("download-cv-button"),
     getEducationCards: () => wrapper.findAllByTestId("education-card"),
     getEducationSection: () => wrapper.findByTestId("education-section"),
@@ -123,6 +125,18 @@ describe("App", () => {
     });
   });
 
+  describe("beyond the code section", () => {
+    it("renders the beyond the code section", () => {
+      const { getBeyondTheCodeSection } = render();
+      expect(getBeyondTheCodeSection().exists()).toBe(true);
+    });
+
+    it("renders beyond the code heading", () => {
+      const { getBeyondTheCodeSection } = render();
+      expect(getBeyondTheCodeSection().text()).toContain("Beyond the Code");
+    });
+  });
+
   describe("recommendations section", () => {
     it("renders the recommendations section", () => {
       const { getRecommendationsSection } = render();
@@ -159,11 +173,11 @@ describe("App", () => {
       expect(getFooter().text()).toContain("Andres Janes");
     });
 
-    it("displays the tech stack", () => {
+    it("displays the tech stack and credits", () => {
       const { getFooter } = render();
       expect(getFooter().text()).toContain("Vue 3");
       expect(getFooter().text()).toContain("TypeScript");
-      expect(getFooter().text()).toContain("Tailwind CSS");
+      expect(getFooter().text()).toContain("Tailwind CSS 4");
     });
 
     it("renders the source code link", () => {

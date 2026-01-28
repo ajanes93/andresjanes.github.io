@@ -108,7 +108,7 @@
                 <CardContent class="p-4">
                   <div class="flex items-start gap-4">
                     <div
-                      class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
+                      class="bg-muted flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                     >
                       <img
                         v-if="edu.logoPath"
@@ -137,6 +137,12 @@
               </Card>
             </div>
           </div>
+        </section>
+      </BlurFade>
+
+      <BlurFade>
+        <section data-testid="beyond-the-code-section">
+          <BeyondTheCode :personal="store.personal" />
         </section>
       </BlurFade>
 
@@ -215,6 +221,7 @@
 import { Download, GraduationCap, Heart } from "lucide-vue-next";
 
 import AiInsights from "@/components/AiInsights.vue";
+import BeyondTheCode from "@/components/BeyondTheCode.vue";
 import ExperienceTimeline from "@/components/ExperienceTimeline.vue";
 import ProfileHero from "@/components/ProfileHero.vue";
 import SkillsSection from "@/components/SkillsSection.vue";

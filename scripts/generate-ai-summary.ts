@@ -5,7 +5,6 @@
  * Usage: npm run generate:summary
  */
 
-import { execSync } from "child_process";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
@@ -13,16 +12,11 @@ import { createPinia, setActivePinia } from "pinia";
 
 import { useProfileStore } from "../src/stores/profile";
 
+import { callClaude } from "./lib/claude";
+
 interface AISummary {
   generatedAt: string;
   summary: string;
-}
-
-function getProfileStore() {
-  const pinia = createPinia();
-  setActivePinia(pinia);
-
-  return useProfileStore();
 }
 
 function formatExperience(exp: {
@@ -59,6 +53,8 @@ function buildProfileContext(
     .map((lang) => `${lang.name} (${lang.level})`)
     .join(", ");
 
+  const personal = store.personal;
+
   return `
 Name: ${store.name}
 Title: ${store.title} at ${store.company}
@@ -78,28 +74,33 @@ ${recommendations}
 
 Education: ${education}
 Languages: ${languages}
+
+Personal:
+- Originally from: ${personal.origin}
+- Current chapter: ${personal.currentChapter}
+- Interests: ${personal.interests.join(", ")}
+- AI tools enthusiast: ${personal.aiTools.join(", ")}
+- Side projects: ${personal.sideProjectStatus}
 `.trim();
 }
 
 function buildPrompt(profileContext: string, generatedAt: string): string {
-  return `You are writing a professional summary for a portfolio website. Based on the profile data below, write a compelling 2-3 sentence executive summary that highlights:
-- Years of experience and current role
-- Core technical expertise (especially Vue.js/TypeScript)
-- Leadership experience and key achievements
-- Professional qualities mentioned in recommendations
+  return `You are writing a summary for a developer's portfolio website. The tone should be warm and personable—like a friendly colleague introducing someone—while still being professional.
+
+Based on the profile data below, write a compelling 2-3 sentence summary that:
+- Is written in THIRD PERSON (use "Andres" or "he", never "I")
+- Feels human and approachable, not like a corporate bio
+- Highlights technical expertise (especially Vue.js/TypeScript) without being dry
+- Mentions something personal that makes him memorable (like being a new dad or his Colombian roots)
+- Captures his professional qualities in a natural way
+
+Avoid corporate buzzwords like "leveraging", "synergy", "passionate", or "results-driven". Write like a real person.
 
 Output ONLY valid JSON in this exact format (no markdown, no code blocks, just raw JSON):
 {"summary": "Your summary here", "generatedAt": "${generatedAt}"}
 
 Profile Data:
 ${profileContext}`;
-}
-
-function callClaude(prompt: string): string {
-  return execSync(`claude -p ${JSON.stringify(prompt)} --output-format text`, {
-    encoding: "utf-8",
-    maxBuffer: 1024 * 1024,
-  });
 }
 
 function validateSummary(data: unknown): asserts data is AISummary {
@@ -128,13 +129,16 @@ function main(): void {
   console.log("Generating AI summary using Claude Code CLI...\n");
 
   try {
-    const store = getProfileStore();
+    const pinia = createPinia();
+    setActivePinia(pinia);
+    const store = useProfileStore();
+
     const profileContext = buildProfileContext(store);
     const generatedAt = getTodayISODate();
     const prompt = buildPrompt(profileContext, generatedAt);
 
     const result = callClaude(prompt);
-    const parsed: unknown = JSON.parse(result.trim());
+    const parsed = JSON.parse(result.trim());
 
     validateSummary(parsed);
     writeSummary(parsed);

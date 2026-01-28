@@ -83,7 +83,7 @@ export default tseslint.config(
       "id-length": [
         "error",
         {
-          exceptions: ["_", "a", "b", "h", "i", "l", "r", "s", "x", "y"],
+          exceptions: ["_", "h"],
           min: 2,
           properties: "never",
         },

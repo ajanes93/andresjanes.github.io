@@ -1,7 +1,7 @@
 <template>
   <div
     ref="tracingBeamRef"
-    class="relative h-full w-full"
+    class="relative size-full"
     :class="props.class"
     data-testid="tracing-beam"
   >

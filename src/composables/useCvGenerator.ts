@@ -67,7 +67,7 @@ export function useCvGenerator() {
     const pageWidth = pdfDoc.internal.pageSize.getWidth();
     const margin = 20;
     const contentWidth = pageWidth - margin * 2;
-    let y = margin;
+    let posY = margin;
 
     // Colors
     const primaryColor: RgbColor = [37, 99, 235]; // Blue-600
@@ -76,7 +76,7 @@ export function useCvGenerator() {
 
     function addWrappedText(
       text: string,
-      x: number,
+      posX: number,
       maxWidth: number,
       fontSize: number,
       color: RgbColor = textColor
@@ -84,7 +84,7 @@ export function useCvGenerator() {
       pdfDoc.setFontSize(fontSize);
       pdfDoc.setTextColor(...color);
       const lines = pdfDoc.splitTextToSize(text, maxWidth);
-      pdfDoc.text(lines, x, y);
+      pdfDoc.text(lines, posX, posY);
 
       return lines.length * (fontSize * 0.4);
     }
@@ -92,9 +92,9 @@ export function useCvGenerator() {
     function checkPageBreak(requiredSpace: number): void {
       const pageHeight = pdfDoc.internal.pageSize.getHeight();
 
-      if (y + requiredSpace > pageHeight - margin) {
+      if (posY + requiredSpace > pageHeight - margin) {
         pdfDoc.addPage();
-        y = margin;
+        posY = margin;
       }
     }
 
@@ -102,8 +102,8 @@ export function useCvGenerator() {
       pdfDoc.setFontSize(12);
       pdfDoc.setFont("helvetica", "bold");
       pdfDoc.setTextColor(...primaryColor);
-      pdfDoc.text(title, margin, y);
-      y += 6;
+      pdfDoc.text(title, margin, posY);
+      posY += 6;
       pdfDoc.setFont("helvetica", "normal");
     }
 
@@ -123,28 +123,31 @@ export function useCvGenerator() {
     pdfDoc.setFontSize(10);
     pdfDoc.text(`${profile.location} | ${profile.company}`, margin, 36);
 
-    y = 50;
+    posY = 50;
 
     // Contact info
-    const email = profile.socials.find((s) => s.name === "Email");
-    const linkedin = profile.socials.find((s) => s.name === "LinkedIn");
+    const emailLink = profile.socials.find((social) => social.name === "Email");
+
+    const linkedin = profile.socials.find(
+      (social) => social.name === "LinkedIn"
+    );
 
     const contactParts = [
-      email?.href.replace("mailto:", ""),
+      emailLink?.href.replace("mailto:", ""),
       linkedin?.href,
     ].filter(Boolean);
 
     if (contactParts.length > 0) {
       pdfDoc.setFontSize(9);
       pdfDoc.setTextColor(...mutedColor);
-      pdfDoc.text(contactParts.join(" | "), margin, y);
-      y += 8;
+      pdfDoc.text(contactParts.join(" | "), margin, posY);
+      posY += 8;
     }
 
     // Summary
     addSectionHeader("PROFESSIONAL SUMMARY");
-    y += addWrappedText(profile.summary, margin, contentWidth, 10);
-    y += 8;
+    posY += addWrappedText(profile.summary, margin, contentWidth, 10);
+    posY += 8;
 
     // Skills
     checkPageBreak(30);
@@ -156,22 +159,22 @@ export function useCvGenerator() {
     const skillsPerRow = 4;
     const skillWidth = contentWidth / skillsPerRow;
 
-    for (let i = 0; i < profile.skills.length; i += skillsPerRow) {
-      const rowSkills = profile.skills.slice(i, i + skillsPerRow);
+    for (let idx = 0; idx < profile.skills.length; idx += skillsPerRow) {
+      const rowSkills = profile.skills.slice(idx, idx + skillsPerRow);
 
-      rowSkills.forEach((skill, idx) => {
-        pdfDoc.text(`• ${skill}`, margin + idx * skillWidth, y);
+      rowSkills.forEach((skill, colIdx) => {
+        pdfDoc.text(`• ${skill}`, margin + colIdx * skillWidth, posY);
       });
 
-      y += 5;
+      posY += 5;
     }
 
-    y += 6;
+    posY += 6;
 
     // Experience
     checkPageBreak(40);
     addSectionHeader("EXPERIENCE");
-    y += 2;
+    posY += 2;
 
     profile.experience.forEach((exp) => {
       checkPageBreak(35);
@@ -179,7 +182,7 @@ export function useCvGenerator() {
       pdfDoc.setFontSize(11);
       pdfDoc.setFont("helvetica", "bold");
       pdfDoc.setTextColor(...textColor);
-      pdfDoc.text(exp.title, margin, y);
+      pdfDoc.text(exp.title, margin, posY);
 
       const endDate = exp.endDate ? formatDate(exp.endDate) : "Present";
       const dateRange = `${formatDate(exp.startDate)} - ${endDate}`;
@@ -190,33 +193,33 @@ export function useCvGenerator() {
       pdfDoc.text(
         dateRange,
         pageWidth - margin - pdfDoc.getTextWidth(dateRange),
-        y
+        posY
       );
 
-      y += 5;
+      posY += 5;
 
       pdfDoc.setFontSize(10);
       pdfDoc.setTextColor(...mutedColor);
-      pdfDoc.text(`${exp.company} | ${exp.location}`, margin, y);
-      y += 5;
+      pdfDoc.text(`${exp.company} | ${exp.location}`, margin, posY);
+      posY += 5;
 
       pdfDoc.setFont("helvetica", "normal");
-      y += addWrappedText(exp.description, margin, contentWidth, 9);
+      posY += addWrappedText(exp.description, margin, contentWidth, 9);
 
       if (exp.skills?.length) {
-        y += 2;
+        posY += 2;
         pdfDoc.setFontSize(8);
         pdfDoc.setTextColor(...mutedColor);
-        pdfDoc.text(`Technologies: ${exp.skills.join(", ")}`, margin, y);
+        pdfDoc.text(`Technologies: ${exp.skills.join(", ")}`, margin, posY);
       }
 
-      y += 8;
+      posY += 8;
     });
 
     // Education
     checkPageBreak(30);
     addSectionHeader("EDUCATION");
-    y += 2;
+    posY += 2;
 
     profile.education.forEach((edu) => {
       checkPageBreak(20);
@@ -224,18 +227,18 @@ export function useCvGenerator() {
       pdfDoc.setFontSize(11);
       pdfDoc.setFont("helvetica", "bold");
       pdfDoc.setTextColor(...textColor);
-      pdfDoc.text(edu.title, margin, y);
-      y += 5;
+      pdfDoc.text(edu.title, margin, posY);
+      posY += 5;
 
       pdfDoc.setFontSize(10);
       pdfDoc.setFont("helvetica", "normal");
       pdfDoc.setTextColor(...mutedColor);
-      pdfDoc.text(`${edu.company} | ${edu.location}`, margin, y);
-      y += 4;
+      pdfDoc.text(`${edu.company} | ${edu.location}`, margin, posY);
+      posY += 4;
 
       pdfDoc.setFontSize(9);
-      pdfDoc.text(edu.description, margin, y);
-      y += 8;
+      pdfDoc.text(edu.description, margin, posY);
+      posY += 8;
     });
 
     // Languages
@@ -245,10 +248,10 @@ export function useCvGenerator() {
     pdfDoc.setTextColor(...textColor);
 
     const languageStr = profile.languages
-      .map((l) => `${l.name} (${l.level})`)
+      .map((lang) => `${lang.name} (${lang.level})`)
       .join(", ");
 
-    pdfDoc.text(languageStr, margin, y);
+    pdfDoc.text(languageStr, margin, posY);
 
     const filename = generateFilename(profile.name);
 

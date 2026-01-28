@@ -107,8 +107,7 @@ describe("Button", () => {
 
     it("applies icon size", () => {
       const { wrapper } = render({ props: { size: "icon" } });
-      expect(wrapper.classes()).toContain("h-10");
-      expect(wrapper.classes()).toContain("w-10");
+      expect(wrapper.classes()).toContain("size-10");
     });
   });
 

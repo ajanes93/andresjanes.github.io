@@ -10,3 +10,6 @@ pre-commit:
     typecheck:
       glob: "*.{ts,vue}"
       run: npx vue-tsc --noEmit
+    seo-check:
+      glob: "src/stores/profile.ts"
+      run: npm run generate:seo -- --check-only

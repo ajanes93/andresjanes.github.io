@@ -1,7 +1,7 @@
 <template>
   <img
     :alt="props.alt"
-    :class="cn('aspect-square h-full w-full', props.class)"
+    :class="cn('aspect-square size-full', props.class)"
     data-testid="avatar-image"
     :src="props.src"
   />
