@@ -31,11 +31,18 @@ export interface Recommendation {
   title: string;
 }
 
+export interface SideProject {
+  description: string;
+  name: string;
+  url?: string;
+}
+
 export interface PersonalInfo {
   aiTools: string[];
   currentChapter: string;
   interests: string[];
   origin: string;
+  sideProjects: SideProject[];
   sideProjectStatus: string;
 }
 
@@ -126,6 +133,7 @@ ${nonEmailSocials.map(formatSocialLink).join("\n")}
 - Current life chapter: ${state.personal.currentChapter}
 - Interests outside work: ${state.personal.interests.join(", ")}
 - AI tools I use: ${state.personal.aiTools.join(", ")}
+- Side projects: ${state.personal.sideProjects.map((project) => `${project.name} (${project.description})`).join(", ")}
 - Side project status: ${state.personal.sideProjectStatus}
 `.trim();
 
@@ -324,14 +332,31 @@ Avoid corporate buzzwords. Be specific and genuine.`;
         "Family adventures",
       ],
       origin: "Colombia",
-      sideProjectStatus: "Hacking together ideas with Claude",
+      sideProjectStatus: "Always building something",
+      sideProjects: [
+        {
+          description: "RSS reader with AI summaries and MCP server",
+          name: "feed-ai",
+          url: "https://feed-ai.andresjanes.com",
+        },
+        {
+          description: "Client site for Cathodic Protection International",
+          name: "CPI",
+          url: "https://cpi.andresjanes.com",
+        },
+        {
+          description: "This portfolio — Vue 3, TypeScript, Tailwind",
+          name: "andresjanes.com",
+          url: "https://andresjanes.com",
+        },
+      ],
     },
 
     summary: `Senior Software Engineer with 10+ years building web apps that people actually enjoy using. Currently at Cision, helping enterprise clients make sense of media at scale with Rails and Vue.js.
 
 I get excited about clean component APIs, accessible UIs, and shipping features that solve real problems. Previously led frontend development at Windsor Telecom, where I championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
 
-Originally from Colombia, now based in the UK. Recently became a dad—so side projects are on pause, but I'm still tinkering with AI coding tools whenever I get a spare moment.`,
+Originally from Colombia, now based in the UK. Recently became a dad, and still finding time to ship side projects—currently building feed-ai and this very portfolio with the help of AI coding tools.`,
 
     title: "Senior Software Engineer",
 

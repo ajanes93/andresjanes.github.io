@@ -104,6 +104,12 @@ describe("useProfileStore", () => {
       const store = useProfileStore();
       expect(store.personal.sideProjectStatus).toBeDefined();
     });
+
+    it("has sideProjects array", () => {
+      const store = useProfileStore();
+      expect(Array.isArray(store.personal.sideProjects)).toBe(true);
+      expect(store.personal.sideProjects.length).toBeGreaterThan(0);
+    });
   });
 
   describe("experience items", () => {
