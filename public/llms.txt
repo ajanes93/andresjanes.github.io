@@ -1,4 +1,4 @@
-<!-- Profile hash: e6efce8b3920 -->
+<!-- Profile hash: a87d67b34d8c -->
 # Andres Janes - Senior Software Engineer
 
 > This is an llms.txt file following the llmstxt.org specification. It provides structured information about Andres Janes to help LLMs understand his professional background, skills, and career aspirations.
@@ -168,7 +168,7 @@ A: His combination of deep frontend expertise, real-time systems experience, ent
 - **Current Chapter:** New dad to Arianna (2025)
 - **Interests:** Football (Lincoln City supporter), Coffee, Craft beer, Family adventures
 - **AI Tools:** Claude Code, Cursor, GitHub Copilot, ChatGPT, Gemini
-- **Side Projects:** feed-ai, andresjanes.com, Budgeting app (backlog)
+- **Side Projects:** feed-ai (https://feed-ai.pages.dev), andresjanes.com (https://andresjanes.com), Budgeting app (backlog)
 - **Side Project Status:** Always building something
 
 ## Availability

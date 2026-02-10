@@ -11,7 +11,10 @@ const TEST_PROPS: PersonalInfo = {
   interests: ["Craft beer", "Discovering good restaurants", "Travelling"],
   origin: "Colombia",
   sideProjectStatus: "Paused for nappies",
-  sideProjects: ["feed-ai", "andresjanes.com"],
+  sideProjects: [
+    { name: "feed-ai", url: "https://feed-ai.pages.dev" },
+    { name: "andresjanes.com" },
+  ],
 };
 
 const render = (options: RenderOptions<typeof BeyondTheCode> = {}) => {

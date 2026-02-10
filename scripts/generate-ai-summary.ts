@@ -80,7 +80,7 @@ Personal:
 - Current chapter: ${personal.currentChapter}
 - Interests: ${personal.interests.join(", ")}
 - AI tools enthusiast: ${personal.aiTools.join(", ")}
-- Side projects: ${personal.sideProjects.join(", ")}
+- Side projects: ${personal.sideProjects.map((project) => project.name).join(", ")}
 - Side project status: ${personal.sideProjectStatus}
 `.trim();
 }

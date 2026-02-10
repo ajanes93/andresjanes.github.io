@@ -43,7 +43,7 @@
   ],
   <span :class="SYNTAX.comment">// {{ props.personal.sideProjectStatus }}</span>
   <span :class="SYNTAX.property">sideProjects</span>: [
-    <span v-for="(project, index) in props.personal.sideProjects" :key="project"><span :class="SYNTAX.string">"{{ project }}"</span><span v-if="index < props.personal.sideProjects.length - 1">, </span></span>
+    <span v-for="(project, index) in props.personal.sideProjects" :key="project.name"><a v-if="project.url" :class="SYNTAX.string" data-testid="side-project-link" :href="project.url" rel="noopener noreferrer" target="_blank">"{{ project.name }}"</a><span v-else :class="SYNTAX.string">"{{ project.name }}"</span><span v-if="index < props.personal.sideProjects.length - 1">, </span></span>
   ],
 };
 

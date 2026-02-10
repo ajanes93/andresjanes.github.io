@@ -31,12 +31,17 @@ export interface Recommendation {
   title: string;
 }
 
+export interface SideProject {
+  name: string;
+  url?: string;
+}
+
 export interface PersonalInfo {
   aiTools: string[];
   currentChapter: string;
   interests: string[];
   origin: string;
-  sideProjects: string[];
+  sideProjects: SideProject[];
   sideProjectStatus: string;
 }
 
@@ -127,7 +132,7 @@ ${nonEmailSocials.map(formatSocialLink).join("\n")}
 - Current life chapter: ${state.personal.currentChapter}
 - Interests outside work: ${state.personal.interests.join(", ")}
 - AI tools I use: ${state.personal.aiTools.join(", ")}
-- Side projects: ${state.personal.sideProjects.join(", ")}
+- Side projects: ${state.personal.sideProjects.map((project) => project.name).join(", ")}
 - Side project status: ${state.personal.sideProjectStatus}
 `.trim();
 
@@ -327,7 +332,11 @@ Avoid corporate buzzwords. Be specific and genuine.`;
       ],
       origin: "Colombia",
       sideProjectStatus: "Always building something",
-      sideProjects: ["feed-ai", "andresjanes.com", "Budgeting app (backlog)"],
+      sideProjects: [
+        { name: "feed-ai", url: "https://feed-ai.pages.dev" },
+        { name: "andresjanes.com", url: "https://andresjanes.com" },
+        { name: "Budgeting app (backlog)" },
+      ],
     },
 
     summary: `Senior Software Engineer with 10+ years building web apps that people actually enjoy using. Currently at Cision, helping enterprise clients make sense of media at scale with Rails and Vue.js.
