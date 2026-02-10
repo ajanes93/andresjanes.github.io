@@ -127,7 +127,8 @@ ${recommendations}
 - Current chapter: ${state.personal.currentChapter}
 - Interests: ${state.personal.interests.join(", ")}
 - AI tools: ${state.personal.aiTools.join(", ")}
-- Side projects: ${state.personal.sideProjectStatus}
+- Side projects: ${state.personal.sideProjects.join(", ")}
+- Side project status: ${state.personal.sideProjectStatus}
 
 ## AVAILABILITY
 ${state.availability}

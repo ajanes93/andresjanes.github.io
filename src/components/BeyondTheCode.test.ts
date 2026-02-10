@@ -11,6 +11,7 @@ const TEST_PROPS: PersonalInfo = {
   interests: ["Craft beer", "Discovering good restaurants", "Travelling"],
   origin: "Colombia",
   sideProjectStatus: "Paused for nappies",
+  sideProjects: ["feed-ai", "andresjanes.com"],
 };
 
 const render = (options: RenderOptions<typeof BeyondTheCode> = {}) => {
@@ -272,10 +273,12 @@ describe("BeyondTheCode", () => {
       expect(getCodeContent().text()).toContain("export default andres");
     });
 
-    it("shows sideProjects property as undefined", () => {
+    it("shows sideProjects property as an array", () => {
       const { getCodeContent } = render();
       const text = getCodeContent().text();
-      expect(text).toMatch(/sideProjects:\s*undefined/);
+      expect(text).toMatch(/sideProjects:\s*\[/);
+      expect(text).toContain("feed-ai");
+      expect(text).toContain("andresjanes.com");
     });
 
     it("shows introductory comment", () => {
