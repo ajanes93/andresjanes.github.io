@@ -55,7 +55,7 @@ const createMockProfile = (
     interests: ["Testing", "Coding"],
     origin: "Test Land",
     sideProjectStatus: "Always testing",
-    sideProjects: [{ name: "test-project" }],
+    sideProjects: [{ description: "A test project", name: "test-project" }],
   },
   pronouns: "They/Them",
   recommendations: [],

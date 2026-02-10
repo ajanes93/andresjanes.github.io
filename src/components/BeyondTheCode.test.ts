@@ -12,8 +12,12 @@ const TEST_PROPS: PersonalInfo = {
   origin: "Colombia",
   sideProjectStatus: "Paused for nappies",
   sideProjects: [
-    { name: "feed-ai", url: "https://feed-ai.pages.dev" },
-    { name: "andresjanes.com" },
+    {
+      description: "RSS reader with AI summaries",
+      name: "feed-ai",
+      url: "https://feed-ai.andresjanes.com",
+    },
+    { description: "Portfolio site", name: "andresjanes.com" },
   ],
 };
 

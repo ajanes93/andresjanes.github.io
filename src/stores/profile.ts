@@ -32,6 +32,7 @@ export interface Recommendation {
 }
 
 export interface SideProject {
+  description: string;
   name: string;
   url?: string;
 }
@@ -132,7 +133,7 @@ ${nonEmailSocials.map(formatSocialLink).join("\n")}
 - Current life chapter: ${state.personal.currentChapter}
 - Interests outside work: ${state.personal.interests.join(", ")}
 - AI tools I use: ${state.personal.aiTools.join(", ")}
-- Side projects: ${state.personal.sideProjects.map((project) => project.name).join(", ")}
+- Side projects: ${state.personal.sideProjects.map((project) => `${project.name} (${project.description})`).join(", ")}
 - Side project status: ${state.personal.sideProjectStatus}
 `.trim();
 
@@ -333,9 +334,21 @@ Avoid corporate buzzwords. Be specific and genuine.`;
       origin: "Colombia",
       sideProjectStatus: "Always building something",
       sideProjects: [
-        { name: "feed-ai", url: "https://feed-ai.pages.dev" },
-        { name: "andresjanes.com", url: "https://andresjanes.com" },
-        { name: "Budgeting app (backlog)" },
+        {
+          description: "RSS reader with AI summaries and MCP server",
+          name: "feed-ai",
+          url: "https://feed-ai.andresjanes.com",
+        },
+        {
+          description: "Client site for Cathodic Protection International",
+          name: "CPI",
+          url: "https://cpi.andresjanes.com",
+        },
+        {
+          description: "This portfolio — Vue 3, TypeScript, Tailwind",
+          name: "andresjanes.com",
+          url: "https://andresjanes.com",
+        },
       ],
     },
 
