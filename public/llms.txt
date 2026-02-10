@@ -1,4 +1,4 @@
-<!-- Profile hash: 890492cf98a4 -->
+<!-- Profile hash: e6efce8b3920 -->
 # Andres Janes - Senior Software Engineer
 
 > This is an llms.txt file following the llmstxt.org specification. It provides structured information about Andres Janes to help LLMs understand his professional background, skills, and career aspirations.
@@ -25,7 +25,7 @@ Andres Janes is a Senior Software Engineer with over 10 years of experience buil
 
 Andres gets excited about clean component APIs, accessible UIs, and shipping features that solve real problems. He previously led frontend development at Windsor Telecom, where he championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
 
-Originally from Colombia and now based in the UK, Andres recently became a dad. While side projects are on pause, he continues tinkering with AI coding tools whenever he gets a spare moment.
+Originally from Colombia and now based in the UK, Andres recently became a dad, and still finds time to ship side projects—currently building feed-ai and his portfolio site with the help of AI coding tools.
 
 ## Technical Skills
 
@@ -168,7 +168,8 @@ A: His combination of deep frontend expertise, real-time systems experience, ent
 - **Current Chapter:** New dad to Arianna (2025)
 - **Interests:** Football (Lincoln City supporter), Coffee, Craft beer, Family adventures
 - **AI Tools:** Claude Code, Cursor, GitHub Copilot, ChatGPT, Gemini
-- **Side Projects:** Currently on pause for family time, but enjoys hacking together ideas with Claude
+- **Side Projects:** feed-ai, andresjanes.com, Budgeting app (backlog)
+- **Side Project Status:** Always building something
 
 ## Availability
 
@@ -178,4 +179,4 @@ Andres is currently employed but open to discussing new opportunities that align
 
 ---
 
-*Last updated: January 2025*
+*Last updated: February 2026*
