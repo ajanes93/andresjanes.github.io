@@ -282,6 +282,13 @@ Avoid corporate buzzwords. Be specific and genuine.`;
         text: "Andres is a professional, efficient, solution orientated developer who it has been a pleasure to work with. Within his role he has happily taken on increasingly challenging tasks - whilst remaining calm, approachable and crucially maintaining a sense of humour.",
         title: "Director",
       },
+      {
+        linkedInUrl:
+          "https://www.linkedin.com/in/andresjanes/details/recommendations/",
+        name: "Alastair Bell",
+        text: "Being Andres line manager has been a rewarding experience. He learns new skills very fast, has an excellent manner with clients (both internal and external) and takes a calm an pragmatic approach to challenges which arise. He's shown great aptitude with the VBA, SQL and Laravel PHP tasks we've had. Working on a variety of UI/view systems and complex back end calculations. Of particular note, he has been key in migrating our team to use agile project management. This is a little different to normal, in that our workflow combines programming and analysis tasks. He's taken point with this and it's been enormously helpful.",
+        title: "Analytics Director at Kantar",
+      },
     ],
 
     skills: [
