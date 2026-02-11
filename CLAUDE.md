@@ -188,6 +188,7 @@ Pre-commit hooks (via Lefthook) automatically run:
 1. ESLint with auto-fix on staged files
 2. Prettier formatting on staged files
 3. TypeScript type checking
+4. SEO file hash check (when `src/stores/profile.ts` is staged)
 
 Manual checks if needed:
 
@@ -196,6 +197,31 @@ Manual checks if needed:
 - `npm run typecheck` - Type check
 - `npm run test` - Run tests
 - `npm run build` - Full production build
+
+## SEO File Updates (when profile data changes)
+
+When `src/stores/profile.ts` is modified, the pre-commit `seo-check` hook verifies that SEO files are in sync. The `npm run generate:seo` command requires `tsx` and the Claude API (for `llms.txt`), which may not be available in all environments (e.g., Claude Code web sessions).
+
+**Manual update steps when `generate:seo` is unavailable:**
+
+1. **Compute the new hash** (requires `tsx` and `node_modules`):
+   ```bash
+   npx tsx -e "
+   import { createPinia, setActivePinia } from 'pinia';
+   import { useProfileStore } from './src/stores/profile';
+   import { computeProfileHash } from './scripts/seo/hash';
+   const pinia = createPinia();
+   setActivePinia(pinia);
+   const store = useProfileStore();
+   console.log(computeProfileHash(store.\$state));
+   "
+   ```
+2. **Update the `<!-- Profile hash: ... -->` comment** in all four files:
+   - `public/robots.txt` - replace hash only
+   - `public/sitemap.xml` - replace hash, update `<lastmod>` to today's date
+   - `public/llms.txt` - replace hash, update content to reflect profile changes
+   - `index.html` - replace hash in the JSON-LD section (update schemas if fields beyond recommendations changed)
+3. **`llms.txt` content**: This file is normally AI-generated via the Claude API. When updating manually, add/remove recommendation quotes, update skills sections, etc. to match the profile store changes.
 
 ## Agents & Commands
 
