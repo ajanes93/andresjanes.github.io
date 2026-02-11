@@ -158,7 +158,7 @@ Avoid corporate buzzwords. Be specific and genuine.`;
     education: [
       {
         company: "University of the West of England",
-        description: "Bachelor's Degree - 2:1",
+        description: "Bachelor's Degree",
         endDate: "2014-07-01",
         location: "Bristol, UK",
         logoPath: "/img/uwe.svg",
