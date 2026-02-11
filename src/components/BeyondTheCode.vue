@@ -43,7 +43,11 @@
   ],
   <span :class="SYNTAX.comment">// {{ props.personal.sideProjectStatus }}</span>
   <span :class="SYNTAX.property">sideProjects</span>: [<span v-for="(project, index) in props.personal.sideProjects" :key="project.name">
-    { <span :class="SYNTAX.property">name</span>: <a v-if="project.url" :class="SYNTAX.string" data-testid="side-project-link" :href="project.url" rel="noopener noreferrer" target="_blank">"{{ project.name }}"</a><span v-else :class="SYNTAX.string">"{{ project.name }}"</span>, <span :class="SYNTAX.comment">// {{ project.description }}</span> }<span v-if="index < props.personal.sideProjects.length - 1">,</span></span>
+    {
+      <span :class="SYNTAX.property">name</span>: <span :class="SYNTAX.string">"{{ project.name }}"</span>,
+      <span :class="SYNTAX.property">description</span>: <span :class="SYNTAX.string">"{{ project.description }}"</span>,
+      <span :class="SYNTAX.property">link</span>: <a v-if="project.url" :class="[SYNTAX.string, 'hover:underline']" data-testid="side-project-link" :href="project.url" rel="noopener noreferrer" target="_blank">"{{ displayUrl(project.url) }}"</a><span v-else :class="SYNTAX.keyword">null</span>,
+    }<span v-if="index < props.personal.sideProjects.length - 1">,</span></span>
   ],
 };
 
@@ -64,6 +68,10 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+function displayUrl(url: string): string {
+  return url.replace(/^https?:\/\//, "");
+}
 
 const SYNTAX = {
   keyword: "text-pink-500 dark:text-pink-400",
