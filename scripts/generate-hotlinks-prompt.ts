@@ -20,25 +20,27 @@ interface HotlinksPrompt {
   profileSummary: string;
 }
 
+function formatExperience(exp: {
+  company: string;
+  description: string;
+  endDate?: string;
+  startDate: string;
+  title: string;
+}): string {
+  const startYear = exp.startDate.slice(0, 4);
+  const endYear = exp.endDate?.slice(0, 4) || "Present";
+
+  return `- ${exp.title} at ${exp.company} (${startYear}-${endYear}): ${exp.description}`;
+}
+
 function buildProfileContext(
   store: ReturnType<typeof useProfileStore>
 ): string {
-  const experiences = store.experience
-    .map((exp) => {
-      const startYear = exp.startDate.slice(0, 4);
-      const endYear = exp.endDate?.slice(0, 4) || "Present";
-
-      return `- ${exp.title} at ${exp.company} (${startYear}-${endYear}): ${exp.description}`;
-    })
-    .join("\n");
+  const experiences = store.experience.map(formatExperience).join("\n");
 
   const recommendations = store.recommendations
     .map((rec) => `- "${rec.text}" —${rec.name}, ${rec.title}`)
     .join("\n");
-
-  const sideProjects = store.personal.sideProjects
-    .map((proj) => `${proj.name}: ${proj.description}`)
-    .join("; ");
 
   return `
 Name: ${store.name}
@@ -59,7 +61,7 @@ Languages: ${store.languages.map((lang) => `${lang.name} (${lang.level})`).join(
 Recommendations:
 ${recommendations}
 
-Personal: From ${store.personal.origin}. ${store.personal.currentChapter}. Interests: ${store.personal.interests.join(", ")}. Side projects: ${sideProjects}.
+Personal: From ${store.personal.origin}. ${store.personal.currentChapter}. Interests: ${store.personal.interests.join(", ")}. Side projects: ${store.personal.sideProjects.map((proj) => `${proj.name}: ${proj.description}`).join("; ")}.
 `.trim();
 }
 
