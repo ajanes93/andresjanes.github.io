@@ -181,7 +181,7 @@ describe("useProfileStore", () => {
 
       it("includes skills", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Technical Skills");
+        expect(store.getCandidateSummaryPrompt).toContain("Skills:");
       });
 
       it("includes education", () => {

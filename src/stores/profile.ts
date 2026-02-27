@@ -75,79 +75,46 @@ export interface ProfileState {
 export const useProfileStore = defineStore("profile", {
   getters: {
     getCandidateSummaryPrompt: (state): string => {
-      const formatExperience = (exp: ExperienceItem): string => {
-        const dateRange = `${exp.startDate} - ${exp.endDate || "Present"}`;
-        const skills = exp.skills?.join(", ") || "N/A";
+      const experienceSummary = state.experience
+        .map(
+          (exp) =>
+            `${exp.title}, ${exp.company} (${exp.startDate.slice(0, 4)}-${exp.endDate ? exp.endDate.slice(0, 4) : "now"})`
+        )
+        .join("; ");
 
-        return `### ${exp.title} at ${exp.company}\n${dateRange} | ${exp.location}\n${exp.description}\nSkills: ${skills}`;
-      };
+      const recSnippets = state.recommendations
+        .map((rec) => `"${rec.text.split(".")[0]}." —${rec.name}`)
+        .join(" | ");
 
-      const formatEducation = (edu: ExperienceItem): string =>
-        `### ${edu.title}\n${edu.company}, ${edu.location}\n${edu.description}`;
+      const projects = state.personal.sideProjects
+        .map((proj) => proj.name)
+        .join(", ");
 
-      const formatLanguage = (lang: Language): string =>
-        `${lang.name}: ${lang.level}`;
+      const context = `Andres Janes — ${state.title} at ${state.company}, ${state.location}, ${state.yearsExperience}+ yrs exp.
 
-      const formatRecommendation = (rec: Recommendation): string =>
-        `"${rec.text}" - ${rec.name}, ${rec.title}`;
+Summary: ${state.summary}
 
-      const formatSocialLink = (social: SocialLink): string =>
-        `- ${social.name}: ${social.href}`;
+Skills: ${state.skills.join(", ")}
 
-      const nonEmailSocials = state.socials.filter(
-        (social) => social.icon !== "mail"
-      );
+Work Experience: ${experienceSummary}
 
-      const context = `
-# About Andres Janes
+Education: ${state.education.map((edu) => `${edu.title}, ${edu.company}`).join("; ")}
 
-## Current Role
-${state.title} at ${state.company}
-Location: ${state.location}
-Experience: ${state.yearsExperience} years
+Languages: ${state.languages.map((lang) => `${lang.name} (${lang.level})`).join(", ")}
 
-## Professional Summary
-${state.summary}
+Recommendations: ${recSnippets}
 
-## Technical Skills
-${state.skills.join(", ")}
+Personal: From ${state.personal.origin}. ${state.personal.currentChapter}. Interests: ${state.personal.interests.join(", ")}. Side projects: ${projects}.`;
 
-## Work Experience
-${state.experience.map(formatExperience).join("\n\n")}
-
-## Education
-${state.education.map(formatEducation).join("\n\n")}
-
-## Languages
-${state.languages.map(formatLanguage).join(", ")}
-
-## Recommendations
-${state.recommendations.map(formatRecommendation).join("\n\n")}
-
-## Online Presence
-${nonEmailSocials.map(formatSocialLink).join("\n")}
-- Portfolio: https://andresjanes.com
-
-## Personal
-- Originally from: ${state.personal.origin}
-- Current life chapter: ${state.personal.currentChapter}
-- Interests outside work: ${state.personal.interests.join(", ")}
-- AI tools I use: ${state.personal.aiTools.join(", ")}
-- Side projects: ${state.personal.sideProjects.map((project) => `${project.name} (${project.description})`).join(", ")}
-- Side project status: ${state.personal.sideProjectStatus}
-`.trim();
-
-      return `Here's the profile for Andres Janes, a senior software engineer. He's a real person, not a corporate template—so please keep your response warm and human.
+      return `Profile for Andres Janes, a senior software engineer. Keep your response warm and human.
 
 ${context}
 
 Please provide:
-1. A brief, personable summary (2-3 sentences) — write like you're introducing him to a friend, not a hiring committee
-2. Key technical strengths (what he's genuinely good at)
-3. Notable achievements — the stuff that actually matters, not just bullet points
-4. What kind of team and role would be a great fit (based on his personality and work style)
-
-Avoid corporate buzzwords. Be specific and genuine.`;
+1. A personable summary (2-3 sentences) — like introducing him to a friend
+2. Key technical strengths
+3. Notable achievements
+4. What kind of team/role would be a great fit`;
     },
   },
 
