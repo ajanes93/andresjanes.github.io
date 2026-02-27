@@ -1,4 +1,4 @@
-<!-- Profile hash: 5d94d8cd30fd -->
+<!-- Profile hash: 0a45bad6831a -->
 # robots.txt for https://andresjanes.com
 # Generated automatically from profile data
 

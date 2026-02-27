@@ -348,7 +348,8 @@ Avoid corporate buzzwords. Be specific and genuine.`;
           url: "https://one-question.andresjanes.com",
         },
         {
-          description: "RSS reader with AI summaries and MCP server",
+          description:
+            "AI-powered RSS aggregation that fetches, summarises, and delivers a curated evening digest",
           name: "feed-ai",
           url: "https://feed-ai.andresjanes.com",
         },

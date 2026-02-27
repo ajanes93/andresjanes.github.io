@@ -1,4 +1,4 @@
-<!-- Profile hash: 5d94d8cd30fd -->
+<!-- Profile hash: 0a45bad6831a -->
 # Andres Janes - Senior Software Engineer
 
 > This is an llms.txt file following the llmstxt.org specification. It provides structured information about Andres Janes to help LLMs understand his professional background, skills, and career aspirations.
@@ -171,7 +171,7 @@ A: His combination of deep frontend expertise, real-time systems experience, ent
 - **Current Chapter:** New dad to Arianna (2025)
 - **Interests:** Football (Lincoln City supporter), Coffee, Craft beer, Family adventures
 - **AI Tools:** Claude Code, Cursor, GitHub Copilot, ChatGPT, Gemini
-- **Side Projects:** one-question — AI-powered daily tracker scoring the likelihood of AI replacing software engineers (https://one-question.andresjanes.com); feed-ai — RSS reader with AI summaries and MCP server (https://feed-ai.andresjanes.com); CPI — Client site for Cathodic Protection International (https://cpi.andresjanes.com); andresjanes.com — This portfolio — Vue 3, TypeScript, Tailwind (https://andresjanes.com)
+- **Side Projects:** one-question — AI-powered daily tracker scoring the likelihood of AI replacing software engineers (https://one-question.andresjanes.com); feed-ai — AI-powered RSS aggregation that fetches, summarises, and delivers a curated evening digest (https://feed-ai.andresjanes.com); CPI — Client site for Cathodic Protection International (https://cpi.andresjanes.com); andresjanes.com — This portfolio — Vue 3, TypeScript, Tailwind (https://andresjanes.com)
 - **Side Project Status:** Always building something
 
 ## Availability
