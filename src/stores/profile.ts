@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import hotlinksData from "@/data/ai-hotlinks-prompt.json";
+
 export interface ExperienceItem {
   company: string;
   description: string;
@@ -74,41 +76,10 @@ export interface ProfileState {
 
 export const useProfileStore = defineStore("profile", {
   getters: {
-    getCandidateSummaryPrompt: (state): string => {
-      const experienceSummary = state.experience
-        .map(
-          (exp) =>
-            `${exp.title}, ${exp.company} (${exp.startDate.slice(0, 4)}-${exp.endDate ? exp.endDate.slice(0, 4) : "now"})`
-        )
-        .join("; ");
-
-      const recSnippets = state.recommendations
-        .map((rec) => `"${rec.text.split(".")[0]}." —${rec.name}`)
-        .join(" | ");
-
-      const projects = state.personal.sideProjects
-        .map((proj) => proj.name)
-        .join(", ");
-
-      const context = `Andres Janes — ${state.title} at ${state.company}, ${state.location}, ${state.yearsExperience}+ yrs exp.
-
-Summary: ${state.summary}
-
-Skills: ${state.skills.join(", ")}
-
-Work Experience: ${experienceSummary}
-
-Education: ${state.education.map((edu) => `${edu.title}, ${edu.company}`).join("; ")}
-
-Languages: ${state.languages.map((lang) => `${lang.name} (${lang.level})`).join(", ")}
-
-Recommendations: ${recSnippets}
-
-Personal: From ${state.personal.origin}. ${state.personal.currentChapter}. Interests: ${state.personal.interests.join(", ")}. Side projects: ${projects}.`;
-
+    getCandidateSummaryPrompt: (): string => {
       return `Profile for Andres Janes, a senior software engineer. Keep your response warm and human.
 
-${context}
+${hotlinksData.profileSummary}
 
 Please provide:
 1. A personable summary (2-3 sentences) — like introducing him to a friend

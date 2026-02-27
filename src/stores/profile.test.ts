@@ -174,25 +174,21 @@ describe("useProfileStore", () => {
         expect(store.getCandidateSummaryPrompt).toContain("Andres Janes");
       });
 
-      it("includes work experience", () => {
+      it("includes pre-generated profile summary", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Work Experience");
+
+        expect(store.getCandidateSummaryPrompt).toContain(
+          "Senior Software Engineer"
+        );
       });
 
-      it("includes skills", () => {
+      it("includes instruction prompts", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Skills:");
-      });
+        expect(store.getCandidateSummaryPrompt).toContain("personable summary");
 
-      it("includes education", () => {
-        const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Education");
-      });
-
-      it("includes personal info", () => {
-        const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Personal");
-        expect(store.getCandidateSummaryPrompt).toContain("Colombia");
+        expect(store.getCandidateSummaryPrompt).toContain(
+          "technical strengths"
+        );
       });
     });
   });
