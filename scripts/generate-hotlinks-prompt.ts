@@ -13,7 +13,7 @@ import { createPinia, setActivePinia } from "pinia";
 
 import { useProfileStore } from "../src/stores/profile";
 
-import { callClaude } from "./lib/claude";
+import { callClaude, getTodayISODate } from "./lib/claude";
 
 interface HotlinksPrompt {
   generatedAt: string;
@@ -97,10 +97,6 @@ function writePrompt(data: HotlinksPrompt): void {
 
   const content = JSON.stringify(data, null, 2) + "\n";
   writeFileSync(outputPath, content);
-}
-
-function getTodayISODate(): string {
-  return new Date().toISOString().split("T")[0] + "T00:00:00.000Z";
 }
 
 function main(): void {
