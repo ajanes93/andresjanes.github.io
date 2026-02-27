@@ -79,6 +79,37 @@ describe("generate-hotlinks-prompt", () => {
       expect(command).toContain("Spanish");
     });
 
+    it("includes personal info and side projects", async () => {
+      vi.mocked(execSync).mockReturnValue(VALID_RESPONSE);
+      await runScript();
+
+      const command = getExecutedCommand();
+
+      expect(command).toContain("Colombia");
+      expect(command).toContain("one-question");
+      expect(command).toContain("feed-ai");
+    });
+
+    it("includes skills list", async () => {
+      vi.mocked(execSync).mockReturnValue(VALID_RESPONSE);
+      await runScript();
+
+      const command = getExecutedCommand();
+
+      expect(command).toContain("Vue.js");
+      expect(command).toContain("TypeScript");
+      expect(command).toContain("Ruby on Rails");
+    });
+
+    it("formats experience with date ranges", async () => {
+      vi.mocked(execSync).mockReturnValue(VALID_RESPONSE);
+      await runScript();
+
+      const command = getExecutedCommand();
+
+      expect(command).toMatch(/\d{4}-(?:Present|\d{4})/);
+    });
+
     it("requests concise output with character limit", async () => {
       vi.mocked(execSync).mockReturnValue(VALID_RESPONSE);
       await runScript();
