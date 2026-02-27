@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite-ssg build",
     "preview": "vite preview",
+    "generate:hotlinks": "tsx scripts/generate-hotlinks-prompt.ts",
     "generate:summary": "tsx scripts/generate-ai-summary.ts",
     "generate:seo": "tsx scripts/generate-seo.ts",
     "lint": "eslint src scripts --fix",

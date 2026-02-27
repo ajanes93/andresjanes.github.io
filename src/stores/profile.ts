@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import hotlinksData from "@/data/ai-hotlinks-prompt.json";
+
 export interface ExperienceItem {
   company: string;
   description: string;
@@ -74,80 +76,16 @@ export interface ProfileState {
 
 export const useProfileStore = defineStore("profile", {
   getters: {
-    getCandidateSummaryPrompt: (state): string => {
-      const formatExperience = (exp: ExperienceItem): string => {
-        const dateRange = `${exp.startDate} - ${exp.endDate || "Present"}`;
-        const skills = exp.skills?.join(", ") || "N/A";
+    getCandidateSummaryPrompt: (): string => {
+      return `Profile for Andres Janes, a senior software engineer. Keep your response warm and human.
 
-        return `### ${exp.title} at ${exp.company}\n${dateRange} | ${exp.location}\n${exp.description}\nSkills: ${skills}`;
-      };
-
-      const formatEducation = (edu: ExperienceItem): string =>
-        `### ${edu.title}\n${edu.company}, ${edu.location}\n${edu.description}`;
-
-      const formatLanguage = (lang: Language): string =>
-        `${lang.name}: ${lang.level}`;
-
-      const formatRecommendation = (rec: Recommendation): string =>
-        `"${rec.text}" - ${rec.name}, ${rec.title}`;
-
-      const formatSocialLink = (social: SocialLink): string =>
-        `- ${social.name}: ${social.href}`;
-
-      const nonEmailSocials = state.socials.filter(
-        (social) => social.icon !== "mail"
-      );
-
-      const context = `
-# About Andres Janes
-
-## Current Role
-${state.title} at ${state.company}
-Location: ${state.location}
-Experience: ${state.yearsExperience} years
-
-## Professional Summary
-${state.summary}
-
-## Technical Skills
-${state.skills.join(", ")}
-
-## Work Experience
-${state.experience.map(formatExperience).join("\n\n")}
-
-## Education
-${state.education.map(formatEducation).join("\n\n")}
-
-## Languages
-${state.languages.map(formatLanguage).join(", ")}
-
-## Recommendations
-${state.recommendations.map(formatRecommendation).join("\n\n")}
-
-## Online Presence
-${nonEmailSocials.map(formatSocialLink).join("\n")}
-- Portfolio: https://andresjanes.com
-
-## Personal
-- Originally from: ${state.personal.origin}
-- Current life chapter: ${state.personal.currentChapter}
-- Interests outside work: ${state.personal.interests.join(", ")}
-- AI tools I use: ${state.personal.aiTools.join(", ")}
-- Side projects: ${state.personal.sideProjects.map((project) => `${project.name} (${project.description})`).join(", ")}
-- Side project status: ${state.personal.sideProjectStatus}
-`.trim();
-
-      return `Here's the profile for Andres Janes, a senior software engineer. He's a real person, not a corporate template—so please keep your response warm and human.
-
-${context}
+${hotlinksData.profileSummary}
 
 Please provide:
-1. A brief, personable summary (2-3 sentences) — write like you're introducing him to a friend, not a hiring committee
-2. Key technical strengths (what he's genuinely good at)
-3. Notable achievements — the stuff that actually matters, not just bullet points
-4. What kind of team and role would be a great fit (based on his personality and work style)
-
-Avoid corporate buzzwords. Be specific and genuine.`;
+1. A personable summary (2-3 sentences) — like introducing him to a friend
+2. Key technical strengths
+3. Notable achievements
+4. What kind of team/role would be a great fit`;
     },
   },
 
@@ -342,7 +280,14 @@ Avoid corporate buzzwords. Be specific and genuine.`;
       sideProjectStatus: "Always building something",
       sideProjects: [
         {
-          description: "RSS reader with AI summaries and MCP server",
+          description:
+            "AI-powered daily tracker scoring the likelihood of AI replacing software engineers",
+          name: "one-question",
+          url: "https://one-question.andresjanes.com",
+        },
+        {
+          description:
+            "AI-powered RSS aggregation that fetches, summarises, and delivers a curated evening digest",
           name: "feed-ai",
           url: "https://feed-ai.andresjanes.com",
         },
@@ -363,7 +308,7 @@ Avoid corporate buzzwords. Be specific and genuine.`;
 
 I get excited about clean component APIs, accessible UIs, and shipping features that solve real problems. Previously led frontend development at Windsor Telecom, where I championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
 
-Originally from Colombia, now based in the UK. Recently became a dad, and still finding time to ship side projects—currently building feed-ai and this very portfolio with the help of AI coding tools.`,
+Originally from Colombia, now based in the UK. Recently became a dad, and still finding time to ship side projects—currently building one-question, feed-ai, and this very portfolio with the help of AI coding tools.`,
 
     title: "Senior Software Engineer",
 

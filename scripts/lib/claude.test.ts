@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-import { callClaude } from "./claude";
+import { callClaude, getTodayISODate } from "./claude";
 
 vi.mock("child_process");
 
@@ -79,5 +79,20 @@ describe("callClaude", () => {
     expect(command).toContain(
       JSON.stringify('Prompt with "quotes" and $pecial chars')
     );
+  });
+});
+
+describe("getTodayISODate", () => {
+  it("returns a midnight UTC ISO string for today", () => {
+    const result = getTodayISODate();
+    const today = new Date().toISOString().split("T")[0];
+
+    expect(result).toBe(`${today}T00:00:00.000Z`);
+  });
+
+  it("returns a string matching the expected format", () => {
+    const result = getTodayISODate();
+
+    expect(result).toMatch(/^\d{4}-\d{2}-\d{2}T00:00:00\.000Z$/);
   });
 });

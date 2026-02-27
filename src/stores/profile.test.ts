@@ -1,5 +1,7 @@
 import { createPinia, setActivePinia } from "pinia";
 
+import hotlinksData from "@/data/ai-hotlinks-prompt.json";
+
 import { useProfileStore } from "./profile";
 
 describe("useProfileStore", () => {
@@ -174,25 +176,28 @@ describe("useProfileStore", () => {
         expect(store.getCandidateSummaryPrompt).toContain("Andres Janes");
       });
 
-      it("includes work experience", () => {
+      it("embeds the pre-generated profile summary from JSON", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Work Experience");
+
+        expect(store.getCandidateSummaryPrompt).toContain(
+          hotlinksData.profileSummary
+        );
       });
 
-      it("includes skills", () => {
+      it("includes all four instruction sections", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Technical Skills");
+        const prompt = store.getCandidateSummaryPrompt;
+
+        expect(prompt).toContain("personable summary");
+        expect(prompt).toContain("technical strengths");
+        expect(prompt).toContain("Notable achievements");
+        expect(prompt).toContain("team/role");
       });
 
-      it("includes education", () => {
+      it("sets the tone instruction", () => {
         const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Education");
-      });
 
-      it("includes personal info", () => {
-        const store = useProfileStore();
-        expect(store.getCandidateSummaryPrompt).toContain("Personal");
-        expect(store.getCandidateSummaryPrompt).toContain("Colombia");
+        expect(store.getCandidateSummaryPrompt).toContain("warm and human");
       });
     });
   });
