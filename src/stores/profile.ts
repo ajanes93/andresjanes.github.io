@@ -342,6 +342,12 @@ Avoid corporate buzzwords. Be specific and genuine.`;
       sideProjectStatus: "Always building something",
       sideProjects: [
         {
+          description:
+            "AI-powered daily tracker scoring the likelihood of AI replacing software engineers",
+          name: "one-question",
+          url: "https://one-question.andresjanes.com",
+        },
+        {
           description: "RSS reader with AI summaries and MCP server",
           name: "feed-ai",
           url: "https://feed-ai.andresjanes.com",
@@ -363,7 +369,7 @@ Avoid corporate buzzwords. Be specific and genuine.`;
 
 I get excited about clean component APIs, accessible UIs, and shipping features that solve real problems. Previously led frontend development at Windsor Telecom, where I championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
 
-Originally from Colombia, now based in the UK. Recently became a dad, and still finding time to ship side projects—currently building feed-ai and this very portfolio with the help of AI coding tools.`,
+Originally from Colombia, now based in the UK. Recently became a dad, and still finding time to ship side projects—currently building one-question, feed-ai, and this very portfolio with the help of AI coding tools.`,
 
     title: "Senior Software Engineer",
 

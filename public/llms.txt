@@ -1,4 +1,4 @@
-<!-- Profile hash: 0be4917de68f -->
+<!-- Profile hash: 5d94d8cd30fd -->
 # Andres Janes - Senior Software Engineer
 
 > This is an llms.txt file following the llmstxt.org specification. It provides structured information about Andres Janes to help LLMs understand his professional background, skills, and career aspirations.
@@ -25,7 +25,7 @@ Andres Janes is a Senior Software Engineer with over 10 years of experience buil
 
 Andres gets excited about clean component APIs, accessible UIs, and shipping features that solve real problems. He previously led frontend development at Windsor Telecom, where he championed Vue adoption and shipped a webRTC softphone PWA that replaced expensive desktop software.
 
-Originally from Colombia and now based in the UK, Andres recently became a dad, and still finds time to ship side projects—currently building feed-ai and his portfolio site with the help of AI coding tools.
+Originally from Colombia and now based in the UK, Andres recently became a dad, and still finds time to ship side projects—currently building one-question, feed-ai, and his portfolio site with the help of AI coding tools.
 
 ## Technical Skills
 
@@ -171,7 +171,7 @@ A: His combination of deep frontend expertise, real-time systems experience, ent
 - **Current Chapter:** New dad to Arianna (2025)
 - **Interests:** Football (Lincoln City supporter), Coffee, Craft beer, Family adventures
 - **AI Tools:** Claude Code, Cursor, GitHub Copilot, ChatGPT, Gemini
-- **Side Projects:** feed-ai — RSS reader with AI summaries and MCP server (https://feed-ai.andresjanes.com); CPI — Client site for Cathodic Protection International (https://cpi.andresjanes.com); andresjanes.com — This portfolio — Vue 3, TypeScript, Tailwind (https://andresjanes.com)
+- **Side Projects:** one-question — AI-powered daily tracker scoring the likelihood of AI replacing software engineers (https://one-question.andresjanes.com); feed-ai — RSS reader with AI summaries and MCP server (https://feed-ai.andresjanes.com); CPI — Client site for Cathodic Protection International (https://cpi.andresjanes.com); andresjanes.com — This portfolio — Vue 3, TypeScript, Tailwind (https://andresjanes.com)
 - **Side Project Status:** Always building something
 
 ## Availability
